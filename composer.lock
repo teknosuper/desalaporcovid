@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3f440cbf725f3404ecf1c1d9e932faa",
+    "content-hash": "385aa94980fffe3ff308f3a63f9cd8df",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -1185,16 +1185,16 @@
         },
         {
             "name": "kartik-v/yii2-widget-depdrop",
-            "version": "v1.0.6",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-depdrop.git",
-                "reference": "ea347e3793fbd8273cc9bd1eb94c4b32bb55d318"
+                "reference": "4dffe1fd0c9d9d5b7e6231f6cd059dfa36d22b3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-depdrop/zipball/ea347e3793fbd8273cc9bd1eb94c4b32bb55d318",
-                "reference": "ea347e3793fbd8273cc9bd1eb94c4b32bb55d318",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-depdrop/zipball/4dffe1fd0c9d9d5b7e6231f6cd059dfa36d22b3b",
+                "reference": "4dffe1fd0c9d9d5b7e6231f6cd059dfa36d22b3b",
                 "shasum": ""
             },
             "require": {
@@ -1235,7 +1235,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2019-04-19T07:02:48+00:00"
+            "time": "2019-05-25T07:32:15+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-fileinput",
@@ -1453,16 +1453,16 @@
         },
         {
             "name": "kartik-v/yii2-widget-select2",
-            "version": "v2.1.7",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-select2.git",
-                "reference": "b8cdb76b8dcc363e1e25b8f04f69aeabe98c6be3"
+                "reference": "ffe1a245fb73fc4f4add741ca3bc8657e0976c12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/b8cdb76b8dcc363e1e25b8f04f69aeabe98c6be3",
-                "reference": "b8cdb76b8dcc363e1e25b8f04f69aeabe98c6be3",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/ffe1a245fb73fc4f4add741ca3bc8657e0976c12",
+                "reference": "ffe1a245fb73fc4f4add741ca3bc8657e0976c12",
                 "shasum": ""
             },
             "require": {
@@ -1503,7 +1503,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2019-11-15T16:16:16+00:00"
+            "time": "2020-02-04T11:59:36+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-sidenav",
@@ -5753,7 +5753,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "kartik-v/yii2-widgets": 20
+        "kartik-v/yii2-widgets": 20,
+        "kartik-v/yii2-widget-depdrop": 20,
+        "kartik-v/yii2-widget-select2": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
