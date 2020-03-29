@@ -63,8 +63,10 @@ class SiteController extends Controller
     public function actionGetposko()
     {
         $output = [];
+        $selected = '';
         if (isset($_POST['depdrop_parents'])) {
             $parents = $_POST['depdrop_parents'];
+            $selected = $_POST['depdrop_parents'];
             $model = \app\models\PoskoModel::find()->where(['id_kelurahan'=>$parents])->all();
             $output = [];
             if($model)
@@ -82,7 +84,7 @@ class SiteController extends Controller
 
             }            
         }
-        $output = ['output'=>$output, 'selected'=>''];
+        $output = ['output'=>$output, 'selected'=>\yii::$app->request->get('id')];
         return json_encode($output);
         // echo '{"output":[{"id":1,"name":"eBooks"},{"id":2,"name":"Music"},{"id":3,"name":"Movies"},{"id":4,"name":"Games"},{"id":5,"name":"Stationery"}],"selected":""}';
     }

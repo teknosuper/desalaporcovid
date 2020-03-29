@@ -8,6 +8,55 @@ use app\models\table\LaporanTable;
 class LaporanModel extends LaporanTable
 {
 
+    // const STATUS_DELETED = 20;
+    const STATUS_WAITING = 10;
+    const STATUS_ON_PROCESS = 30;
+    const STATUS_PROCESSED = 40;
+    const STATUS_NOT_VALID = 50;
+
+	public function getKelurahanBelongsToKelurahanModel()
+	{
+		return $this->hasOne(KelurahanModel::className(),['id_kel'=>'kelurahan']);
+	}
+
+	public function getKelurahanDatangBelongsToKelurahanModel()
+	{
+		return $this->hasOne(KelurahanModel::className(),['id_kel'=>'kelurahan_datang']);
+	}
+
+	public function getKotaAsalBelongsToKabupatenModel()
+	{
+		return $this->hasOne(KabupatenModel::className(),['id_kab'=>'kota_asal']);
+	}
+
+	public function getJenisLaporanBelongsToJenisLaporanModel()
+	{
+		return $this->hasOne(JenisLaporanModel::className(),['id'=>'jenis_laporan']);
+	}
+
+	public function getPoskoBelongsToPoskoModel()
+	{
+		return $this->hasOne(PoskoModel::className(),['id'=>'id_posko']);
+	}
+
+    public function getStatusDetail()
+    {
+        $status = $this->status;
+        $array = self::getStatusList();
+        return isset($array[$status]) ? $array[$status] : NULL;
+    }
+
+    public static function getStatusList()
+    {
+        return [
+            // self::STATUS_DELETED=>"DI HAPUS",
+            self::STATUS_WAITING=>"MENUNGGU DIPROSES",
+            self::STATUS_ON_PROCESS=>"SEDANG DIPROSES",
+            self::STATUS_PROCESSED=>"SUDAH DIPROSES",
+            self::STATUS_NOT_VALID=>"DATA TIDAK VALID",
+        ];
+    }
+
     public function attributeLabels()
     {
         return [

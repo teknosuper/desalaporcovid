@@ -162,7 +162,7 @@ use yii\helpers\Url;
                                     ]
                                 ])
                                 ->widget(Select2::classname(), [
-                                    // 'initValueText' => $initText,
+                                    'initValueText' => \app\models\KelurahanModel::getTextKelurahanById($model->kelurahan),                        
                                     'options' => [
                                         'placeholder' => 'Pilih Kelurahan/Desa ...',
                                     ],
@@ -305,7 +305,7 @@ use yii\helpers\Url;
                                     ]
                                 ])
                                 ->widget(Select2::classname(), [
-                                    // 'initValueText' => $initText,
+                                    'initValueText' => \app\models\NegaraModel::getTextNegaraById($model->id_negara),                        
                                     'options' => [
                                         'placeholder' => 'Pilih Negara ...',
                                     ],
@@ -350,7 +350,7 @@ use yii\helpers\Url;
                                     ]
                                 ])
                                 ->widget(Select2::classname(), [
-                                    // 'initValueText' => $initText,
+                                    'initValueText' => \app\models\KabupatenModel::getTextKabById($model->kota_asal),                        
                                     'options' => [
                                         'placeholder' => 'Pilih Kab/Kota Asal ...',
                                     ],
@@ -391,7 +391,7 @@ use yii\helpers\Url;
                                     ]
                                 ])
                                 ->widget(Select2::classname(), [
-                                    // 'initValueText' => $initText,
+                                    'initValueText' => \app\models\KelurahanModel::getTextKelurahanById($model->kelurahan_datang),                        
                                     'options' => [
                                         'placeholder' => 'Pilih Kelurahan/Desa Tujuan ...',
                                         'id'=>'kelurahan_datang_id',
@@ -470,7 +470,9 @@ use yii\helpers\Url;
                                 'pluginOptions'=>[
                                     'depends'=>['kelurahan_datang_id'],
                                     'placeholder'=>'Pilih Posko Terdekat...',
-                                    'url'=>Url::to(['/site/getposko'])
+                                    'initialize' => true,
+                                    'initDepends' => ['kelurahan_datang_id'],
+                                    'url'=>Url::to(['/site/getposko','id'=>$model->id_posko])
                                 ]
                             ])
                             ->hint('<div style="width:200px"><b>Posko </b> - Pilih Posko Terdekat.</div>');
