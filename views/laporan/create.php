@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\LaporanModel */
 
 $this->title = Yii::t('app', 'Buat Laporan Warga');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Laporan Models'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Laporan Saya'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="laporan-model-create">
