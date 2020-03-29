@@ -20,6 +20,8 @@ use Yii;
  * @property string|null $keterangan
  * @property int|null $id_pelapor
  * @property int|null $id_posko
+ * @property int|null $luar_negeri
+ * @property int|null $id_negara
  */
 class LaporanTable extends \yii\db\ActiveRecord
 {
@@ -37,7 +39,7 @@ class LaporanTable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['kelurahan', 'jenis_laporan', 'kota_asal', 'kelurahan_datang', 'status', 'id_pelapor', 'id_posko'], 'integer'],
+            [['kelurahan', 'jenis_laporan', 'kota_asal', 'kelurahan_datang', 'status', 'id_pelapor', 'id_posko', 'luar_negeri', 'id_negara'], 'integer'],
             [['keterangan'], 'string'],
             [['nama_warga', 'no_telepon_pelapor', 'no_telepon_terlapor'], 'string', 'max' => 255],
             [['alamat'], 'string', 'max' => 500],
@@ -63,6 +65,8 @@ class LaporanTable extends \yii\db\ActiveRecord
             'keterangan' => Yii::t('app', 'Keterangan'),
             'id_pelapor' => Yii::t('app', 'Id Pelapor'),
             'id_posko' => Yii::t('app', 'Id Posko'),
+            'luar_negeri' => Yii::t('app', 'Luar Negeri'),
+            'id_negara' => Yii::t('app', 'Id Negara'),
         ];
     }
 }

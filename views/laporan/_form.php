@@ -5,10 +5,36 @@ use kartik\form\ActiveForm;
 use kartik\form\ActiveField;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
+use kartik\depdrop\DepDrop;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\LaporanModel */
 /* @var $form yii\widgets\ActiveForm */
+?>
+
+<?php 
+    $js = '$(".dependent-dropdown-input").on("change", function() {
+        var value = $(this).val(),
+            obj = $(this).attr("id"),
+            next = $(this).attr("data-next");
+            if(value==2)
+            {
+                $("#"+next).removeClass("hidden");
+            }
+            else if(value==1)
+            {
+                $("#"+next).addClass("hidden");             
+            }
+            else
+            {
+                $("#"+next).addClass("hidden");             
+            }
+            // $("#" + next).val(next);
+    });';
+    $jsTrigger = '$(".dependent-dropdown-input" ).trigger( "change" );';
+    $this->registerJs($js);
+    $this->registerJs($jsTrigger);
 ?>
 
 <div class="laporan-model-form box box-primary">
@@ -75,7 +101,7 @@ use yii\web\JsExpression;
                             ->textInput([
                                 'placeholder' => 'Nomer Telepon Anda',
                             ])
-                            ->hint('<div style="width:200px"><b>Kelurahan </b> - Masukkan Kelurahan.</div>');?>
+                            ->hint('<div style="width:200px"><b>Nomer Telepon Pelapor</b> - Masukkan Nomer Telepon Anda / nomor yang dapat dihubungi..</div>');?>
                         </div>
                     </div>            
                 </div>
@@ -144,7 +170,7 @@ use yii\web\JsExpression;
                                         'allowClear' => true,
                                         'minimumInputLength' => 4,
                                         'language' => [
-                                            'errorLoading' => new JsExpression("function () { return 'Waiting for results...'; }"),
+                                            'errorLoading' => new JsExpression("function () { return 'Sedang mencari data...'; }"),
                                         ],
                                         'ajax' => [
                                             'url' => \yii\helpers\Url::to(['/site/getdatakelurahan']),
@@ -211,9 +237,9 @@ use yii\web\JsExpression;
                                 'mask' => '+6299999999999'
                             ])
                             ->textInput([
-                                'placeholder' => 'Nomer Telepon Warga Terlapor',
+                                'placeholder' => 'Nomer Telepon Warga Terlapor / yang dapat dihubungi',
                             ])
-                            ->hint('<div style="width:200px"><b>Kelurahan </b> - Masukkan Kelurahan.</div>');?>
+                            ->hint('<div style="width:200px"><b>Kelurahan </b> - Nomer Telepon Warga Terlapor / nomor yang dapat dihubungi.</div>');?>
                         </div>
                     </div>                            
                 </div>
@@ -226,6 +252,81 @@ use yii\web\JsExpression;
 
         </div>
         <div class="box-body table-responsive">
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <?= $form->field($model, 'luar_negeri', [
+                                    'feedbackIcon' => [
+                                            'default' => '',
+                                            'success' => 'ok',
+                                            'error' => 'exclamation-sign',
+                                            'defaultOptions' => ['class'=>'text-primary']
+                                    ],
+                                    'hintType' => ActiveField::HINT_SPECIAL,
+                                    'hintSettings' => [
+                                        'iconBesideInput' => false,
+                                        'onLabelClick' => false,
+                                        'onLabelHover' => true,
+                                        'onIconClick' => true,
+                                        'onIconHover' => false,
+                                        'title' => '<i class="glyphicon glyphicon-info-sign"></i> Required'
+                                    ]
+                                ])
+                                ->hint('<div style="width:200px"><b>Apakah dari Luar Negeri ? </b></div>')
+                                ->dropDownList([1=>'Tidak',2=>'Iya'],
+                                [
+                                    // 'prompt'=>'Pilih ',
+                                    'id'=>'luar_negeri',
+                                    'class'=>'dependent-dropdown-input form-control',
+                                    'data-next'=>'id_negara',
+                                ]);?>
+                        </div>
+                    </div>                
+
+                    <div class="col-md-6 hidden" id="id_negara">
+                        <div class="form-group">
+                            <?= $form->field($model, 'id_negara', [
+                                    'feedbackIcon' => [
+                                            'default' => '',
+                                            'success' => 'ok',
+                                            'error' => 'exclamation-sign',
+                                            'defaultOptions' => ['class'=>'text-primary']
+                                    ],
+                                    'hintType' => ActiveField::HINT_SPECIAL,
+                                    'hintSettings' => [
+                                        'iconBesideInput' => false,
+                                        'onLabelClick' => false,
+                                        'onLabelHover' => true,
+                                        'onIconClick' => true,
+                                        'onIconHover' => false,
+                                        'title' => '<i class="glyphicon glyphicon-info-sign"></i> Required'
+                                    ]
+                                ])
+                                ->widget(Select2::classname(), [
+                                    // 'initValueText' => $initText,
+                                    'options' => [
+                                        'placeholder' => 'Pilih Negara ...',
+                                    ],
+                                    'pluginOptions' => [
+                                        'allowClear' => true,
+                                        'minimumInputLength' => 4,
+                                        'language' => [
+                                            'errorLoading' => new JsExpression("function () { return 'Sedang mencari data...'; }"),
+                                        ],
+                                        'ajax' => [
+                                            'url' => \yii\helpers\Url::to(['/site/getdatanegara']),
+                                            'dataType' => 'json',
+                                            'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                                        ],
+                                    ],
+                                ])
+                                ->hint('<div style="width:200px"><b>Negara </b> - Masukkan data Negara</div>');?>
+                        </div>
+                    </div> 
+                </div>            
+            </div> 
 
             <div class="col-md-12">
                 <div class="row">
@@ -257,7 +358,7 @@ use yii\web\JsExpression;
                                         'allowClear' => true,
                                         'minimumInputLength' => 4,
                                         'language' => [
-                                            'errorLoading' => new JsExpression("function () { return 'Waiting for results...'; }"),
+                                            'errorLoading' => new JsExpression("function () { return 'Sedang mencari data...'; }"),
                                         ],
                                         'ajax' => [
                                             'url' => \yii\helpers\Url::to(['/site/getdatakabupaten']),
@@ -293,12 +394,13 @@ use yii\web\JsExpression;
                                     // 'initValueText' => $initText,
                                     'options' => [
                                         'placeholder' => 'Pilih Kelurahan/Desa Tujuan ...',
+                                        'id'=>'kelurahan_datang_id',
                                     ],
                                     'pluginOptions' => [
                                         'allowClear' => true,
                                         'minimumInputLength' => 4,
                                         'language' => [
-                                            'errorLoading' => new JsExpression("function () { return 'Waiting for results...'; }"),
+                                            'errorLoading' => new JsExpression("function () { return 'Sedang mencari data...'; }"),
                                         ],
                                         'ajax' => [
                                             'url' => \yii\helpers\Url::to(['/site/getdatakelurahan']),
@@ -336,36 +438,25 @@ use yii\web\JsExpression;
                                 ]
                             ])
                             ->textInput([
-                                'placeholder' => 'Alamat',
+                                'placeholder' => 'Lengkapi Keterangan, misalnya : hari / jam atau keperluan',
                             ])
-                            ->hint('<div style="width:200px"><b>Alamat </b> - Masukkan Alamat Lengkap.</div>');?>
+                            ->hint('<div style="width:200px"><b>Alamat </b> - Lengkapi Keterangan.</div>');?>
                         </div>
                     </div>                
 
                     <div class="col-md-6">
                         <div class="form-group">
-                        <?= $form->field($model, 'id_posko', [
-                                'feedbackIcon' => [
-                                        'default' => '',
-                                        'success' => 'ok',
-                                        'error' => 'exclamation-sign',
-                                        'defaultOptions' => ['class'=>'text-primary']
-                                ],
-                                'hintType' => ActiveField::HINT_SPECIAL,
-                                'addon' => ['append' => ['content'=>'<i class="fa fa-pencil"></i>']],
-                                'hintSettings' => [
-                                    'iconBesideInput' => false,
-                                    'onLabelClick' => false,
-                                    'onLabelHover' => true,
-                                    'onIconClick' => true,
-                                    'onIconHover' => false,
-                                    'title' => '<i class="glyphicon glyphicon-info-sign"></i> Wajib diisi'
+                        <?php
+                            echo $form->field($model, 'id_posko')->widget(DepDrop::classname(), [
+                                'options'=>['id'=>'posko_id'],
+                                'pluginOptions'=>[
+                                    'depends'=>['kelurahan_datang_id'],
+                                    'placeholder'=>'Select...',
+                                    'url'=>Url::to(['/site/getposko'])
                                 ]
-                            ])
-                            ->textInput([
-                                'placeholder' => 'Alamat',
-                            ])
-                            ->hint('<div style="width:200px"><b>Alamat </b> - Masukkan Alamat Lengkap.</div>');?>
+                            ]);
+                            // ->hint('<div style="width:200px"><b>Posko </b> - Pilih Posko Terdekat.</div>');
+                        ?>
                         </div>
                     </div> 
                 </div>            

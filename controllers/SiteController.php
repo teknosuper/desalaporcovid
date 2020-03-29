@@ -12,6 +12,7 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+
     /**
      * {@inheritdoc}
      */
@@ -54,6 +55,97 @@ class SiteController extends Controller
         ];
     }
 
+    public function actionGetposko()
+    {
+        echo '{"output":[{"id":1,"name":"eBooks"},{"id":2,"name":"Music"},{"id":3,"name":"Movies"},{"id":4,"name":"Games"},{"id":5,"name":"Stationery"}],"selected":""}';
+        // if (isset($_POST['depdrop_parents'])) {
+        //     // $parents = $_POST['depdrop_parents'];
+        //     echo "<pre>";            
+        //     print_r($_POST);
+        //     echo "</pre>";
+        //     die;            
+        // }
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                $out[] = [
+                    1 => 'El',
+                    2 => 'Bo',
+                    3 => 'Ho'
+                ];
+                // the getSubCatList function will query the database based on the
+                // cat_id and return an array like below:
+                // [
+                //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+                //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+                // ]
+                return ['output'=>$out, 'selected'=>1];
+        // Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        // $out = [];
+        // if (isset($_POST['depdrop_parents'])) {
+        //     $parents = $_POST['depdrop_parents'];
+        //     if ($parents != null) {
+        //         // $cat_id = $parents[0];
+        //         $out = [
+        //             1 => 'Electronics',
+        //             2 => 'Books',
+        //             3 => 'Home & Kitchen'
+        //         ];
+        //         // the getSubCatList function will query the database based on the
+        //         // cat_id and return an array like below:
+        //         // [
+        //         //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+        //         //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+        //         // ]
+        //         return ['output'=>$out, 'selected'=>''];
+        //     }
+        // }
+        // return ['output'=>'', 'selected'=>''];
+    }
+
+    public function actionGetdatanegara($q=null,$id=null)
+    {
+        if(!is_null($q)) 
+        {
+            $model = \app\models\NegaraModel::find()
+                ->where(['like','nama',$q])
+                ->all();
+            if($model and strlen($q)>3)
+            {
+                foreach($model as $modelData)
+                {
+                    $nama = $modelData->nama;
+                    $kode_negara = $modelData->kode_negara;
+                    $returnData[] = [
+                        'id'=>$modelData->id,
+                        'text'=>implode(' - ',[$nama,$kode_negara]),
+                    ];
+                }
+            }
+            else
+            {
+                $returnData = [];
+            }
+        }
+        elseif($id > 0)
+        {
+            $model = \app\models\NegaraModel::find()->where(['id'=>$id])->one();
+            if($model)
+            {
+                $nama = $model->nama;
+                $kode_negara = $model->kode_negara;
+                $returnData = [
+                    'id'=>$model->id,
+                    'text'=>implode(' - ',[$nama,$kode_negara]),
+                ];
+            }
+            else
+            {
+                $returnData = [];               
+            }
+        }
+        $returnDatas['results'] = $returnData;
+        return json_encode($returnDatas);
+    }
+
     public function actionGetdatakelurahan($q=null,$id=null)
     {
         if(!is_null($q)) 
@@ -86,10 +178,10 @@ class SiteController extends Controller
             {
                 $kelurahan = $model->nama;
                 $kecamatan = $model->kelurahanBelongsToKecamatanModel->nama;
-                $kabupaten = $kecamatan->kecamatanBelongsToKabupatenModel->nama;
+                $kabupaten = $model->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama;
                 $returnData = [
                     'id'=>$model->id_kel,
-                    'text'=>implode(' - ',[$model->nama,$model->kelurahanBelongsToKecamatanModel->nama,$model->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama]),
+                'text'=>implode(' - ',[$kelurahan,$kecamatan,$kabupaten]),
                 ];
             }
             else

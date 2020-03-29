@@ -8,12 +8,13 @@ use Yii;
  * This is the model class for table "posko".
  *
  * @property int $id
- * @property int|null $id_kelurahan
+ * @property string|null $id_kelurahan
  * @property string|null $nama_posko
  * @property string|null $alamat_posko
  * @property string|null $email_posko
  * @property string|null $keterangan
  * @property int|null $status
+ * @property string|null $no_telepon
  */
 class PoskoTable extends \yii\db\ActiveRecord
 {
@@ -31,9 +32,10 @@ class PoskoTable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_kelurahan', 'status'], 'integer'],
             [['keterangan'], 'string'],
-            [['nama_posko', 'alamat_posko', 'email_posko'], 'string', 'max' => 255],
+            [['status'], 'integer'],
+            [['id_kelurahan'], 'string', 'max' => 20],
+            [['nama_posko', 'alamat_posko', 'email_posko', 'no_telepon'], 'string', 'max' => 255],
         ];
     }
 
@@ -50,6 +52,7 @@ class PoskoTable extends \yii\db\ActiveRecord
             'email_posko' => Yii::t('app', 'Email Posko'),
             'keterangan' => Yii::t('app', 'Keterangan'),
             'status' => Yii::t('app', 'Status'),
+            'no_telepon' => Yii::t('app', 'No Telepon'),
         ];
     }
 }
