@@ -55,50 +55,36 @@ class SiteController extends Controller
         ];
     }
 
+    public function actionTest()
+    {
+        return $this->redirect(['/laporan']);
+    }
+
     public function actionGetposko()
     {
-        echo '{"output":[{"id":1,"name":"eBooks"},{"id":2,"name":"Music"},{"id":3,"name":"Movies"},{"id":4,"name":"Games"},{"id":5,"name":"Stationery"}],"selected":""}';
-        // if (isset($_POST['depdrop_parents'])) {
-        //     // $parents = $_POST['depdrop_parents'];
-        //     echo "<pre>";            
-        //     print_r($_POST);
-        //     echo "</pre>";
-        //     die;            
-        // }
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-                $out[] = [
-                    1 => 'El',
-                    2 => 'Bo',
-                    3 => 'Ho'
-                ];
-                // the getSubCatList function will query the database based on the
-                // cat_id and return an array like below:
-                // [
-                //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
-                //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
-                // ]
-                return ['output'=>$out, 'selected'=>1];
-        // Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        // $out = [];
-        // if (isset($_POST['depdrop_parents'])) {
-        //     $parents = $_POST['depdrop_parents'];
-        //     if ($parents != null) {
-        //         // $cat_id = $parents[0];
-        //         $out = [
-        //             1 => 'Electronics',
-        //             2 => 'Books',
-        //             3 => 'Home & Kitchen'
-        //         ];
-        //         // the getSubCatList function will query the database based on the
-        //         // cat_id and return an array like below:
-        //         // [
-        //         //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
-        //         //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
-        //         // ]
-        //         return ['output'=>$out, 'selected'=>''];
-        //     }
-        // }
-        // return ['output'=>'', 'selected'=>''];
+        $output = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $parents = $_POST['depdrop_parents'];
+            $model = \app\models\PoskoModel::find()->where(['id_kelurahan'=>$parents])->all();
+            $output = [];
+            if($model)
+            {
+                foreach($model as $modelData)
+                {
+                    $nama = $modelData->nama_posko;
+                    $kelurahan = $modelData->poskoBelongsToKelurahanModel->nama;
+                    $kecamatan = $modelData->poskoBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama;
+                    $output[] = [
+                        'id'=>$modelData->id,
+                        'name'=>implode(' - ', [$nama,$kelurahan,$kecamatan]),
+                    ];                
+                }
+
+            }            
+        }
+        $output = ['output'=>$output, 'selected'=>''];
+        return json_encode($output);
+        // echo '{"output":[{"id":1,"name":"eBooks"},{"id":2,"name":"Music"},{"id":3,"name":"Movies"},{"id":4,"name":"Games"},{"id":5,"name":"Stationery"}],"selected":""}';
     }
 
     public function actionGetdatanegara($q=null,$id=null)

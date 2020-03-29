@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce7bcb9d41b609483761ee194590adec",
+    "content-hash": "a5517f8634e76a208cc33e2857681851",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -1885,6 +1885,55 @@
                 "yii2"
             ],
             "time": "2019-09-03T03:11:11+00:00"
+        },
+        {
+            "name": "machour/yii2-notifications",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/machour/yii2-notifications.git",
+                "reference": "7da0b67cb9c7c89f692faa8491b3a34caf498b69"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/machour/yii2-notifications/zipball/7da0b67cb9c7c89f692faa8491b3a34caf498b69",
+                "reference": "7da0b67cb9c7c89f692faa8491b3a34caf498b69",
+                "shasum": ""
+            },
+            "require": {
+                "rmrevin/yii2-fontawesome": "~2.15",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "machour\\yii2\\notifications\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mehdi Achour",
+                    "email": "machour@gmail.com"
+                }
+            ],
+            "description": "Notifications for your Yii2 app",
+            "keywords": [
+                "growl",
+                "notification",
+                "notify",
+                "noty",
+                "yii"
+            ],
+            "time": "2017-08-31T12:47:23+00:00"
         },
         {
             "name": "psr/http-message",

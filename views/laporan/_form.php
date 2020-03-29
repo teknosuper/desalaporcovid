@@ -447,15 +447,33 @@ use yii\helpers\Url;
                     <div class="col-md-6">
                         <div class="form-group">
                         <?php
-                            echo $form->field($model, 'id_posko')->widget(DepDrop::classname(), [
+                            echo $form->field($model, 'id_posko',[
+                                'feedbackIcon' => [
+                                        'default' => '',
+                                        'success' => 'ok',
+                                        'error' => 'exclamation-sign',
+                                        'defaultOptions' => ['class'=>'text-primary']
+                                ],
+                                'hintType' => ActiveField::HINT_SPECIAL,
+                                'addon' => ['append' => ['content'=>'<i class="fa fa-home"></i>']],
+                                'hintSettings' => [
+                                    'iconBesideInput' => false,
+                                    'onLabelClick' => false,
+                                    'onLabelHover' => true,
+                                    'onIconClick' => true,
+                                    'onIconHover' => false,
+                                    'title' => '<i class="glyphicon glyphicon-info-sign"></i> Wajib diisi'
+                                ],
+                            ])
+                            ->widget(DepDrop::classname(), [
                                 'options'=>['id'=>'posko_id'],
                                 'pluginOptions'=>[
                                     'depends'=>['kelurahan_datang_id'],
-                                    'placeholder'=>'Select...',
+                                    'placeholder'=>'Pilih Posko Terdekat...',
                                     'url'=>Url::to(['/site/getposko'])
                                 ]
-                            ]);
-                            // ->hint('<div style="width:200px"><b>Posko </b> - Pilih Posko Terdekat.</div>');
+                            ])
+                            ->hint('<div style="width:200px"><b>Posko </b> - Pilih Posko Terdekat.</div>');
                         ?>
                         </div>
                     </div> 
