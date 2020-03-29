@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\PoskoModel */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Posko Models'), 'url' => ['index']];
+$this->title = $model->nama_posko;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Daftar Posko'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="posko-model-view box box-primary">

@@ -33,7 +33,7 @@ use yii\helpers\Url;
                 ]
             ])
             ->widget(Select2::classname(), [
-                // 'initValueText' => $initText,
+                'initValueText' => \app\models\KelurahanModel::getTextKelurahanById($model->id_kelurahan),                        
                 'options' => [
                     'placeholder' => 'Pilih Kelurahan/Desa ...',
                 ],
@@ -60,7 +60,7 @@ use yii\helpers\Url;
 
         <?= $form->field($model, 'keterangan')->textarea(['rows' => 6]) ?>
 
-        <?= $form->field($model, 'status')->textInput() ?>
+        <?= $form->field($model, 'status')->textInput()->dropDownList(\app\models\PoskoModel::getStatusList(),['prompt'=>'Pilih Status']) ?>
 
     </div>
     <div class="box-footer">

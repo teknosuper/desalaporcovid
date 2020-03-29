@@ -69,9 +69,59 @@ $this->params['breadcrumbs'][] = $this->title;
                 'alamat_posko',
                 'email_posko:email',
                 // 'keterangan:ntext',
-                // 'status',
+                [
+                    'label' => 'status',
+                    'attribute' => 'school_id',
+                    'value' => function ($model) {
+                        return ($model->statusDetail) ? $model->statusDetail : null;
+                    },
+                    'filter' => \app\models\PoskoModel::getStatusList(),
+                    'filterInputOptions' => ['prompt' => 'Semua Status', 'class' => 'form-control', 'id' => null]
+                ],
 
-                ['class' => 'yii\grid\ActionColumn'],
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'header' => '#',
+                        'headerOptions' => ['style' => 'color:#337ab7;text-align:center;'],
+                        'template' => '{view} {update} {delete}',
+                        'buttons' => [
+                                'view' => function ($url, $model) {
+                                    return Html::a('<span class="fa fa-eye"></span> Detail', $url, [
+                                                'title' => Yii::t('app', 'view'),
+                                                'class'=>'btn btn-success btn-xs modal-form',
+                                                'data-size' => 'modal-lg',
+                                    ]);
+                                },
+
+                                'update' => function ($url, $model) {
+                                    return Html::a('<span class="fa fa-pencil"></span> Ubah', $url, [
+                                                'title' => Yii::t('app', 'update'),
+                                                'class'=>'btn btn-warning btn-xs modal-form',
+                                                'data-size' => 'modal-lg',
+
+                                    ]);
+                                },
+                                'delete' => function ($url, $model) {
+                                    return Html::a('<span class="glyphicon glyphicon-trash"></span> Hapus', $url, [
+                                                'title' => Yii::t('app', 'delete'),
+                                                'class'=>'btn btn-danger btn-xs modal-form',
+                                                'data-method'=>'post',
+                                                'data-confirm'=>'Apakah anda yakin akan menghapus data ini ? ',
+                                    ]);
+                                }
+                        ],
+                        // 'urlCreator' => function ($action, $model, $key, $index) {
+                        //     if ($action === 'view') {
+                        //         $url ='view?id='.$model->id;
+                        //         return $url;
+                        //     }
+
+                        //     if ($action === 'update') {
+                        //         $url ='update?id='.$model->id;
+                        //         return $url;
+                        //     }
+                        // }
+                    ],
             ],
         ]); ?>
     </div>

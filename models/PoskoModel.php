@@ -9,6 +9,26 @@ use yii\helpers\ArrayHelper;
 class PoskoModel extends PoskoTable
 {
 
+    const STATUS_DELETED = 20;
+    const STATUS_ACTIVE = 10;
+    const STATUS_SUSPENDED = 30;
+
+    public function getStatusDetail()
+    {
+        $status = $this->status;
+        $array = self::getStatusList();
+        return isset($array[$status]) ? $array[$status] : NULL;
+    }
+
+    public static function getStatusList()
+    {
+        return [
+            self::STATUS_ACTIVE=>"ACTIVE",
+            self::STATUS_SUSPENDED=>"SUSPENDED",
+            self::STATUS_DELETED=>"DELETED",
+        ];
+    }
+
     public function attributeLabels()
     {
         return [
