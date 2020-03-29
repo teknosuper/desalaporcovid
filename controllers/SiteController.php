@@ -54,12 +54,6 @@ class SiteController extends Controller
             ],
         ];
     }
-
-    public function actionTest()
-    {
-        return $this->redirect(['/laporan']);
-    }
-
     public function actionGetposko()
     {
         $output = [];
@@ -231,7 +225,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->redirect(['/laporan']);
+        // return $this->render('index');
     }
 
     /**
