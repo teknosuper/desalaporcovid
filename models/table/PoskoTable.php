@@ -32,10 +32,8 @@ class PoskoTable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['keterangan'], 'string'],
             [['status'], 'integer'],
-            [['id_kelurahan'], 'string', 'max' => 20],
-            [['nama_posko', 'alamat_posko', 'email_posko', 'no_telepon'], 'string', 'max' => 255],
+            [['id_kelurahan','nama_posko', 'alamat_posko', 'email_posko', 'no_telepon','keterangan'], 'safe'],
         ];
     }
 
