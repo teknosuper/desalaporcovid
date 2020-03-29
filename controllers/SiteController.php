@@ -54,6 +54,96 @@ class SiteController extends Controller
         ];
     }
 
+    public function actionGetdatakelurahan($q=null,$id=null)
+    {
+        if(!is_null($q)) 
+        {
+            $model = \app\models\KelurahanModel::find()
+                ->where(['like','nama',$q])
+                ->all();
+            if($model and strlen($q)>3)
+            {
+                foreach($model as $modelData)
+                {
+                    $kelurahan = $modelData->nama;
+                    $kecamatan = $modelData->kelurahanBelongsToKecamatanModel->nama;
+                    $kabupaten = $modelData->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama;
+                    $returnData[] = [
+                        'id'=>$modelData->id_kel,
+                        'text'=>implode(' - ',[$kelurahan,$kecamatan,$kabupaten]),
+                    ];
+                }
+            }
+            else
+            {
+                $returnData = [];
+            }
+        }
+        elseif($id > 0)
+        {
+            $model = \app\models\KelurahanModel::find()->where(['id_kel'=>$id])->one();
+            if($model)
+            {
+                $kelurahan = $model->nama;
+                $kecamatan = $model->kelurahanBelongsToKecamatanModel->nama;
+                $kabupaten = $kecamatan->kecamatanBelongsToKabupatenModel->nama;
+                $returnData = [
+                    'id'=>$model->id_kel,
+                    'text'=>implode(' - ',[$model->nama,$model->kelurahanBelongsToKecamatanModel->nama,$model->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama]),
+                ];
+            }
+            else
+            {
+                $returnData = [];               
+            }
+        }
+        $returnDatas['results'] = $returnData;
+        return json_encode($returnDatas);
+    }
+
+    public function actionGetdatakabupaten($q=null,$id=null)
+    {
+        if(!is_null($q)) 
+        {
+            $model = \app\models\KabupatenModel::find()
+                ->where(['like','nama',$q])
+                ->all();
+            if($model and strlen($q)>3)
+            {
+                foreach($model as $modelData)
+                {
+                    $kabupaten = $modelData->nama;
+                    $returnData[] = [
+                        'id'=>$modelData->id_kab,
+                        'text'=>implode(' - ',[$kabupaten]),
+                    ];
+                }
+            }
+            else
+            {
+                $returnData = [];
+            }
+        }
+        elseif($id > 0)
+        {
+            $model = \app\models\KabupatenModel::find()->where(['id_kab'=>$id])->one();
+            if($model)
+            {
+                $kabupaten = $model->nama;
+                $returnData = [
+                    'id'=>$model->id_kab,
+                    'text'=>implode(' - ',[$kabupaten]),
+                ];
+            }
+            else
+            {
+                $returnData = [];               
+            }
+        }
+        $returnDatas['results'] = $returnData;
+        return json_encode($returnDatas);
+    }
+
     /**
      * Displays homepage.
      *

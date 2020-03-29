@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'kelurahan_datang',
                 'status',
                 'keterangan:ntext',
-                'id_pelapor',
+                // 'id_pelapor',
                 'id_posko',
             ],
         ]) ?>
