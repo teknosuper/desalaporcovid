@@ -47,6 +47,22 @@ class PoskoModel extends PoskoTable
         ];
     }
 
+	public static function getTextPoskoById($id)
+	{
+		$model = self::find()->where(['id'=>$id])->one();
+		if($model)
+		{
+            $nama_posko = $model->nama_posko;
+            $kelurahan = $model->poskoBelongsToKelurahanModel->nama;
+            $kecamatan = $model->poskoBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama;
+			return implode(' - ', [$nama_posko,$kelurahan,$kecamatan]);
+		}
+		else
+		{
+			return $id;
+		}
+	}
+
 	public function getPoskoBelongsToKelurahanModel()
 	{
 		return $this->hasOne(KelurahanModel::className(),['id_kel'=>'id_kelurahan']);

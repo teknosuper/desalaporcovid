@@ -12,8 +12,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="laporan-model-view box box-primary">
     <div class="box-header">
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
+        <?php if(\yii::$app->user->identity->userType==\app\models\User::LEVEL_POSKO):?>
+            <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
+        <?php endif;?>
+
         <?php if(\yii::$app->user->identity->userType==\app\models\User::LEVEL_ADMIN):?>
+            <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
             <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger btn-flat',
                 'data' => [

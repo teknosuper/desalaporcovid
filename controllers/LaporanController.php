@@ -3,20 +3,20 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\LaporanModel;
+use app\models\form\LaporanForm;
 use app\models\form\LaporanSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * LaporanController implements the CRUD actions for LaporanModel model.
+ * LaporanController implements the CRUD actions for LaporanForm model.
  */
 class LaporanController extends \app\controllers\MainController
 {
 
     /**
-     * Lists all LaporanModel models.
+     * Lists all LaporanForm models.
      * @return mixed
      */
     public function actionIndex()
@@ -49,7 +49,7 @@ class LaporanController extends \app\controllers\MainController
     }
 
     /**
-     * Displays a single LaporanModel model.
+     * Displays a single LaporanForm model.
      * @param integer $id
      * @return mixed
      */
@@ -61,16 +61,16 @@ class LaporanController extends \app\controllers\MainController
     }
 
     /**
-     * Creates a new LaporanModel model.
+     * Creates a new LaporanForm model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new LaporanModel();
+        $model = new LaporanForm();
 
         $model->id_pelapor = \yii::$app->user->identity->id;
-        $model->status = \app\models\LaporanModel::STATUS_WAITING;
+        $model->status = \app\models\form\LaporanForm::STATUS_WAITING;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -81,7 +81,7 @@ class LaporanController extends \app\controllers\MainController
     }
 
     /**
-     * Updates an existing LaporanModel model.
+     * Updates an existing LaporanForm model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -100,7 +100,7 @@ class LaporanController extends \app\controllers\MainController
     }
 
     /**
-     * Deletes an existing LaporanModel model.
+     * Deletes an existing LaporanForm model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -113,15 +113,15 @@ class LaporanController extends \app\controllers\MainController
     }
 
     /**
-     * Finds the LaporanModel model based on its primary key value.
+     * Finds the LaporanForm model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return LaporanModel the loaded model
+     * @return LaporanForm the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = LaporanModel::findOne($id)) !== null) {
+        if (($model = LaporanForm::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

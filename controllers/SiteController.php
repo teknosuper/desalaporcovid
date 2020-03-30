@@ -128,6 +128,53 @@ class SiteController extends \app\controllers\MainController
         return json_encode($returnDatas);
     }
 
+    public function actionGetdataposko($q=null,$id=null)
+    {
+        if(!is_null($q)) 
+        {
+            $model = \app\models\PoskoModel::find()
+                ->where(['like','nama_posko',$q])
+                ->all();
+            if($model and strlen($q)>3)
+            {
+                foreach($model as $modelData)
+                {
+                    $nama_posko = $modelData->nama_posko;
+                    $kelurahan = $modelData->poskoBelongsToKelurahanModel->nama;
+                    $kecamatan = $modelData->poskoBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama;
+                    $returnData[] = [
+                        'id'=>$modelData->id,
+                        'text'=>implode(' - ', [$nama_posko,$kelurahan,$kecamatan]),
+                    ];
+                }
+            }
+            else
+            {
+                $returnData = [];
+            }
+        }
+        elseif($id > 0)
+        {
+            $model = \app\models\PoskoModel::find()->where(['id'=>$id])->one();
+            if($model)
+            {
+                $nama_posko = $model->nama_posko;
+                $kelurahan = $model->poskoBelongsToKelurahanModel->nama;
+                $kecamatan = $model->poskoBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama;
+                $returnData[] = [
+                    'id'=>$modelData->id,
+                    'text'=>implode(' - ', [$nama_posko,$kelurahan,$kecamatan]),
+                ];
+            }
+            else
+            {
+                $returnData = [];               
+            }
+        }
+        $returnDatas['results'] = $returnData;
+        return json_encode($returnDatas);
+    }
+
     public function actionGetdatakelurahan($q=null,$id=null)
     {
         if(!is_null($q)) 

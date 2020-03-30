@@ -69,9 +69,9 @@ use yii\helpers\Url;
                                 ]
                             ])
                             ->textInput([
-                                'placeholder' => 'Nama Warga Yang akan dilaporkan',
+                                'placeholder' => 'Jenis Pelaporan',
                             ])
-                            ->hint('<div style="width:200px"><b>Jenis Laporan </b> - Masukkan Nama Warga Yang akan dilaporkan.</div>')
+                            ->hint('<div style="width:200px"><b>Jenis Laporan </b> - Masukkan Jenis Pelaporan.</div>')
                             ->dropDownList(\app\models\JenisLaporanModel::getJenisLaporanList(),['prompt'=>'Pilih Jenis Laporan']);?>
                         </div>
                     </div>            

@@ -29,6 +29,7 @@
                                 'items' => [
                                     ['label' => 'Daftar Posko', 'icon' => 'file-code-o', 'url' => ['/posko'],],
                                     ['label' => 'Jenis Laporan', 'icon' => 'dashboard', 'url' => ['/jenislaporan'],],
+                                    ['label' => 'Pengguna', 'icon' => 'users', 'url' => ['/users'],],
                                 ],
                             ],
                         ],

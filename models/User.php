@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use Yii;
 use yii\base\NotSupportedException;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
@@ -17,6 +18,56 @@ class User extends UsersTable implements IdentityInterface
     const LEVEL_POSKO = 'posko';
     const LEVEL_ADMIN = 'admin';
     const LEVEL_PENGGUNA = 'pengguna';
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'username' => Yii::t('app', 'Username'),
+            'authKey' => Yii::t('app', 'Auth Key'),
+            'password' => Yii::t('app', 'Password'),
+            'email' => Yii::t('app', 'Email'),
+            'accessToken' => Yii::t('app', 'Access Token'),
+            'userType' => Yii::t('app', 'User Type'),
+            'user_id' => Yii::t('app', 'Posko'),
+            'status' => Yii::t('app', 'Status'),
+            'nama' => Yii::t('app', 'Nama'),
+            'kelurahan' => Yii::t('app', 'Kelurahan'),
+            'alamat' => Yii::t('app', 'Alamat'),
+        ];
+    }
+
+    public function getLevelDetail()
+    {
+        $status = $this->status;
+        $array = self::getStatusList();
+        return isset($array[$status]) ? $array[$status] : NULL;
+    }
+
+    public static function getLevelList()
+    {
+        return [
+            self::LEVEL_PENGGUNA=>"PENGGUNA",
+            self::LEVEL_POSKO=>"POSKO",
+            self::LEVEL_ADMIN=>"ADMIN",
+        ];
+    }
+
+    public function getStatusDetail()
+    {
+        $status = $this->status;
+        $array = self::getStatusList();
+        return isset($array[$status]) ? $array[$status] : NULL;
+    }
+
+    public static function getStatusList()
+    {
+        return [
+            self::STATUS_ACTIVE=>"ACTIVE",
+            self::STATUS_SUSPENDED=>"SUSPENDED",
+            self::STATUS_DELETED=>"DELETED",
+        ];
+    }
 
     public static function findIdentity($id) {
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
