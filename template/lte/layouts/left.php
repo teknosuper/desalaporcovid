@@ -11,7 +11,7 @@
                         'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                         'items' => [
                             ['label' => 'Menu Dasbor', 'options' => ['class' => 'header']],
-                            ['label' => 'Home', 'icon' => 'home', 'url' => ['/']],
+                            ['label' => 'Beranda', 'icon' => 'home', 'url' => ['/']],
                             ['label' => 'Lapor Warga', 'icon' => 'file-o', 'url' => ['/laporan']],
                             // ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                             [
@@ -43,7 +43,7 @@
                         'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                         'items' => [
                             ['label' => 'Menu Dasbor', 'options' => ['class' => 'header']],
-                            ['label' => 'Home', 'icon' => 'home', 'url' => ['/']],
+                            ['label' => 'Beranda', 'icon' => 'home', 'url' => ['/']],
                             ['label' => 'Lapor Warga', 'icon' => 'file-o', 'url' => ['/laporan']],
                             // ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                             [
@@ -65,7 +65,7 @@
                         'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                         'items' => [
                             ['label' => 'Menu Dasbor', 'options' => ['class' => 'header']],
-                            ['label' => 'Home', 'icon' => 'home', 'url' => ['/']],
+                            ['label' => 'Beranda', 'icon' => 'home', 'url' => ['/']],
                             ['label' => 'Lapor Warga', 'icon' => 'file-o', 'url' => ['/laporan']],
                         ],
                     ]
@@ -78,6 +78,20 @@
         }
 
         ;?>
+
+        <?php else:?>
+
+        <?php 
+                echo dmstr\widgets\Menu::widget(
+                    [
+                        'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
+                        'items' => [
+                            ['label' => 'Menu Dasbor', 'options' => ['class' => 'header']],
+                            ['label' => 'Beranda', 'icon' => 'home', 'url' => ['/']],
+                        ],
+                    ]
+                );
+        ?>
 
         <?php endif;?>
 

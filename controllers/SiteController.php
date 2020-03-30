@@ -225,8 +225,8 @@ class SiteController extends \app\controllers\MainController
      */
     public function actionIndex()
     {
-        return $this->redirect(['/laporan']);
-        // return $this->render('index');
+        // return $this->redirect(['/laporan']);
+        return $this->render('index');
     }
 
     /**

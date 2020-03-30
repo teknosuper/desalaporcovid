@@ -25,14 +25,13 @@ $fieldOptions2 = [
 <div class="login-box panel panel-default">
     <div class="row text-center">
         <div class="login-logo">
-            <span>Desa Lapor Covid-19</span>
-            <!-- <img class="col-md-6 col-md-offset-3 col-xs-6 col-xs-offset-3 col-lg-6 col-lg-offset-3" src="/img/bemobile_purple.png"> -->
+            <img class="col-md-6 col-md-offset-3 col-xs-6 col-xs-offset-3 col-lg-6 col-lg-offset-3" src="/logodlc-transparent.png">
         </div>        
     </div>
 
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg"><b>Halaman Masuk</b></p>
+        <p class="login-box-msg"><b>Halaman Daftar Aplikasi</b></p>
 
         <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false,'options' => ['autocomplete' => 'off']]); ?>
 

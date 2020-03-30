@@ -78,4 +78,9 @@ class LaporanModel extends LaporanTable
         ];
     }
 
+    public static function getLaporanCount()
+    {
+    	return self::find()->count();
+    }
+
 }

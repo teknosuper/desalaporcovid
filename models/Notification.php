@@ -1,9 +1,8 @@
 <?php 
-namespace frontend\components;
+namespace app\models;
 
 use Yii;
 use machour\yii2\notifications\models\Notification as BaseNotification;
-use common\models\master\PurchaseModel;
 
 class Notification extends BaseNotification
 {

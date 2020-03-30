@@ -29,6 +29,11 @@ class PoskoModel extends PoskoTable
         ];
     }
 
+    public static function getPoskoCount()
+    {
+    	return self::find()->count();
+    }
+
     public function attributeLabels()
     {
         return [
