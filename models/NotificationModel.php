@@ -27,7 +27,7 @@ class NotificationModel extends NotificationTable
 
 	public static function createNotification($key,$key_id,$user_id,$type = NotificationModel::TYPE_DEFAULT)
 	{
-		$model = new NotificationTable;
+		$model = new NotificationModel;
 		$model->key = $key;
 		$model->key_id = $key_id;
 		$model->type = $type;
@@ -39,6 +39,5 @@ class NotificationModel extends NotificationTable
 		{
 			return $model;
 		}
-
 	}
 }

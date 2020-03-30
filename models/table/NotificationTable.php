@@ -34,8 +34,7 @@ class NotificationTable extends \yii\db\ActiveRecord
         return [
             [['key', 'type', 'user_id', 'seen', 'created_at', 'flashed'], 'required'],
             [['user_id', 'seen', 'flashed'], 'integer'],
-            [['created_at'], 'safe'],
-            [['key', 'key_id', 'type'], 'string', 'max' => 255],
+            [['created_at','key', 'key_id', 'type'], 'safe'],
         ];
     }
 
