@@ -53,7 +53,36 @@ class MainController extends Controller
             }
             $pathInfo = \yii::$app->request->pathInfo;
             switch ($pathInfo) {
-                case 'register/newuser':
+                case 'dataposko':
+                    switch (\yii::$app->user->identity->userType) {
+                    case \app\models\User::LEVEL_ADMIN:
+                    case \app\models\User::LEVEL_POSKO:
+                            return true;
+                            # code...
+                            break;
+                        
+                        default:
+                            return false;
+                            # code...
+                            break;
+                    }
+                    # code...
+                    break;
+                case 'posko':
+                    switch (\yii::$app->user->identity->userType) {
+                    case \app\models\User::LEVEL_ADMIN:
+                            return true;
+                            # code...
+                            break;
+                        
+                        default:
+                            return false;
+                            # code...
+                            break;
+                    }
+                    # code...
+                    break;                
+                case 'jenislaporan':
                     switch (\yii::$app->user->identity->userType) {
                     case \app\models\User::LEVEL_ADMIN:
                             return true;
