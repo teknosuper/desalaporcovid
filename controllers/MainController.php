@@ -30,7 +30,7 @@ class MainController extends Controller
                     ],
                     [
                         // 'actions' => ['logout', 'index','update','transaction','usage'],
-                        // 'allow' => $this->canAccessWithLogin(),
+                        'allow' => $this->canAccessWithLogin(),
                         'roles' => ['@'],
                     ],
                 ],

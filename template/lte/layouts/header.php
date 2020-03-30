@@ -20,10 +20,17 @@ use yii\helpers\Html;
             <ul class="nav navbar-nav">
 
                 <li class="dropdown user user-menu">
+                    <?php if(Yii::$app->user->isGuest):?>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="<?= \app\models\CommonHelper::letterAvatar('Guest') ;?>" class="user-image" alt="User Image"/>
                         <span class="hidden-xs">Silahkan Login</span>
                     </a>
+                    <?php else:?>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="<?= \app\models\CommonHelper::letterAvatar(\yii::$app->user->identity->username) ;?>" class="user-image" alt="User Image"/>
+                            <span class="hidden-xs"><?= \yii::$app->user->identity->username;?></span>
+                        </a>
+                    <?php endif;?>
                     <ul class="dropdown-menu">
                     <?php if(!Yii::$app->user->isGuest):?>
                         <!-- User image -->
@@ -33,7 +40,7 @@ use yii\helpers\Html;
 
                             <p>
                                 <?= \yii::$app->user->identity->username;?>                                
-                                <small><?= \yii::$app->user->identity->username;?></small>
+                                <small><?= \yii::$app->user->identity->userType;?></small>
                             </p>
                         </li>
 
