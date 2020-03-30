@@ -54,6 +54,10 @@ class MainController extends Controller
             $pathInfo = \yii::$app->request->pathInfo;
             switch ($pathInfo) {
                 case 'dataposko':
+                case 'dataposko/create':
+                case 'dataposko/view':
+                case 'dataposko/update':
+                case 'dataposko/delete':
                     switch (\yii::$app->user->identity->userType) {
                     case \app\models\User::LEVEL_ADMIN:
                     case \app\models\User::LEVEL_POSKO:
@@ -69,6 +73,10 @@ class MainController extends Controller
                     # code...
                     break;
                 case 'posko':
+                case 'posko/create':
+                case 'posko/view':
+                case 'posko/update':
+                case 'posko/delete':
                     switch (\yii::$app->user->identity->userType) {
                     case \app\models\User::LEVEL_ADMIN:
                             return true;
@@ -83,6 +91,28 @@ class MainController extends Controller
                     # code...
                     break;                
                 case 'jenislaporan':
+                case 'jenislaporan/create':
+                case 'jenislaporan/view':
+                case 'jenislaporan/update':
+                case 'jenislaporan/delete':
+                    switch (\yii::$app->user->identity->userType) {
+                    case \app\models\User::LEVEL_ADMIN:
+                            return true;
+                            # code...
+                            break;
+                        
+                        default:
+                            return false;
+                            # code...
+                            break;
+                    }
+                    # code...
+                    break;
+                case 'users':
+                case 'users/create':
+                case 'users/view':
+                case 'users/update':
+                case 'users/delete':
                     switch (\yii::$app->user->identity->userType) {
                     case \app\models\User::LEVEL_ADMIN:
                             return true;
