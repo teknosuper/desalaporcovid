@@ -12,22 +12,8 @@ use yii\filters\VerbFilter;
 /**
  * PoskoController implements the CRUD actions for PoskoModel model.
  */
-class PoskoController extends Controller
+class PoskoController extends \app\controllers\MainController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all PoskoModel models.

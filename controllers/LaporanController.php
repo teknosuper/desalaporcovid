@@ -12,22 +12,8 @@ use yii\filters\VerbFilter;
 /**
  * LaporanController implements the CRUD actions for LaporanModel model.
  */
-class LaporanController extends Controller
+class LaporanController extends \app\controllers\MainController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all LaporanModel models.

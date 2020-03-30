@@ -9,7 +9,7 @@ use kartik\form\ActiveField;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
 
-$this->title = 'Masuk Aplikasi';
+$this->title = 'Daftar';
 
 $fieldOptions1 = [
     'options' => ['class' => 'form-group has-feedback'],
@@ -32,7 +32,7 @@ $fieldOptions2 = [
 
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg"><b>Halaman Daftar</b></p>
+        <p class="login-box-msg"><b>Halaman Masuk</b></p>
 
         <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false,'options' => ['autocomplete' => 'off']]); ?>
 
@@ -100,14 +100,14 @@ $fieldOptions2 = [
             </div>
             <!-- /.col -->
             <div class="col-md-12">
-                <?= Html::submitButton('Masuk Aplikasi', ['class' => 'btn btn-success btn-block btn-flat', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Daftar Aplikasi', ['class' => 'btn btn-success btn-block btn-flat', 'name' => 'login-button']) ?>
             </div>
             <!-- /.col -->
         </div>
 
         <div class="social-auth-links text-center">
-            <p>- Belum mempunyai akun ? -</p>
-            <a href="<?= \yii\helpers\Url::toRoute(['/site/signup']);?>" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-user"></i> Daftar Aplikasi </a>
+            <p>- Sudah mempunyai akun ? -</p>
+            <a href="<?= \yii\helpers\Url::toRoute(['/site/login']);?>" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-user"></i> Masuk ke Aplikasi</a>
         </div>
 
         <?php ActiveForm::end(); ?>

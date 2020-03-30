@@ -12,22 +12,8 @@ use yii\filters\VerbFilter;
 /**
  * JenislaporanController implements the CRUD actions for JenisLaporanModel model.
  */
-class JenislaporanController extends Controller
+class JenislaporanController extends \app\controllers\MainController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all JenisLaporanModel models.

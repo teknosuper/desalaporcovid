@@ -9,10 +9,14 @@ use app\models\table\UsersTable;
 class User extends UsersTable implements IdentityInterface 
 {
 
-    const STATUS_DELETED = -1;
+    const STATUS_DELETED = 30;
     const STATUS_ACTIVE = 10;
     const STATUS_SUSPENDED = 0;
 
+
+    const LEVEL_POSKO = 'posko';
+    const LEVEL_ADMIN = 'admin';
+    const LEVEL_PENGGUNA = 'pengguna';
 
     public static function findIdentity($id) {
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
@@ -67,6 +71,7 @@ class User extends UsersTable implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        // return $this->password === $password;
+        return $this->password === md5($password);
     }
 }

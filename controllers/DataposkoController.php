@@ -12,22 +12,8 @@ use yii\filters\VerbFilter;
 /**
  * DataposkoController implements the CRUD actions for DataPoskoModel model.
  */
-class DataposkoController extends Controller
+class DataposkoController extends \app\controllers\MainController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all DataPoskoModel models.
