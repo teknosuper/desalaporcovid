@@ -4,22 +4,12 @@ use yii\helpers\Html;
 use kartik\form\ActiveForm;
 use kartik\form\ActiveField;
 
-
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
 
-$this->title = 'Daftar';
+$this->title = 'Pendaftaran Aplikasi Desa Lapor Covid-19';
 
-$fieldOptions1 = [
-    'options' => ['class' => 'form-group has-feedback'],
-    'inputTemplate' => "{input}<span class='glyphicon glyphicon-envelope form-control-feedback'></span>"
-];
-
-$fieldOptions2 = [
-    'options' => ['class' => 'form-group has-feedback'],
-    'inputTemplate' => "{input}<span class='glyphicon glyphicon-lock form-control-feedback'></span>"
-];
 ?>
 
 <div class="login-box panel panel-default">
@@ -31,9 +21,38 @@ $fieldOptions2 = [
 
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg"><b>Halaman Daftar Aplikasi</b></p>
+        <p class="login-box-msg"><b>Daftar Aplikasi</b></p>
 
-        <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false,'options' => ['autocomplete' => 'off']]); ?>
+        <?php $form = ActiveForm::begin(['id' => 'Signup-form', 'enableClientValidation' => false,'options' => ['autocomplete' => 'off']]); ?>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+	                <?= $form->field($model, 'nama', [
+	                        'feedbackIcon' => [
+	                                'default' => '',
+	                                'success' => 'ok',
+	                                'error' => 'exclamation-sign',
+	                                'defaultOptions' => ['class'=>'text-primary']
+	                        ],
+	                        'hintType' => ActiveField::HINT_SPECIAL,
+	                        'addon' => ['prepend' => ['content'=>'<i class="fa fa-user"></i>']],
+	                        'hintSettings' => [
+	                            'iconBesideInput' => false,
+	                            'onLabelClick' => false,
+	                            'onLabelHover' => true,
+	                            'onIconClick' => true,
+	                            'onIconHover' => false,
+	                            'title' => '<i class="glyphicon glyphicon-info-sign"></i> Wajib diisi'
+	                        ]
+	                    ])
+	                    ->textInput([
+	                        'placeholder' => 'Nama',
+	                    ])
+	                    ->hint('<div style="width:200px"><b>Nama </b> - Masukkan Nama </div>');?>
+                </div>
+            </div>            
+        </div>
 
         <div class="row">
             <div class="col-md-12">
@@ -53,16 +72,46 @@ $fieldOptions2 = [
                             'onLabelHover' => true,
                             'onIconClick' => true,
                             'onIconHover' => false,
+                            'title' => '<i class="glyphicon glyphicon-info-sign"></i> Wajib diisi'
+                        ]
+                    ])
+                    ->textInput([
+                        'placeholder' => 'Wajib diisi',
+                    ])
+                    ->hint('<div style="width:200px"><b>Username </b> -Masukkan Username.</div>');?>
+                </div>
+            </div>            
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                <?= $form->field($model, 'email', [
+                        'feedbackIcon' => [
+                                'default' => '',
+                                'success' => 'ok',
+                                'error' => 'exclamation-sign',
+                                'defaultOptions' => ['class'=>'text-primary']
+                        ],
+                        'hintType' => ActiveField::HINT_SPECIAL,
+                        'addon' => ['prepend' => ['content'=>'<i class="fa fa-envelope"></i>']],
+                        'hintSettings' => [
+                            'iconBesideInput' => false,
+                            'onLabelClick' => false,
+                            'onLabelHover' => true,
+                            'onIconClick' => true,
+                            'onIconHover' => false,
                             'title' => '<i class="glyphicon glyphicon-info-sign"></i> Optional'
                         ]
                     ])
                     ->textInput([
                         'placeholder' => 'Wajib diisi',
                     ])
-                    ->hint('<div style="width:200px"><b>Username </b> - Masukkan Username.</div>');?>
+                    ->hint('<div style="width:200px"><b>Email </b> - Enter Your Valid Email Address here.</div>');?>
                 </div>
             </div>            
-        </div>        
+        </div>
+
 
         <div class="row">
             <div class="col-md-12">
@@ -85,7 +134,7 @@ $fieldOptions2 = [
                                 'title' => '<i class="glyphicon glyphicon-info-sign"></i> Wajib diisi'
                             ]
                         ])
-                        ->hint('<div style="width:200px"><b>Password </b> Masukkan Password</div>')
+                        ->hint('<div style="width:200px"><b>Password </b> enter your Password</div>')
                         ->passwordInput([
                             'placeholder' => 'Wajib diisi',
                         ]);?>
@@ -94,24 +143,52 @@ $fieldOptions2 = [
         </div>
 
         <div class="row">
-            <div class="col-xs-8">
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <?= $form->field($model, 'confirm_password', [
+                            'feedbackIcon' => [
+                                    'default' => '',
+                                    'success' => 'ok',
+                                    'error' => 'exclamation-sign',
+                                    'defaultOptions' => ['class'=>'text-primary']
+                            ],
+                            'addon' => ['prepend' => ['content'=>'<i class="fa fa-lock"></i>']],
+                            'hintType' => ActiveField::HINT_SPECIAL,
+                            'hintSettings' => [
+                                'iconBesideInput' => false,
+                                'onLabelClick' => false,
+                                'onLabelHover' => true,
+                                'onIconClick' => true,
+                                'onIconHover' => false,
+                                'title' => '<i class="glyphicon glyphicon-info-sign"></i> Wajib diisi'
+                            ]
+                        ])
+                        ->hint('<div style="width:200px"><b>Confirm Password </b> Confirm your Password</div>')
+                        ->passwordInput([
+                            'placeholder' => 'Wajib diisi',
+                        ]);?>
+                </div>
+            </div>            
+        </div>
+
+
+        <div class="row">
+
             <!-- /.col -->
             <div class="col-md-12">
-                <?= Html::submitButton('Daftar Aplikasi', ['class' => 'btn btn-success btn-block btn-flat', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Lanjutkan pendaftaran', ['class' => 'btn btn-success btn-block btn-flat', 'name' => 'login-button']) ?>
             </div>
             <!-- /.col -->
         </div>
 
         <div class="social-auth-links text-center">
-            <p>- Sudah mempunyai akun ? -</p>
-            <a href="<?= \yii\helpers\Url::toRoute(['/site/login']);?>" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-user"></i> Masuk ke Aplikasi</a>
+            <p>- Sudah Mempunyai Akun ? -</p>
+            <a href="<?= \yii\helpers\Url::toRoute(['/site/login']);?>" class="btn btn-xs btn-block btn-social btn-facebook btn-flat"><i class="fa fa-user"></i> ke Halaman Masuk Aplikasi</a>
         </div>
 
         <?php ActiveForm::end(); ?>
-
         <?php /*
+
         <a href="<?= \yii\helpers\Url::toRoute(['/forgot']);?>">I forgot my password</a><br>
         */ ?>
         <!-- <a href="register.html" class="text-center">Register a new membership</a> -->

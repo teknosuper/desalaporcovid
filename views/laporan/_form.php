@@ -197,7 +197,7 @@ use yii\helpers\Url;
                                         'defaultOptions' => ['class'=>'text-primary']
                                 ],
                                 'hintType' => ActiveField::HINT_SPECIAL,
-                                'addon' => ['append' => ['content'=>'<i class="fa fa-pencil"></i>']],
+                                'addon' => ['append' => ['content'=>'<i class="fa fa-address"></i>']],
                                 'hintSettings' => [
                                     'iconBesideInput' => false,
                                     'onLabelClick' => false,
@@ -427,7 +427,7 @@ use yii\helpers\Url;
                                         'defaultOptions' => ['class'=>'text-primary']
                                 ],
                                 'hintType' => ActiveField::HINT_SPECIAL,
-                                'addon' => ['append' => ['content'=>'<i class="fa fa-pencil"></i>']],
+                                'addon' => ['append' => ['content'=>'<i class="fa fa-address"></i>']],
                                 'hintSettings' => [
                                     'iconBesideInput' => false,
                                     'onLabelClick' => false,

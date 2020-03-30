@@ -301,10 +301,66 @@ class SiteController extends \app\controllers\MainController
     public function actionSignup()
     {
         $this->layout = "main-login.php";
-        $model = new LoginForm();
-        return $this->render('signup',[
-            'model'=> $model,
-        ]);
+        $step = \yii::$app->request->get('step');
+
+        $step1Model = new \app\models\form\SignupForm(['scenario' => 'step1']);
+        $step2Model = new \app\models\form\SignupForm(['scenario' => 'step2']);
+        $step1session = \yii::$app->session->get('SignupUserStep1');
+        $step2session = \yii::$app->session->get('SignupUserStep2');
+        if ($step1session) {
+            $step1Model->load($step1session);
+        }
+        if ($step2session) {
+            $step2Model->load($step2session);
+        }
+        // $randomWord = \common\helpers\CommonHelper::randomCode(TRUE,6);
+
+        $model = new \app\models\form\SignupForm;
+        $model->load($step1session);
+        $model->load($step2session);
+
+        switch ($step) {
+            case 2:
+                if (empty(\yii::$app->session->get('SignupUserStep1'))) {
+                    return $this->redirect(['/site/signup', 'step' => 1]);
+                }
+                if ($step2Model->load(Yii::$app->request->post()))
+                {
+                    if($step2Model->validate())
+                    {
+                        \yii::$app->session->set('SignupUserStep2', \yii::$app->request->post());
+                        if($model->signup())
+                        {
+                            \yii::$app->session->remove('SignupUserStep1');
+                            \yii::$app->session->remove('SignupUserStep2');
+                            $getUser = \app\models\User::findByUsername($model->username);
+                            //do login
+                            \Yii::$app->user->login($getUser, 1 ? 3600 * 24 * 30 : 0);
+                            return $this->redirect(['/']);
+                        }
+                    }
+                }
+                return $this->render('signup_step2',[
+                    'model' => $step2Model
+                ]);
+                # code...
+                break;
+            
+            default:
+                if ($step1Model->load(Yii::$app->request->post()))
+                {
+                    if($step1Model->validate())
+                    {
+                        \yii::$app->session->set('SignupUserStep1', \yii::$app->request->post());
+                        return $this->redirect(['/site/signup', 'step' => 2]);
+                    }
+                }
+                return $this->render('signup',[
+                    'model' => $step1Model
+                ]);
+                # code...
+                break;
+        }
     }
 
     /**
