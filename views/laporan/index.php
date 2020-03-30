@@ -132,7 +132,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'theme' => Select2::THEME_BOOTSTRAP,
 
                         'hideSearch' => true,
-                        'initValueText' => \app\models\KelurahanModel::getTextKelurahanById($searchModel->kelurahan),                        
+                        'initValueText' => \app\models\KelurahanModel::getTextKelurahanById($searchModel->kelurahan_datang),                        
                         'options' => [
 
                             'placeholder' => 'Pilih Kelurahan/Desa ...',
@@ -174,9 +174,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'hideSearch' => true,
                         'initValueText' => \app\models\KelurahanModel::getTextKelurahanById($searchModel->kelurahan),                        
                         'options' => [
-
-                            'placeholder' => 'Pilih Kelurahan/Desa ...',
-
+                            'placeholder' => 'Pilih Posko ...',
                         ],
                         'pluginOptions' => [
                             'allowClear' => true,
@@ -185,7 +183,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'errorLoading' => new JsExpression("function () { return 'Sedang mencari data...'; }"),
                             ],
                             'ajax' => [
-                                'url' => \yii\helpers\Url::to(['/site/getdatakelurahan']),
+                                'url' => \yii\helpers\Url::to(['/site/getdataposko']),
                                 'dataType' => 'json',
                                 'data' => new JsExpression('function(params) { return {q:params.term}; }')
                             ],

@@ -39,8 +39,8 @@ class User extends UsersTable implements IdentityInterface
 
     public function getLevelDetail()
     {
-        $status = $this->status;
-        $array = self::getStatusList();
+        $status = $this->userType;
+        $array = self::getLevelList();
         return isset($array[$status]) ? $array[$status] : NULL;
     }
 
@@ -71,6 +71,11 @@ class User extends UsersTable implements IdentityInterface
 
     public static function findIdentity($id) {
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    public function getKelurahanBelongsToKelurahanModel()
+    {
+        return $this->hasOne(KelurahanModel::className(),['id_kel'=>'kelurahan']);
     }
 
     public function getIdPoskoToPoskoModel()
