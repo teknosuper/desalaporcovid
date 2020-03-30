@@ -217,20 +217,48 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
 
                             'update' => function ($url, $model) {
-                                return Html::a('<span class="fa fa-pencil"></span> Ubah', $url, [
-                                            'title' => Yii::t('app', 'update'),
-                                            'class'=>'btn btn-warning btn-xs modal-form',
-                                            'data-size' => 'modal-lg',
+                                switch (\yii::$app->user->identity->userType) {
+                                    case \app\models\User::LEVEL_POSKO:
+                                    case \app\models\User::LEVEL_ADMIN:
+                                        return Html::a('<span class="fa fa-pencil"></span> Ubah', $url, [
+                                                    'title' => Yii::t('app', 'update'),
+                                                    'class'=>'btn btn-warning btn-xs modal-form',
+                                                    'data-size' => 'modal-lg',
 
-                                ]);
+                                        ]);
+                                        # code...
+                                        break;
+                                    
+                                    default:
+                                        if($model->status==\app\models\LaporanModel::STATUS_WAITING)
+                                        {
+                                            return Html::a('<span class="fa fa-pencil"></span> Ubah', $url, [
+                                                        'title' => Yii::t('app', 'update'),
+                                                        'class'=>'btn btn-warning btn-xs modal-form',
+                                                        'data-size' => 'modal-lg',
+
+                                            ]);                                            
+                                        }
+                                        # code...
+                                        break;
+                                }
                             },
                             'delete' => function ($url, $model) {
-                                return Html::a('<span class="glyphicon glyphicon-trash"></span> Hapus', $url, [
-                                            'title' => Yii::t('app', 'delete'),
-                                            'class'=>'btn btn-danger btn-xs modal-form',
-                                            'data-method'=>'post',
-                                            'data-confirm'=>'Apakah anda yakin akan menghapus data ini ? ',
-                                ]);
+                                switch (\yii::$app->user->identity->userType) {
+                                    case \app\models\User::LEVEL_ADMIN:
+                                        return Html::a('<span class="glyphicon glyphicon-trash"></span> Hapus', $url, [
+                                                    'title' => Yii::t('app', 'delete'),
+                                                    'class'=>'btn btn-danger btn-xs modal-form',
+                                                    'data-method'=>'post',
+                                                    'data-confirm'=>'Apakah anda yakin akan menghapus data ini ? ',
+                                        ]);
+                                        # code...
+                                        break;
+                                    
+                                    default:
+                                        # code...
+                                        break;
+                                }
                             }
                     ],
                     // 'urlCreator' => function ($action, $model, $key, $index) {

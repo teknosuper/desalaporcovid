@@ -110,7 +110,7 @@ use yii\helpers\Url;
         </div>  
 
         <div class="box-header with-border text-center">
-          <h3 class="box-title">Isi Biodata Warga Terlapor</h3>
+          <h3 class="box-title">Isi Biodata Warga Terlapor Sesuai Kartu Identitas</h3>
 
         </div>
         <div class="box-body table-responsive">

@@ -68,7 +68,7 @@ class LaporanModel extends LaporanTable
             'no_telepon_terlapor' => Yii::t('app', 'No Telepon Terlapor'),
             'jenis_laporan' => Yii::t('app', 'Jenis Laporan'),
             'kota_asal' => Yii::t('app', 'Kota Asal'),
-            'kelurahan_datang' => Yii::t('app', 'Kelurahan Datang'),
+            'kelurahan_datang' => Yii::t('app', 'Kelurahan Tujuan'),
             'status' => Yii::t('app', 'Status'),
             'keterangan' => Yii::t('app', 'Keterangan'),
             'id_pelapor' => Yii::t('app', 'Pelapor'),

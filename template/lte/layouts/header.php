@@ -82,7 +82,7 @@ NotificationsWidget::widget([
 
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="<?= \yii\helpers\Url::toRoute(['/profile']);?>" class="btn btn-default btn-flat">Profile</a>
+                                <a href="<?= \yii\helpers\Url::toRoute(['/profile/password']);?>" class="btn btn-default btn-flat">Ganti Password</a>
                             </div>
                             <div class="pull-right">
 
