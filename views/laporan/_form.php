@@ -484,6 +484,24 @@ use yii\helpers\Url;
 
         </div>
 
+        <?php 
+            switch (\yii::$app->user->identity->userType) {
+                case \app\models\User::LEVEL_ADMIN:
+                case \app\models\User::LEVEL_POSKO:
+                    echo $this->render('_form_validasi',[
+                        'model'=>$model,
+                        'form'=>$form,
+                    ]);
+                    # code...
+                    break;
+                default:
+
+                    # code...
+                    break;
+            }
+        ?>
+
+
         <div class="box-footer">
             <?= Html::submitButton(Yii::t('app', 'Kirim Laporan'), ['class' => 'btn btn-success btn-flat btn-block']) ?>
         </div>

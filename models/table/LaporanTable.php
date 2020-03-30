@@ -9,19 +9,23 @@ use Yii;
  *
  * @property int $id
  * @property string|null $nama_warga
- * @property int|null $kelurahan
+ * @property string|null $kelurahan
  * @property string|null $alamat
  * @property string|null $no_telepon_pelapor
  * @property string|null $no_telepon_terlapor
  * @property int|null $jenis_laporan
- * @property int|null $kota_asal
- * @property int|null $kelurahan_datang
+ * @property string|null $kota_asal
+ * @property string|null $kelurahan_datang
  * @property int|null $status
  * @property string|null $keterangan
  * @property int|null $id_pelapor
  * @property int|null $id_posko
  * @property int|null $luar_negeri
- * @property int|null $id_negara
+ * @property string|null $id_negara
+ * @property string|null $created_time
+ * @property string|null $updated_time
+ * @property int|null $created_by
+ * @property int|null $updated_by
  */
 class LaporanTable extends \yii\db\ActiveRecord
 {
@@ -39,9 +43,11 @@ class LaporanTable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['kelurahan', 'jenis_laporan', 'kota_asal', 'kelurahan_datang', 'status', 'id_pelapor', 'id_posko', 'luar_negeri', 'id_negara'], 'integer'],
+            [['jenis_laporan', 'status', 'id_pelapor', 'id_posko', 'luar_negeri', 'created_by', 'updated_by'], 'integer'],
             [['keterangan'], 'string'],
+            [['created_time', 'updated_time'], 'safe'],
             [['nama_warga', 'no_telepon_pelapor', 'no_telepon_terlapor'], 'string', 'max' => 255],
+            [['kelurahan', 'kota_asal', 'kelurahan_datang', 'id_negara'], 'string', 'max' => 11],
             [['alamat'], 'string', 'max' => 500],
         ];
     }
@@ -67,6 +73,10 @@ class LaporanTable extends \yii\db\ActiveRecord
             'id_posko' => Yii::t('app', 'Id Posko'),
             'luar_negeri' => Yii::t('app', 'Luar Negeri'),
             'id_negara' => Yii::t('app', 'Id Negara'),
+            'created_time' => Yii::t('app', 'Created Time'),
+            'updated_time' => Yii::t('app', 'Updated Time'),
+            'created_by' => Yii::t('app', 'Created By'),
+            'updated_by' => Yii::t('app', 'Updated By'),
         ];
     }
 }

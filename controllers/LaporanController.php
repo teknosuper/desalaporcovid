@@ -71,6 +71,8 @@ class LaporanController extends \app\controllers\MainController
 
         $model->id_pelapor = \yii::$app->user->identity->id;
         $model->status = \app\models\form\LaporanForm::STATUS_WAITING;
+        $model->created_time = date('Y-m-d H:i:s');
+        $model->created_by = \yii::$app->user->identity->id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -90,6 +92,8 @@ class LaporanController extends \app\controllers\MainController
     {
         $model = $this->findModel($id);
 
+        $model->updated_time = date('Y-m-d H:i:s');
+        $model->updated_by = \yii::$app->user->identity->id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
