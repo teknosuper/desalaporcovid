@@ -53,12 +53,12 @@ class DataPoskoModel extends DataPoskoTable
     {
         return [
             // self::STATUS_DELETED=>"DI HAPUS",
-            self::STATUS_DALAM_PEMANTAUAN=>"STATUS_DALAM_PEMANTAUAN",
-            self::STATUS_GEJALA=>"STATUS_GEJALA",
-            self::STATUS_POSITIF=>"STATUS_POSITIF",
-            self::STATUS_SEMBUH=>"STATUS_SEMBUH",
-            self::STATUS_PERGI=>"STATUS_PERGI",
-            self::STATUS_NEGATIF=>"STATUS_NEGATIF",
+            self::STATUS_DALAM_PEMANTAUAN=>"STATUS DALAM PEMANTAUAN",
+            self::STATUS_GEJALA=>"STATUS GEJALA",
+            self::STATUS_POSITIF=>"STATUS POSITIF",
+            self::STATUS_SEMBUH=>"STATUS SEMBUH",
+            self::STATUS_PERGI=>"STATUS PERGI",
+            self::STATUS_NEGATIF=>"STATUS NEGATIF",
         ];
     }
 
