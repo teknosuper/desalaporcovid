@@ -306,18 +306,13 @@ class SiteController extends \app\controllers\MainController
         $step1Model = new \app\models\form\SignupForm(['scenario' => 'step1']);
         $step2Model = new \app\models\form\SignupForm(['scenario' => 'step2']);
         $step1session = \yii::$app->session->get('SignupUserStep1');
-        $step2session = \yii::$app->session->get('SignupUserStep2');
         if ($step1session) {
             $step1Model->load($step1session);
-        }
-        if ($step2session) {
-            $step2Model->load($step2session);
         }
         // $randomWord = \common\helpers\CommonHelper::randomCode(TRUE,6);
 
         $model = new \app\models\form\SignupForm;
         $model->load($step1session);
-        $model->load($step2session);
 
         switch ($step) {
             case 2:
@@ -326,9 +321,14 @@ class SiteController extends \app\controllers\MainController
                 }
                 if ($step2Model->load(Yii::$app->request->post()))
                 {
+                    // $model->load(Yii::$app->request->post());
                     if($step2Model->validate())
                     {
-                        \yii::$app->session->set('SignupUserStep2', \yii::$app->request->post());
+                        $model->no_telepon = $step2Model->no_telepon;
+                        $model->kelurahan = $step2Model->kelurahan;
+                        $model->alamat = $step2Model->alamat;
+                        // \yii::$app->session->set('SignupUserStep2', \yii::$app->request->post());
+                        // $model->load($step2session);
                         if($model->signup())
                         {
                             \yii::$app->session->remove('SignupUserStep1');

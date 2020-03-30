@@ -82,7 +82,6 @@ class SignupForm extends Model
         $userModel->userType = \app\models\User::LEVEL_PENGGUNA;
         $userModel->status = \app\models\User::STATUS_ACTIVE;
 
-        
         if($userModel->validate())
         {
             $userModel->save();
