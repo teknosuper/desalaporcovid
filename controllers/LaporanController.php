@@ -23,6 +23,24 @@ class LaporanController extends \app\controllers\MainController
     {
         $searchModel = new LaporanSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        switch (\yii::$app->user->identity->userType) {
+            case \app\models\User::LEVEL_ADMIN:
+                # code...
+                break;
+            case \app\models\User::LEVEL_POSKO:
+                $id_kelurahan = \yii::$app->user->identity->idPoskoToPoskoModel->id_kelurahan;
+                $dataProvider->query->andWhere([
+                    'kelurahan_datang'=>$id_kelurahan,
+                ]);                        
+                # code...
+                break;            
+            default:
+                $dataProvider->query->andWhere([
+                    'id_pelapor'=>\yii::$app->user->identity->id,
+                ]);
+                # code...
+                break;
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -51,6 +69,8 @@ class LaporanController extends \app\controllers\MainController
     {
         $model = new LaporanModel();
 
+        $model->id_pelapor = \yii::$app->user->identity->id;
+        $model->status = \app\models\LaporanModel::STATUS_WAITING;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

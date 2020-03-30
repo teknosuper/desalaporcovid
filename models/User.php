@@ -22,6 +22,11 @@ class User extends UsersTable implements IdentityInterface
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 
+    public function getIdPoskoToPoskoModel()
+    {
+        return $this->hasOne(PoskoModel::className(),['id'=>'user_id']);
+    }
+
     public static function getPenggunaCount()
     {
         return self::find()->count();
