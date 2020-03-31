@@ -25,7 +25,7 @@ $this->title = 'Pendaftaran Aplikasi Desa Lapor Covid-19';
     <div class="login-box-body">
         <p class="login-box-msg"><b>Pendaftaran Aplikasi Langkah ke-2</b></p>
 
-        <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false,'options' => ['autocomplete' => 'off']]); ?>
+        <?php $form = ActiveForm::begin(['id' => 'Signup-form2', 'enableClientValidation' => false,'options' => ['autocomplete' => 'off']]); ?>
 
         <div class="row">
             <div class="col-md-12">
