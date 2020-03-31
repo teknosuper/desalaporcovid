@@ -1,4 +1,4 @@
-.config/db-local.php
+config/db-local.php
 # phpstorm project files
 .idea
 
