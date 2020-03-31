@@ -224,6 +224,7 @@ class SiteController extends \app\controllers\MainController
 
     public function actionGetdatakabupaten($q=null,$id=null)
     {
+        $returnData = [];
         if(!is_null($q)) 
         {
             $model = \app\models\KabupatenModel::find()
@@ -242,7 +243,35 @@ class SiteController extends \app\controllers\MainController
             }
             else
             {
-                $returnData = [];
+                $kecamatanModel = \app\models\KecamatanModel::find()
+                ->where(['like','nama',$q])
+                ->all();
+                if($kecamatanModel and strlen($q)>3)
+                {
+                    foreach($kecamatanModel as $kecamatanData)
+                    {
+                        $kab[$kecamatanData->id_kab][$kecamatanData->kecamatanBelongsToKabupatenModel->nama][] = $kecamatanData->nama;
+                    }
+
+                    foreach($kab as $kabKey=>$kabValue)
+                    {
+                        $kecamatanArray = [];
+                        $kabValueKey = null;
+                        foreach($kabValue as $kabValueKey=>$kabValueValue)
+                        {
+                            $kabValueKey = $kabValueKey;
+                            $kecamatanArray = $kabValueValue;
+                        }
+
+                        $kecamatanImplode = implode(',', $kecamatanArray);
+
+                        $returnData[] = [
+                            'id'=>$kabKey,
+                            'text'=>"{$kabValueKey} - Kec. ({$kecamatanImplode})",
+                        ];                        
+                    }
+                }
+
             }
         }
         elseif($id > 0)
