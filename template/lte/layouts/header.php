@@ -59,7 +59,7 @@ NotificationsWidget::widget([
                 <li class="dropdown user user-menu">
                     <?php if(Yii::$app->user->isGuest):?>
                     <a href="<?= \yii\helpers\Url::toRoute(['/site/login']);?>">                
-                        <span class="hidden-xs"><i class="fa fa-user"></i> Login Aplikasi</span>
+                        <span><i class="fa fa-user"></i> Login Aplikasi</span>
                     </a>
                     <?php else:?>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
