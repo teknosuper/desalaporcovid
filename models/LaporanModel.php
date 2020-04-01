@@ -83,4 +83,33 @@ class LaporanModel extends LaporanTable
     	return self::find()->count();
     }
 
+    public function sendNotification($action="create")
+    {
+    	switch ($action) {
+    		case 'create':
+	            /* start notification for user posko */
+	            $allPoskoByKelurahan = $this->poskoBelongsToPoskoModel->poskoHasManyPoskoByKelurahan;
+	            foreach($allPoskoByKelurahan as $allPoskoByKelurahanData)
+	            {
+	                $posko_id[] = $allPoskoByKelurahanData->id;
+	            }
+	            $userModel = \app\models\User::find()->where(['user_id'=>$posko_id,'userType'=>\app\models\User::LEVEL_POSKO])->all();
+	            if($userModel)
+	            {
+	                foreach($userModel as $userModelData)
+	                {
+	                    \app\models\NotificationModel::createNotification(\app\models\Notification::KEY_LAPORAN_KE_POSKO, $this->id,$userModelData->id);                                    
+	                }
+
+	            }
+	            /* end notification for user posko */
+    			# code...
+    			break;
+    		
+    		default:
+    			# code...
+    			break;
+    	}
+    }
+
 }

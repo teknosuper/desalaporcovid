@@ -67,24 +67,16 @@ class LaporanController extends \app\controllers\MainController
      */
     public function actionCreate()
     {
+
         $model = new LaporanForm();
 
         $model->id_pelapor = \yii::$app->user->identity->id;
         $model->status = \app\models\form\LaporanForm::STATUS_WAITING;
         $model->created_time = date('Y-m-d H:i:s');
         $model->created_by = \yii::$app->user->identity->id;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //create notification for user
-            $posko_id = $model->poskoBelongsToPoskoModel->id;
-            $userModel = \app\models\User::find()->where(['user_id'=>$posko_id,'userType'=>\app\models\User::LEVEL_POSKO])->all();
-            if($userModel)
-            {
-                foreach($userModel as $userModelData)
-                {
-                    \app\models\NotificationModel::createNotification(\app\models\Notification::KEY_LAPORAN_KE_POSKO, $model->id,$userModelData->id);                                    
-                }
-
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) 
+        {
+            $model->sendNotification("create");
 
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

@@ -68,6 +68,11 @@ class PoskoModel extends PoskoTable
 		return $this->hasOne(KelurahanModel::className(),['id_kel'=>'id_kelurahan']);
 	}
 
+	public function getPoskoHasManyPoskoByKelurahan()
+	{
+		return $this->hasMany(PoskoModel::className(),['id_kelurahan'=>'id_kelurahan']);
+	}
+
     public static function getPoskoList()
     {
         $model = self::find()->all();
