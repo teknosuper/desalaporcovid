@@ -17,6 +17,16 @@ class DataPoskoModel extends DataPoskoTable
     const STATUS_PERGI = 50;
     const STATUS_NEGATIF = 60;
 
+	public function getCreatedByBelongsToUser()
+	{
+		return $this->hasOne(User::className(),['id'=>'created_by']);
+	}
+
+	public function getUpdatedByBelongsToUser()
+	{
+		return $this->hasOne(User::className(),['id'=>'updated_by']);
+	}
+
 	public function getKelurahanBelongsToKelurahanModel()
 	{
 		return $this->hasOne(KelurahanModel::className(),['id_kel'=>'kelurahan']);
@@ -84,6 +94,143 @@ class DataPoskoModel extends DataPoskoTable
             'updated_at' => Yii::t('app', 'Waktu Diubah'),
             'updated_by' => Yii::t('app', 'Diubah Oleh'),
         ];
+    }
+
+    public function sendNotification($action="create")
+    {
+    	switch ($action) {
+    		case 'create':
+	            /* start notification for user posko */
+	            $allPoskoByKelurahan = $this->poskoBelongsToPoskoModel->poskoHasManyPoskoByKelurahan;
+	            foreach($allPoskoByKelurahan as $allPoskoByKelurahanData)
+	            {
+	                $posko_id[] = $allPoskoByKelurahanData->id;
+	            }
+	            $userModel = \app\models\User::find()->where(['user_id'=>$posko_id,'userType'=>\app\models\User::LEVEL_POSKO])->all();
+	            if($userModel)
+	            {
+	                foreach($userModel as $userModelData)
+	                {
+	                	switch ($this->status) {
+	                		case self::STATUS_DALAM_PEMANTAUAN:
+	                			$notif_type = \app\models\Notification::KEY_CREATE_STATUS_DALAM_PEMANTAUAN;
+	                			# code...
+	                			break;
+	                		case self::STATUS_GEJALA:
+	                			$notif_type = \app\models\Notification::KEY_CREATE_STATUS_GEJALA;
+	                			# code...
+	                			break;	                		
+	                		case self::STATUS_POSITIF:
+	                			$notif_type = \app\models\Notification::KEY_CREATE_STATUS_POSITIF;
+	                			# code...
+	                			break;
+	                		case self::STATUS_SEMBUH:
+	                			$notif_type = \app\models\Notification::KEY_CREATE_STATUS_SEMBUH;
+	                			# code...
+	                			break;
+	                		case self::STATUS_PERGI:
+	                			$notif_type = \app\models\Notification::KEY_CREATE_STATUS_PERGI;
+	                			# code...
+	                			break;
+	                		case self::STATUS_NEGATIF:
+	                			$notif_type = \app\models\Notification::KEY_CREATE_STATUS_NEGATIF;
+	                			# code...
+	                			break;
+	                		default:
+	                			$notif_type = \app\models\Notification::KEY_CREATE_STATUS_DALAM_PEMANTAUAN;
+	                			# code...
+	                			break;
+	                	}
+	                    \app\models\NotificationModel::createNotification($notif_type, $this->id,$userModelData->id);                                    
+	                }
+
+	            }
+	            /* end notification for user posko */
+    			# code...
+    			break;    		
+			case 'update':
+	            /* start notification for user posko */
+	            $allPoskoByKelurahan = $this->poskoBelongsToPoskoModel->poskoHasManyPoskoByKelurahan;
+	            foreach($allPoskoByKelurahan as $allPoskoByKelurahanData)
+	            {
+	                $posko_id[] = $allPoskoByKelurahanData->id;
+	            }
+	            $userModel = \app\models\User::find()->where(['user_id'=>$posko_id,'userType'=>\app\models\User::LEVEL_POSKO])->all();
+	            if($userModel)
+	            {
+	                foreach($userModel as $userModelData)
+	                {
+	                	switch ($this->status) {
+	                		case self::STATUS_DALAM_PEMANTAUAN:
+	                			$notif_type = \app\models\Notification::KEY_UPDATE_STATUS_DALAM_PEMANTAUAN;
+	                			# code...
+	                			break;
+	                		case self::STATUS_GEJALA:
+	                			$notif_type = \app\models\Notification::KEY_UPDATE_STATUS_GEJALA;
+	                			# code...
+	                			break;	                		
+	                		case self::STATUS_POSITIF:
+	                			$notif_type = \app\models\Notification::KEY_UPDATE_STATUS_POSITIF;
+	                			# code...
+	                			break;
+	                		case self::STATUS_SEMBUH:
+	                			$notif_type = \app\models\Notification::KEY_UPDATE_STATUS_SEMBUH;
+	                			# code...
+	                			break;
+	                		case self::STATUS_PERGI:
+	                			$notif_type = \app\models\Notification::KEY_UPDATE_STATUS_PERGI;
+	                			# code...
+	                			break;
+	                		case self::STATUS_NEGATIF:
+	                			$notif_type = \app\models\Notification::KEY_UPDATE_STATUS_NEGATIF;
+	                			# code...
+	                			break;
+	                		default:
+	                			$notif_type = \app\models\Notification::KEY_UPDATE_STATUS_DALAM_PEMANTAUAN;
+	                			# code...
+	                			break;
+	                	}
+	                    \app\models\NotificationModel::createNotification($notif_type, $this->id,$userModelData->id);                                    
+	                }
+
+	            }
+	            /* end notification for user posko */
+    			# code...
+    			break;
+    		
+    		default:
+    			# code...
+    			break;
+    	}
+    }
+
+    public function sendLogs($action="create")
+    {
+    	switch ($action) {
+    		case 'create':
+	            /* start  */
+	            	$user_id = $this->created_by;
+	            	$action = "create_data_posko";
+	            	$action_id = $this->id;
+	            	$data = $this->toArray();
+	            	$createLogs = \app\models\LogsModel::CreateLogs($user_id,$action,$action_id,$data);
+	            /* end */
+    			# code...
+    			break;
+    		case 'update':
+	            /* start  */
+	            	$user_id = $this->updated_by;
+	            	$action = "update_data_posko";
+	            	$action_id = $this->id;
+	            	$data = $this->toArray();
+	            	$createLogs = \app\models\LogsModel::CreateLogs($user_id,$action,$action_id,$data);
+	            /* end */
+    			# code...
+    			break;    		
+    		default:
+    			# code...
+    			break;
+    	}
     }
 
 }

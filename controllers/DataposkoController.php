@@ -52,6 +52,8 @@ class DataposkoController extends \app\controllers\MainController
         $model = new DataPoskoForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->sendNotification("create");
+            $model->sendLogs("create");
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -71,6 +73,8 @@ class DataposkoController extends \app\controllers\MainController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->sendNotification("update");
+            $model->sendLogs("update");
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
