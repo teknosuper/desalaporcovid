@@ -7,6 +7,7 @@ use kartik\widgets\Select2;
 use yii\web\JsExpression;
 use kartik\depdrop\DepDrop;
 use yii\helpers\Url;
+use kartik\widgets\DateTimePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\LaporanModel */
@@ -74,7 +75,32 @@ use yii\helpers\Url;
                             ->hint('<div style="width:200px"><b>Jenis Laporan </b> - Masukkan Nama Warga Yang akan dilaporkan.</div>')
                             ->dropDownList(\app\models\JenisLaporanModel::getJenisLaporanList(),['prompt'=>'Pilih Jenis Laporan']);?>
                         </div>
-                    </div>            
+                    </div>     
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <?= $form->field($model, 'status', [
+                                    'feedbackIcon' => [
+                                            'default' => '',
+                                            'success' => 'ok',
+                                            'error' => 'exclamation-sign',
+                                            'defaultOptions' => ['class'=>'text-primary']
+                                    ],
+                                    'hintType' => ActiveField::HINT_SPECIAL,
+                                    'hintSettings' => [
+                                        'iconBesideInput' => false,
+                                        'onLabelClick' => false,
+                                        'onLabelHover' => true,
+                                        'onIconClick' => true,
+                                        'onIconHover' => false,
+                                        'title' => '<i class="glyphicon glyphicon-info-sign"></i> Required'
+                                    ]
+                                ])
+                                ->hint('<div style="width:200px"><b>Status </b> : Pilih Status Pantauan</div>')
+                                ->dropDownList(\app\models\DataPoskoModel::getStatusList(),['prompt'=>'Pilih Status Pantauan'])
+                            ;?>
+                        </div>                        
+                    </div>       
            
                 </div>
             </div>
@@ -86,6 +112,40 @@ use yii\helpers\Url;
 
         </div>
         <div class="box-body table-responsive">
+            <div class="col-md-12">
+                <div class="row">            
+                    <div class="col-md-6">
+                        <div class="form-group">
+                        <?= $form->field($model, 'nik', [
+                                'feedbackIcon' => [
+                                        'default' => '',
+                                        'success' => 'ok',
+                                        'error' => 'exclamation-sign',
+                                        'defaultOptions' => ['class'=>'text-primary']
+                                ],
+                                'hintType' => ActiveField::HINT_SPECIAL,
+                                'addon' => ['append' => ['content'=>'<i class="fa fa-id-card"></i>']],
+                                'hintSettings' => [
+                                    'iconBesideInput' => false,
+                                    'onLabelClick' => false,
+                                    'onLabelHover' => true,
+                                    'onIconClick' => true,
+                                    'onIconHover' => false,
+                                    'title' => '<i class="glyphicon glyphicon-info-sign"></i> Wajib diisi'
+                                ]
+                            ])
+                            ->textInput([
+                                'placeholder' => 'Nomor Induk KTP Warga',
+                            ])
+                            ->hint('<div style="width:200px"><b>NIK Warga </b> - Masukkan Nomor Induk KTP Warga.</div>');?>
+                        </div>
+                    </div>            
+                    <div class="col-md-6">
+
+                    </div>            
+                </div>
+            </div> 
+
             <div class="col-md-12">
                 <div class="row">            
                     <div class="col-md-6">
@@ -454,10 +514,44 @@ use yii\helpers\Url;
                 </div>            
             </div> 
 
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'waktu_datang', [
+                                'feedbackIcon' => [
+                                        'default' => '',
+                                        'success' => 'ok',
+                                        'error' => 'exclamation-sign',
+                                        'defaultOptions' => ['class'=>'text-primary']
+                                ],
+                                'hintType' => ActiveField::HINT_SPECIAL,
+                                'hintSettings' => [
+                                    'iconBesideInput' => false,
+                                    'onLabelClick' => false,
+                                    'onLabelHover' => true,
+                                    'onIconClick' => true,
+                                    'onIconHover' => false,
+                                    'title' => '<i class="glyphicon glyphicon-info-sign"></i> Wajib diisi'
+                                ]
+                            ])
+                            ->widget(DateTimePicker::classname(), [
+                                'options' => ['placeholder' => 'Waktu Datang ...'],
+                                'pluginOptions' => [
+                                    'autoclose' => true,
+                                    'format' => 'yyyy-mm-dd hh:ii',
+                                ],
+                                'readonly' => true,
+                            ])
+                            ->hint('<div style="width:200px"><b>Waktu Datang </b> - Lengkapi Waktu Kedatangan.</div>');?>
+                    </div>   
+
+                </div>
+            </div>
+
         </div>
 
         <div class="box-footer">
-            <?= Html::submitButton(Yii::t('app', 'Simpan Data Posko'), ['class' => 'btn btn-success btn-flat btn-block']) ?>
+            <?= Html::submitButton(Yii::t('app', 'Simpan Data Posko'), ['class' => 'btn btn-success btn-flat btn-block','data-method'=>'post','data-confirm'=>'Tekan OK untuk mengkonfirmasi data']) ?>
         </div>
     </div>
     <?php ActiveForm::end(); ?>

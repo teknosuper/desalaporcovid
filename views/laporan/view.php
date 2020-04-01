@@ -86,6 +86,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
                 ],
+                [
+                    'attribute' => 'updated_by',
+                    'value' => function ($model) {
+                        return ($model->updatedByBelongsToUser) ? implode(' - ', [$model->updatedByBelongsToUser->username]) : null;
+                    },
+                    // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
+                    // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
+                ],
             ],
         ]) ?>
     </div>

@@ -66,19 +66,23 @@ class DataPoskoModel extends DataPoskoTable
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'nik' => Yii::t('app', 'Nik'),
+            'nik' => Yii::t('app', 'NIK'),
             'nama_warga' => Yii::t('app', 'Nama Warga'),
             'kelurahan' => Yii::t('app', 'Kelurahan'),
             'alamat' => Yii::t('app', 'Alamat'),
             'no_telepon' => Yii::t('app', 'No Telepon'),
             'jenis_laporan' => Yii::t('app', 'Jenis Laporan'),
             'kota_asal' => Yii::t('app', 'Kota Asal'),
-            'kelurahan_datang' => Yii::t('app', 'Kelurahan Datang'),
+            'kelurahan_datang' => Yii::t('app', 'Desa/Kelurahan Tujuan'),
             'status' => Yii::t('app', 'Status'),
             'keterangan' => Yii::t('app', 'Keterangan'),
             'id_posko' => Yii::t('app', 'Posko'),
             'luar_negeri' => Yii::t('app', 'Apakah Dari Luar Negeri ? '),
             'id_negara' => Yii::t('app', 'Negara'),
+            'created_at' => Yii::t('app', 'Waktu Dibuat'),
+            'created_by' => Yii::t('app', 'Dibuat Oleh'),
+            'updated_at' => Yii::t('app', 'Waktu Diubah'),
+            'updated_by' => Yii::t('app', 'Diubah Oleh'),
         ];
     }
 

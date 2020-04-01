@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\DataPoskoModel */
 
 $this->title = implode(' - ', [$model->nama_warga,$model->nik]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Data Posko Models'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Data Pantauan Posko'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="data-posko-model-view box box-primary">
@@ -85,6 +85,25 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
                 ],
+                'waktu_datang',
+                'created_at',
+                [
+                    'attribute' => 'created_by',
+                    'value' => function ($model) {
+                        return ($model->created_by) ? $model->created_by : null;
+                    },
+                    // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
+                    // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
+                ],                
+                'updated_at',
+                [
+                    'attribute' => 'updated_by',
+                    'value' => function ($model) {
+                        return ($model->updated_by) ? $model->updated_by : null;
+                    },
+                    // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
+                    // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
+                ],                
             ],
         ]) ?>
     </div>

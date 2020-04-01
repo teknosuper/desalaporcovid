@@ -9,13 +9,13 @@ use kartik\widgets\Select2;
 /* @var $searchModel app\models\form\LaporanSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Data Posko');
+$this->title = Yii::t('app', 'Data Pantauan Posko');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="laporan-model-index box box-primary">
     <?php Pjax::begin(); ?>
     <div class="box-header with-border">
-        <?= Html::a(Yii::t('app', 'Buat Data Posko Baru'), ['create'], ['class' => 'btn btn-success btn-flat']) ?>
+        <?= Html::a(Yii::t('app', 'Buat Data Pantauan Posko Baru'), ['create'], ['class' => 'btn btn-success btn-flat']) ?>
     </div>
     <div class="box-body table-responsive no-padding">
         <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

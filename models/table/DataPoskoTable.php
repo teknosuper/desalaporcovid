@@ -22,6 +22,10 @@ use Yii;
  * @property int|null $luar_negeri
  * @property string|null $id_negara
  * @property string|null $waktu_datang
+ * @property string|null $created_at
+ * @property int|null $created_by
+ * @property string|null $updated_at
+ * @property int|null $updated_by
  */
 class DataPoskoTable extends \yii\db\ActiveRecord
 {
@@ -39,9 +43,9 @@ class DataPoskoTable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['jenis_laporan', 'status', 'id_posko', 'luar_negeri'], 'integer'],
+            [['jenis_laporan', 'status', 'id_posko', 'luar_negeri', 'created_by', 'updated_by'], 'integer'],
             [['keterangan'], 'string'],
-            [['waktu_datang'], 'safe'],
+            [['waktu_datang', 'created_at', 'updated_at'], 'safe'],
             [['nik', 'nama_warga', 'no_telepon'], 'string', 'max' => 255],
             [['kelurahan', 'kota_asal', 'kelurahan_datang', 'id_negara'], 'string', 'max' => 11],
             [['alamat'], 'string', 'max' => 500],
@@ -69,6 +73,10 @@ class DataPoskoTable extends \yii\db\ActiveRecord
             'luar_negeri' => Yii::t('app', 'Luar Negeri'),
             'id_negara' => Yii::t('app', 'Id Negara'),
             'waktu_datang' => Yii::t('app', 'Waktu Datang'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'created_by' => Yii::t('app', 'Created By'),
+            'updated_at' => Yii::t('app', 'Updated At'),
+            'updated_by' => Yii::t('app', 'Updated By'),
         ];
     }
 }

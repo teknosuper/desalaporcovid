@@ -52,7 +52,7 @@
                                 'icon' => 'save',
                                 'url' => '#',
                                 'items' => [
-                                    ['label' => 'Data Posko', 'icon' => 'save', 'url' => ['/dataposko'],],
+                                    ['label' => 'Data Pantauan Posko', 'icon' => 'save', 'url' => ['/dataposko'],],
                                 ],
                             ],
                         ],

@@ -14,6 +14,16 @@ class LaporanModel extends LaporanTable
     const STATUS_PROCESSED = 40;
     const STATUS_NOT_VALID = 50;
 
+	public function getCreatedByBelongsToUser()
+	{
+		return $this->hasOne(User::className(),['id'=>'created_by']);
+	}
+
+	public function getUpdatedByBelongsToUser()
+	{
+		return $this->hasOne(User::className(),['id'=>'updated_by']);
+	}
+
 	public function getKelurahanBelongsToKelurahanModel()
 	{
 		return $this->hasOne(KelurahanModel::className(),['id_kel'=>'kelurahan']);
@@ -75,6 +85,8 @@ class LaporanModel extends LaporanTable
             'id_posko' => Yii::t('app', 'Posko'),
             'luar_negeri' => Yii::t('app', 'Apakah Dari Luar Negeri ? '),
             'id_negara' => Yii::t('app', 'Negara'),
+            'created_by' => Yii::t('app', 'Dibuat Oleh'),
+            'updated_by' => Yii::t('app', 'Diubah Oleh'),
         ];
     }
 

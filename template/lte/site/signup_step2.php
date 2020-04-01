@@ -135,7 +135,7 @@ $this->title = 'Pendaftaran Aplikasi Desa Lapor Covid-19';
 
             <!-- /.col -->
             <div class="col-md-12">
-                <?= Html::submitButton('Konfirmasi pendaftaran', ['class' => 'btn btn-success btn-block btn-flat', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Konfirmasi pendaftaran', ['class' => 'btn btn-success btn-block btn-flat', 'name' => 'login-button','data-method'=>'post','data-confirm'=>'Tekan OK untuk mengkonfirmasi data']) ?>
             </div>
             <!-- /.col -->
         </div>

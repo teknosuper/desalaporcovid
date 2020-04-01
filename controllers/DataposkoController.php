@@ -3,20 +3,20 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\DataPoskoModel;
+use app\models\form\DataPoskoForm;
 use app\models\form\DataPoskoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DataposkoController implements the CRUD actions for DataPoskoModel model.
+ * DataposkoController implements the CRUD actions for DataPoskoForm model.
  */
 class DataposkoController extends \app\controllers\MainController
 {
 
     /**
-     * Lists all DataPoskoModel models.
+     * Lists all DataPoskoForm models.
      * @return mixed
      */
     public function actionIndex()
@@ -31,7 +31,7 @@ class DataposkoController extends \app\controllers\MainController
     }
 
     /**
-     * Displays a single DataPoskoModel model.
+     * Displays a single DataPoskoForm model.
      * @param integer $id
      * @return mixed
      */
@@ -43,13 +43,13 @@ class DataposkoController extends \app\controllers\MainController
     }
 
     /**
-     * Creates a new DataPoskoModel model.
+     * Creates a new DataPoskoForm model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new DataPoskoModel();
+        $model = new DataPoskoForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -61,7 +61,7 @@ class DataposkoController extends \app\controllers\MainController
     }
 
     /**
-     * Updates an existing DataPoskoModel model.
+     * Updates an existing DataPoskoForm model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -80,7 +80,7 @@ class DataposkoController extends \app\controllers\MainController
     }
 
     /**
-     * Deletes an existing DataPoskoModel model.
+     * Deletes an existing DataPoskoForm model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -93,15 +93,15 @@ class DataposkoController extends \app\controllers\MainController
     }
 
     /**
-     * Finds the DataPoskoModel model based on its primary key value.
+     * Finds the DataPoskoForm model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return DataPoskoModel the loaded model
+     * @return DataPoskoForm the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = DataPoskoModel::findOne($id)) !== null) {
+        if (($model = DataPoskoForm::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
