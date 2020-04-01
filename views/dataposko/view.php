@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'created_by',
                     'value' => function ($model) {
-                        return ($model->created_by) ? $model->created_by : null;
+                        return ($model->createdByBelongsToUser) ? $model->createdByBelongsToUser->username : null;
                     },
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
@@ -99,7 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'updated_by',
                     'value' => function ($model) {
-                        return ($model->updated_by) ? $model->updated_by : null;
+                        return ($model->updatedByBelongsToUser) ? $model->updatedByBelongsToUser->username : null;
                     },
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
