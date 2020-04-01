@@ -179,44 +179,64 @@ class SiteController extends \app\controllers\MainController
     {
         if(!is_null($q)) 
         {
-            $model = \app\models\KelurahanModel::find()
-                ->where(['like','nama',$q])
-                ->all();
-            if($model and strlen($q)>3)
+            $cache = Yii::$app->cache;
+            $cacheUniqueId = implode('-', ['actionGetdatakelurahan',$q]);
+            $getCache = $cache->get($cacheUniqueId);
+            if($getCache===FALSE)
             {
-                foreach($model as $modelData)
+                $model = \app\models\KelurahanModel::find()
+                    ->where(['like','nama',$q])
+                    ->all();
+                if($model and strlen($q)>3)
                 {
-                    $kelurahan = $modelData->nama;
-                    $kecamatan = $modelData->kelurahanBelongsToKecamatanModel->nama;
-                    $kabupaten = $modelData->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama;
-                    $returnData[] = [
-                        'id'=>$modelData->id_kel,
-                        'text'=>implode(' - ',[$kelurahan,$kecamatan,$kabupaten]),
-                    ];
+                    foreach($model as $modelData)
+                    {
+                        $kelurahan = $modelData->nama;
+                        $kecamatan = $modelData->kelurahanBelongsToKecamatanModel->nama;
+                        $kabupaten = $modelData->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama;
+                        $returnData[] = [
+                            'id'=>$modelData->id_kel,
+                            'text'=>implode(' - ',[$kelurahan,$kecamatan,$kabupaten]),
+                        ];
+                    }
                 }
+                else
+                {
+                    $returnData = [];
+                }
+
+                $getCache = $returnData;
+                $cache->set($cacheUniqueId,$getCache,60*360);
             }
-            else
-            {
-                $returnData = [];
-            }
+            $returnData = $getCache;
+
         }
         elseif($id > 0)
         {
-            $model = \app\models\KelurahanModel::find()->where(['id_kel'=>$id])->one();
-            if($model)
+            $cache = Yii::$app->cache;
+            $cacheUniqueId = implode('-', ['actionGetdatakelurahan',$id]);
+            $getCache = $cache->get($cacheUniqueId);
+            if($getCache===FALSE)
             {
-                $kelurahan = $model->nama;
-                $kecamatan = $model->kelurahanBelongsToKecamatanModel->nama;
-                $kabupaten = $model->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama;
-                $returnData = [
-                    'id'=>$model->id_kel,
-                'text'=>implode(' - ',[$kelurahan,$kecamatan,$kabupaten]),
-                ];
+                $model = \app\models\KelurahanModel::find()->where(['id_kel'=>$id])->one();
+                if($model)
+                {
+                    $kelurahan = $model->nama;
+                    $kecamatan = $model->kelurahanBelongsToKecamatanModel->nama;
+                    $kabupaten = $model->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama;
+                    $returnData = [
+                        'id'=>$model->id_kel,
+                    'text'=>implode(' - ',[$kelurahan,$kecamatan,$kabupaten]),
+                    ];
+                }
+                else
+                {
+                    $returnData = [];               
+                }
+                $getCache = $returnData;
+                $cache->set($cacheUniqueId,$getCache,60*360);
             }
-            else
-            {
-                $returnData = [];               
-            }
+            $returnData = $getCache;
         }
         $returnDatas['results'] = $returnData;
         return json_encode($returnDatas);
@@ -227,69 +247,90 @@ class SiteController extends \app\controllers\MainController
         $returnData = [];
         if(!is_null($q)) 
         {
-            $model = \app\models\KabupatenModel::find()
-                ->where(['like','nama',$q])
-                ->all();
-            if($model and strlen($q)>3)
+            $cache = Yii::$app->cache;
+            $cacheUniqueId = implode('-', ['actionGetdatakabupaten',$q]);
+            $getCache = $cache->get($cacheUniqueId);
+            if($getCache===FALSE)
             {
-                foreach($model as $modelData)
+                $model = \app\models\KabupatenModel::find()
+                    ->where(['like','nama',$q])
+                    ->all();
+                if($model and strlen($q)>3)
                 {
-                    $kabupaten = $modelData->nama;
-                    $returnData[] = [
-                        'id'=>$modelData->id_kab,
-                        'text'=>implode(' - ',[$kabupaten]),
-                    ];
-                }
-            }
-            else
-            {
-                $kecamatanModel = \app\models\KecamatanModel::find()
-                ->where(['like','nama',$q])
-                ->all();
-                if($kecamatanModel and strlen($q)>3)
-                {
-                    foreach($kecamatanModel as $kecamatanData)
+                    foreach($model as $modelData)
                     {
-                        $kab[$kecamatanData->id_kab][$kecamatanData->kecamatanBelongsToKabupatenModel->nama][] = $kecamatanData->nama;
+                        $kabupaten = $modelData->nama;
+                        $returnData[] = [
+                            'id'=>$modelData->id_kab,
+                            'text'=>implode(' - ',[$kabupaten]),
+                        ];
                     }
-
-                    foreach($kab as $kabKey=>$kabValue)
+                }
+                else
+                {
+                    $kecamatanModel = \app\models\KecamatanModel::find()
+                    ->where(['like','nama',$q])
+                    ->all();
+                    if($kecamatanModel and strlen($q)>3)
                     {
-                        $kecamatanArray = [];
-                        $kabValueKey = null;
-                        foreach($kabValue as $kabValueKey=>$kabValueValue)
+                        foreach($kecamatanModel as $kecamatanData)
                         {
-                            $kabValueKey = $kabValueKey;
-                            $kecamatanArray = $kabValueValue;
+                            $kab[$kecamatanData->id_kab][$kecamatanData->kecamatanBelongsToKabupatenModel->nama][] = $kecamatanData->nama;
                         }
 
-                        $kecamatanImplode = implode(',', $kecamatanArray);
+                        foreach($kab as $kabKey=>$kabValue)
+                        {
+                            $kecamatanArray = [];
+                            $kabValueKey = null;
+                            foreach($kabValue as $kabValueKey=>$kabValueValue)
+                            {
+                                $kabValueKey = $kabValueKey;
+                                $kecamatanArray = $kabValueValue;
+                            }
 
-                        $returnData[] = [
-                            'id'=>$kabKey,
-                            'text'=>"{$kabValueKey} - Kec. ({$kecamatanImplode})",
-                        ];                        
+                            $kecamatanImplode = implode(',', $kecamatanArray);
+
+                            $returnData[] = [
+                                'id'=>$kabKey,
+                                'text'=>"{$kabValueKey} - Kec. ({$kecamatanImplode})",
+                            ];                        
+                        }
                     }
+
                 }
+    
+                $getCache = $returnData;
+                $cache->set($cacheUniqueId,$getCache,60*360);
 
             }
+            $returnData = $getCache;
         }
         elseif($id > 0)
         {
-            $model = \app\models\KabupatenModel::find()->where(['id_kab'=>$id])->one();
-            if($model)
+            $cache = Yii::$app->cache;
+            $cacheUniqueId = implode('-', ['actionGetdatakabupaten',$id]);
+            $getCache = $cache->get($cacheUniqueId);
+            if($getCache===FALSE)
             {
-                $kabupaten = $model->nama;
-                $returnData = [
-                    'id'=>$model->id_kab,
-                    'text'=>implode(' - ',[$kabupaten]),
-                ];
+                $model = \app\models\KabupatenModel::find()->where(['id_kab'=>$id])->one();
+                if($model)
+                {
+                    $kabupaten = $model->nama;
+                    $returnData = [
+                        'id'=>$model->id_kab,
+                        'text'=>implode(' - ',[$kabupaten]),
+                    ];
+                }
+                else
+                {
+                    $returnData = [];               
+                }
+                $getCache = $returnData;
+                $cache->set($cacheUniqueId,$getCache,60*360);
             }
-            else
-            {
-                $returnData = [];               
-            }
+            $returnData = $getCache;    
         }
+
         $returnDatas['results'] = $returnData;
         return json_encode($returnDatas);
     }
