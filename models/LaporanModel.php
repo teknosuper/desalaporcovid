@@ -104,8 +104,63 @@ class LaporanModel extends LaporanTable
 	            }
 	            /* end notification for user posko */
     			# code...
+    			break;    		
+			case 'update':
+	            /* start notification for user */
+	            switch ($this->status) {
+	            	case self::STATUS_ON_PROCESS:
+			            $user_id = $this->created_by;
+		                \app\models\NotificationModel::createNotification(\app\models\Notification::KEY_UPDATE_LAPORAN_ON_PROCESS, $this->id,$user_id);	            
+	            		# code...
+	            		break;
+	            	case self::STATUS_PROCESSED:
+			            $user_id = $this->created_by;
+		                \app\models\NotificationModel::createNotification(\app\models\Notification::KEY_UPDATE_LAPORAN_PROCESSED, $this->id,$user_id);	            
+	            		# code...
+	            		break;	            	
+	            	case self::STATUS_NOT_VALID:
+			            $user_id = $this->created_by;
+		                \app\models\NotificationModel::createNotification(\app\models\Notification::KEY_UPDATE_LAPORAN_NOT_VALID, $this->id,$user_id);	            
+	            		# code...
+	            		break;		            		
+	            	default:
+	            		# code...
+	            		break;
+	            }
+
+	            /* end notification for user */
+    			# code...
     			break;
     		
+    		default:
+    			# code...
+    			break;
+    	}
+    }
+
+    public function sendLogs($action="create")
+    {
+    	switch ($action) {
+    		case 'create':
+	            /* start  */
+	            	$user_id = $this->created_by;
+	            	$action = "create_laporan";
+	            	$action_id = $this->id;
+	            	$data = $this->toArray();
+	            	$createLogs = \app\models\LogsModel::CreateLogs($user_id,$action,$action_id,$data);
+	            /* end */
+    			# code...
+    			break;
+    		case 'update':
+	            /* start  */
+	            	$user_id = $this->updated_by;
+	            	$action = "update_laporan";
+	            	$action_id = $this->id;
+	            	$data = $this->toArray();
+	            	$createLogs = \app\models\LogsModel::CreateLogs($user_id,$action,$action_id,$data);
+	            /* end */
+    			# code...
+    			break;    		
     		default:
     			# code...
     			break;

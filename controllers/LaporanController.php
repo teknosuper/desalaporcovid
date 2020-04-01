@@ -77,6 +77,7 @@ class LaporanController extends \app\controllers\MainController
         if ($model->load(Yii::$app->request->post()) && $model->save()) 
         {
             $model->sendNotification("create");
+            $model->sendLogs("create");
 
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -99,6 +100,8 @@ class LaporanController extends \app\controllers\MainController
         $model->updated_time = date('Y-m-d H:i:s');
         $model->updated_by = \yii::$app->user->identity->id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->sendNotification("update");
+            $model->sendLogs("update");
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
