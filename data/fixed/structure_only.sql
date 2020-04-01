@@ -11,7 +11,7 @@
  Target Server Version : 100144
  File Encoding         : 65001
 
- Date: 01/04/2020 14:27:07
+ Date: 01/04/2020 14:53:44
 */
 
 SET NAMES utf8mb4;
@@ -59,28 +59,6 @@ CREATE TABLE `data_posko_history`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Table structure for jenis
--- ----------------------------
-DROP TABLE IF EXISTS `jenis`;
-CREATE TABLE `jenis`  (
-  `id_jenis` int(11) NOT NULL,
-  `nama` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Table structure for jenis_laporan
--- ----------------------------
-DROP TABLE IF EXISTS `jenis_laporan`;
-CREATE TABLE `jenis_laporan`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_laporan` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `keterangan` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `status` int(11) NULL DEFAULT NULL,
-  `kode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for laporan
@@ -134,17 +112,6 @@ CREATE TABLE `migration`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
--- Table structure for negara
--- ----------------------------
-DROP TABLE IF EXISTS `negara`;
-CREATE TABLE `negara`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `kode_negara` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `nama` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 247 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
 -- Table structure for notification
 -- ----------------------------
 DROP TABLE IF EXISTS `notification`;
@@ -175,30 +142,5 @@ CREATE TABLE `posko`  (
   `no_telepon` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Table structure for users
--- ----------------------------
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `authKey` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `accessToken` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `userType` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `user_id` int(11) NULL DEFAULT NULL,
-  `status` int(11) NULL DEFAULT NULL,
-  `nama` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `kelurahan` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `alamat` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `no_telepon` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `username`(`username`) USING BTREE,
-  UNIQUE INDEX `email`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;
