@@ -73,6 +73,11 @@ class User extends UsersTable implements IdentityInterface
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 
+    public function getNamaKelurahan()
+    {
+        return (\yii::$app->user->identity->kelurahanBelongsToKelurahanModel) ?  \yii::$app->user->identity->kelurahanBelongsToKelurahanModel->nama : "?" ;
+    }
+
     public function getKelurahanBelongsToKelurahanModel()
     {
         return $this->hasOne(KelurahanModel::className(),['id_kel'=>'kelurahan']);
