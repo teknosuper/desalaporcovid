@@ -85,7 +85,18 @@ class User extends UsersTable implements IdentityInterface
 
     public static function getPenggunaCount()
     {
-        return self::find()->count();
+        if(\yii::$app->user->isGuest)
+        {
+            return self::find()->count();           
+        }
+        else
+        {
+            $kelurahan_id = \yii::$app->user->identity->kelurahan;
+            $model = self::find()->where([
+                'kelurahan'=>$kelurahan_id,
+            ])->count();            
+            return $model;
+        }
     }
 
     /**

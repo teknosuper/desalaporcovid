@@ -17,6 +17,22 @@ class DataPoskoModel extends DataPoskoTable
     const STATUS_PERGI = 50;
     const STATUS_NEGATIF = 60;
 
+    public static function getDataPoskoCount()
+    {
+    	if(\yii::$app->user->isGuest)
+    	{
+	    	return self::find()->count();    		
+    	}
+    	else
+    	{
+    		$kelurahan_id = \yii::$app->user->identity->kelurahan;
+			$model = self::find()->where([
+				'kelurahan_datang'=>$kelurahan_id,
+			])->count();    		
+			return $model;
+    	}
+    }
+
 	public function getCreatedByBelongsToUser()
 	{
 		return $this->hasOne(User::className(),['id'=>'created_by']);

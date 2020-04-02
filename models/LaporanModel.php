@@ -92,7 +92,18 @@ class LaporanModel extends LaporanTable
 
     public static function getLaporanCount()
     {
-    	return self::find()->count();
+    	if(\yii::$app->user->isGuest)
+    	{
+	    	return self::find()->count();    		
+    	}
+    	else
+    	{
+    		$kelurahan_id = \yii::$app->user->identity->kelurahan;
+			$model = self::find()->where([
+				'kelurahan_datang'=>$kelurahan_id,
+			])->count();    		
+			return $model;
+    	}
     }
 
     public function sendNotification($action="create")

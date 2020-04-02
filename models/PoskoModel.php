@@ -31,7 +31,18 @@ class PoskoModel extends PoskoTable
 
     public static function getPoskoCount()
     {
-    	return self::find()->count();
+    	if(\yii::$app->user->isGuest)
+    	{
+	    	return self::find()->count();    		
+    	}
+    	else
+    	{
+    		$kelurahan_id = \yii::$app->user->identity->kelurahan;
+			$model = self::find()->where([
+				'id_kelurahan'=>$kelurahan_id,
+			])->count();    		
+			return $model;
+    	}
     }
 
     public function attributeLabels()

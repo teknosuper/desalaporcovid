@@ -3,68 +3,35 @@
     $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+
+    <?php if(\yii::$app->user->isGuest):?>
+        <?= $this->render('_dashboard_non_login');?>
+    <?php else:?>
+
+        <?php 
+            switch (\yii::$app->user->identity->userType) {
+                case \app\models\User::LEVEL_POSKO:
+                case \app\models\User::LEVEL_ADMIN:
+                case \app\models\User::LEVEL_PENGGUNA:
+                    echo $this->render('_dashboard_login');
+                    # code...
+                    break;
+                case \app\models\User::LEVEL_PENGGUNA:
+                    echo $this->render('_dashboard_login_pengguna');
+                    # code...
+                    break;                
+                default:
+
+                    # code...
+                    break;
+            }
+
+        ?>
+
+    <?php endif;?>
     
     <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-aqua"><i class="fa fa-home"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Jumlah Posko</span>
-              <span class="info-box-number"><?= \app\models\PoskoModel::getPoskoCount();?></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="fa fa-envelope"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Jumlah Laporan</span>
-              <span class="info-box-number"><?= \app\models\LaporanModel::getLaporanCount();?></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-
-        <!-- fix for small devices only -->
-        <div class="clearfix visible-sm-block"></div>
-
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="fa fa-ambulance"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Jumlah Pantauan</span>
-              <span class="info-box-number"><?= \app\models\LaporanModel::getLaporanCount();?></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-yellow"><i class="fa fa-users"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Jumlah Pengguna</span>
-              <span class="info-box-number"><?= \app\models\User::getPenggunaCount();?></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="box box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">PERBEDAAN ODP, PDP, DAN SUSPECT VIRUS CORONA</h3>
