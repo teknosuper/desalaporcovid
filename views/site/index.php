@@ -16,6 +16,7 @@
                     break;
                 case \app\models\User::LEVEL_POSKO:
                 case \app\models\User::LEVEL_PENGGUNA:
+                case \app\models\User::LEVEL_ADMIN_DESA:
                     echo $this->render('_dashboard_login');
                     # code...
                     break;
