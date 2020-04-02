@@ -14,6 +14,19 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box-header">
         <?php if(\yii::$app->user->identity->userType==\app\models\User::LEVEL_POSKO):?>
             <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
+            <?php 
+                switch ($model->status) {
+                    case \app\models\LaporanModel::STATUS_ON_PROCESS:
+                        echo Html::a(Yii::t('app', '<i class="fa fa-save"></i> Import ke Data Posko'), ['/dataposko/create', 'laporan_id' => $model->id], ['class' => 'btn btn-danger btn-flat']);
+                        # code...
+                        break;
+                    
+                    default:
+                        # code...
+                        break;
+                }
+
+            ?>
         <?php endif;?>
 
         <?php if(\yii::$app->user->identity->userType==\app\models\User::LEVEL_ADMIN):?>
@@ -26,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]) ?>
         <?php endif;?>
+
     </div>
     <div class="box-body table-responsive no-padding">
         <?= DetailView::widget([

@@ -64,11 +64,48 @@ class DataposkoController extends \app\controllers\MainController
      */
     public function actionCreate()
     {
-        $model = new DataPoskoForm();
+        $laporan_id = \yii::$app->request->get('laporan_id');
+        $checkLaporanId = \app\models\LaporanModel::find()->where([
+            'id'=>$laporan_id,
+            'status'=>\app\models\LaporanModel::STATUS_ON_PROCESS,
+            'kelurahan_datang'=>\yii::$app->user->identity->kelurahan,
+        ])->one();
 
+        $model = new DataPoskoForm();
+        if($checkLaporanId)
+        {
+            $model->jenis_laporan = $checkLaporanId->jenis_laporan;
+            $model->nama_warga = $checkLaporanId->nama_warga;
+            $model->kelurahan = $checkLaporanId->kelurahan;
+            $model->alamat = $checkLaporanId->alamat;
+            $model->no_telepon = $checkLaporanId->no_telepon_terlapor;
+            $model->kota_asal = $checkLaporanId->kota_asal;
+            $model->kelurahan_datang = $checkLaporanId->kelurahan_datang;
+            $model->keterangan = $checkLaporanId->keterangan;
+            $model->id_posko = $checkLaporanId->id_posko;
+            $model->luar_negeri = $checkLaporanId->luar_negeri;
+            $model->id_negara = $checkLaporanId->id_negara;
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            /* start update laporan */
+            $checkLaporanId->status = \app\models\LaporanModel::STATUS_PROCESSED;
+            $checkLaporanId->updated_time = date('Y-m-d H:i:s');
+            $checkLaporanId->updated_by = \yii::$app->user->identity->id;
+            if($checkLaporanId->save())
+            {
+                /* start send notification */
+                $checkLaporanId->sendNotification("update");
+                $checkLaporanId->sendLogs("update");                
+                /* end send notification */
+            }
+            /* end update laporan */
+            $model->created_at = date('Y-m-d H:i:s');
+            $model->created_by = \yii::$app->user->identity->id;
+            $model->save();
+            /* start send notification */
             $model->sendNotification("create");
             $model->sendLogs("create");
+            /* end send notification */
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
