@@ -89,9 +89,9 @@ class Notification extends BaseNotification
 
 
             case self::KEY_UPDATE_STATUS_DALAM_PEMANTAUAN:
-                return Yii::t('app', 'Perubahan STATUS Warga DALAM PEMANTAUAN COVID-19');          
+                return Yii::t('app', 'Perubahan STATUS Warga ODP (Orang Dalam Pemantauan) COVID-19');          
             case self::KEY_UPDATE_STATUS_GEJALA:
-                return Yii::t('app', 'Perubahan STATUS Warga GEJALA COVID-19');          
+                return Yii::t('app', 'Perubahan STATUS Warga PDP (Pasien Dalam Pemantauan) COVID-19');          
             case self::KEY_UPDATE_STATUS_POSITIF:
                 return Yii::t('app', 'Perubahan STATUS Warga POSITIF COVID-19');          
             case self::KEY_UPDATE_STATUS_SEMBUH:
