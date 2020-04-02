@@ -23,7 +23,22 @@ class PoskoController extends \app\controllers\MainController
     {
         $searchModel = new PoskoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        switch (\yii::$app->user->identity->userType) {
+            case \app\models\User::LEVEL_ADMIN:
+                # code...
+                break;
+            case \app\models\User::LEVEL_POSKO:
+                $id_kelurahan = \yii::$app->user->identity->idPoskoToPoskoModel->id_kelurahan;
+                $dataProvider->query->andWhere([
+                    'kelurahan_datang'=>$id_kelurahan,
+                ]);                        
+                # code...
+                break;            
+            default:
 
+                # code...
+                break;
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
