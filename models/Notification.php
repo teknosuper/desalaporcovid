@@ -20,7 +20,7 @@ class Notification extends BaseNotification
     const KEY_CREATE_STATUS_SEMBUH = 'KEY_CREATE_STATUS_SEMBUH';
     const KEY_CREATE_STATUS_PERGI = 'KEY_CREATE_STATUS_PERGI';
     const KEY_CREATE_STATUS_NEGATIF = 'KEY_CREATE_STATUS_NEGATIF';
-    
+
     const KEY_UPDATE_STATUS_DALAM_PEMANTAUAN = 'KEY_UPDATE_STATUS_DALAM_PEMANTAUAN';
     const KEY_UPDATE_STATUS_GEJALA = 'KEY_UPDATE_STATUS_GEJALA';
     const KEY_UPDATE_STATUS_POSITIF = 'KEY_UPDATE_STATUS_POSITIF';
@@ -75,17 +75,17 @@ class Notification extends BaseNotification
                 return Yii::t('app', 'Laporan anda tidak valid, silahkan laporkan lagi data yang benar');          
 
             case self::KEY_CREATE_STATUS_DALAM_PEMANTAUAN:
-                return Yii::t('app', 'Perubahan STATUS Warga DALAM PEMANTAUAN COVID-19');          
+                return Yii::t('app', 'Data baru STATUS Warga DALAM PEMANTAUAN COVID-19');          
             case self::KEY_CREATE_STATUS_GEJALA:
-                return Yii::t('app', 'Perubahan STATUS Warga GEJALA COVID-19');          
+                return Yii::t('app', 'Data baru STATUS Warga GEJALA COVID-19');          
             case self::KEY_CREATE_STATUS_POSITIF:
-                return Yii::t('app', 'Perubahan STATUS Warga POSITIF COVID-19');          
+                return Yii::t('app', 'Data baru STATUS Warga POSITIF COVID-19');          
             case self::KEY_CREATE_STATUS_SEMBUH:
-                return Yii::t('app', 'Perubahan STATUS Warga SEMBUH dari COVID-19');          
+                return Yii::t('app', 'Data baru STATUS Warga SEMBUH dari COVID-19');          
             case self::KEY_CREATE_STATUS_PERGI:
-                return Yii::t('app', 'Perubahan STATUS Warga PERGI ke Luar Kota');          
+                return Yii::t('app', 'Data baru STATUS Warga PERGI ke Luar Kota');          
             case self::KEY_CREATE_STATUS_NEGATIF:
-                return Yii::t('app', 'Perubahan STATUS Warga NEGATIF COVID-19');                   
+                return Yii::t('app', 'Data baru STATUS Warga NEGATIF COVID-19');                   
 
 
             case self::KEY_UPDATE_STATUS_DALAM_PEMANTAUAN:
