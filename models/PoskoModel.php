@@ -84,6 +84,20 @@ class PoskoModel extends PoskoTable
 		return $this->hasMany(PoskoModel::className(),['id_kelurahan'=>'id_kelurahan']);
 	}
 
+    public static function getPoskoListByIdKel($id_kel)
+    {
+        $model = self::find()->where(['id_kelurahan'=>$id_kel])->all();
+		$lists = [];
+        if ($model)
+        {
+        	foreach($model as $data)
+        	{
+				$lists[$data->id] = $data->nama_posko;
+        	}
+        }
+        return $lists;
+    }    
+
     public static function getPoskoList()
     {
         $model = self::find()->all();

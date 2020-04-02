@@ -35,6 +35,7 @@ class UsersController extends MainController
                 ];
                 $dataProvider->query->andWhere([
                     'userType'=>$userType,
+                    'kelurahan'=>\yii::$app->user->identity->kelurahan,
                 ]);                        
                 # code...
                 break;            

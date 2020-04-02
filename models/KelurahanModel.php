@@ -13,6 +13,20 @@ class KelurahanModel extends KelurahanTable
 		return $this->hasOne(KecamatanModel::className(),['id_kec'=>'id_kec']);
 	}
 
+    public static function getKelurahanListByIdKel($id_kel)
+    {
+        $model = self::find()->where(['id_kel'=>$id_kel])->all();
+		$lists = [];
+        if ($model)
+        {
+        	foreach($model as $data)
+        	{
+				$lists[$data->id_kel] = $data->nama;
+        	}
+        }
+        return $lists;
+    }
+
 	public static function getTextKelurahanById($id_kel)
 	{
 		$model = self::find()->where(['id_kel'=>$id_kel])->one();
