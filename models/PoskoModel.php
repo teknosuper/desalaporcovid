@@ -38,9 +38,20 @@ class PoskoModel extends PoskoTable
     	else
     	{
     		$kelurahan_id = \yii::$app->user->identity->kelurahan;
-			$model = self::find()->where([
-				'id_kelurahan'=>$kelurahan_id,
-			])->count();    		
+    		switch (\yii::$app->user->identity->userType) {
+    			case \app\models\User::LEVEL_ADMIN:
+					$model = self::find()->count();    		
+    				# code...
+    				break;
+    			
+    			default:
+					$model = self::find()->where([
+						'id_kelurahan'=>$kelurahan_id,
+					])->count();    		
+    				# code...
+    				break;
+    		}
+
 			return $model;
     	}
     }
@@ -57,6 +68,22 @@ class PoskoModel extends PoskoTable
             'status' => Yii::t('app', 'Status'),
         ];
     }
+
+	public function getTextPosko()
+	{
+		$model = $this;
+		if($model)
+		{
+            $nama_posko = $model->nama_posko;
+            $kelurahan = $model->poskoBelongsToKelurahanModel->nama;
+            $kecamatan = $model->poskoBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama;
+			return implode(' - ', [$nama_posko,$kelurahan,$kecamatan]);
+		}
+		else
+		{
+			return $id;
+		}
+	}
 
 	public static function getTextPoskoById($id)
 	{
@@ -92,7 +119,7 @@ class PoskoModel extends PoskoTable
         {
         	foreach($model as $data)
         	{
-				$lists[$data->id] = $data->nama_posko;
+				$lists[$data->id] = $data->textPosko;
         	}
         }
         return $lists;

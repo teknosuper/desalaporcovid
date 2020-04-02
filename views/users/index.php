@@ -114,12 +114,21 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ]);
                             },
                             'delete' => function ($url, $model) {
-                                return Html::a('<span class="glyphicon glyphicon-trash"></span> Hapus', $url, [
-                                            'title' => Yii::t('app', 'delete'),
-                                            'class'=>'btn btn-danger btn-xs modal-form',
-                                            'data-method'=>'post',
-                                            'data-confirm'=>'Apakah anda yakin akan menghapus data ini ? ',
-                                ]);
+                                switch (\yii::$app->user->identity->userType) {
+                                    case \app\models\User::LEVEL_ADMIN:
+                                        return Html::a('<span class="glyphicon glyphicon-trash"></span> Hapus', $url, [
+                                                    'title' => Yii::t('app', 'delete'),
+                                                    'class'=>'btn btn-danger btn-xs modal-form',
+                                                    'data-method'=>'post',
+                                                    'data-confirm'=>'Apakah anda yakin akan menghapus data ini ? ',
+                                        ]);
+                                        # code...
+                                        break;
+                                    
+                                    default:
+                                        # code...
+                                        break;
+                                }
                             }
                     ],
                     // 'urlCreator' => function ($action, $model, $key, $index) {

@@ -52,7 +52,7 @@ use yii\helpers\Url;
                 ])
                 ->hint('<div style="width:200px"><b>Kelurahan </b> - Masukkan data kelurahan</div>');?>
         <?php else:?>
-            <?= $form->field($model, 'id_kelurahan')->textInput()->dropDownList(\app\models\KelurahanModel::getKelurahanListByIdKec(\yii::$app->user->identity->kelurahan)) ?>
+            <?= $form->field($model, 'id_kelurahan')->textInput()->dropDownList(\app\models\KelurahanModel::getKelurahanListByIdKel(\yii::$app->user->identity->kelurahan)) ?>
         <?php endif;?>
         <?= $form->field($model, 'nama_posko')->textInput(['maxlength' => true]) ?>
 

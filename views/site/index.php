@@ -10,8 +10,11 @@
 
         <?php 
             switch (\yii::$app->user->identity->userType) {
-                case \app\models\User::LEVEL_POSKO:
                 case \app\models\User::LEVEL_ADMIN:
+                    echo $this->render('_dashboard_admin');
+                    # code...
+                    break;
+                case \app\models\User::LEVEL_POSKO:
                 case \app\models\User::LEVEL_PENGGUNA:
                     echo $this->render('_dashboard_login');
                     # code...

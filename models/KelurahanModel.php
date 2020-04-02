@@ -27,6 +27,15 @@ class KelurahanModel extends KelurahanTable
         return $lists;
     }
 
+    public function getTextKelurahan()
+    {
+    	$model = $this;
+        $kelurahan = $model->nama;
+        $kecamatan = $model->kelurahanBelongsToKecamatanModel->nama;
+        $kabupaten = $model->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama;
+		return implode(' - ', [$kelurahan,$kecamatan,$kabupaten]);
+    }
+
 	public static function getTextKelurahanById($id_kel)
 	{
 		$model = self::find()->where(['id_kel'=>$id_kel])->one();

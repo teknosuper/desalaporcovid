@@ -26,7 +26,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'model' => $model,
             'attributes' => [
                 'id',
-                'id_kelurahan',
+                [
+                    'attribute' => 'id_kelurahan',
+                    'value' => function ($model) {
+                        return ($model->poskoBelongsToKelurahanModel) ? $model->poskoBelongsToKelurahanModel->textKelurahan : null;
+                    },
+                    // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
+                    // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
+                ],
                 'nama_posko',
                 'alamat_posko',
                 'email_posko:email',
