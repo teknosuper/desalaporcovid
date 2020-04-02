@@ -148,7 +148,7 @@ use yii\helpers\Url;
                                     ]
                                 ])
                                 ->widget(Select2::classname(), [
-                                    'initValueText' => \app\models\PoskoModel::getTextPoskoById($model->kelurahan),                        
+                                    'initValueText' => \app\models\PoskoModel::getTextPoskoById($model->user_id),                        
                                     'options' => [
                                         'placeholder' => 'Pilih Posko ...',
                                     ],
