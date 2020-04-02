@@ -60,6 +60,7 @@ class MainController extends Controller
                 case 'dataposko/delete':
                     switch (\yii::$app->user->identity->userType) {
                     case \app\models\User::LEVEL_ADMIN:
+                    case \app\models\User::LEVEL_ADMIN_DESA:
                     case \app\models\User::LEVEL_POSKO:
                             return true;
                             # code...
@@ -79,6 +80,7 @@ class MainController extends Controller
                 case 'posko/delete':
                     switch (\yii::$app->user->identity->userType) {
                     case \app\models\User::LEVEL_ADMIN:
+                    case \app\models\User::LEVEL_ADMIN_DESA:
                             return true;
                             # code...
                             break;
@@ -115,6 +117,7 @@ class MainController extends Controller
                 case 'users/delete':
                     switch (\yii::$app->user->identity->userType) {
                     case \app\models\User::LEVEL_ADMIN:
+                    case \app\models\User::LEVEL_ADMIN_DESA:
                             return true;
                             # code...
                             break;

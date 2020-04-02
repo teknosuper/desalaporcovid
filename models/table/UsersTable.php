@@ -16,6 +16,12 @@ use Yii;
  * @property string|null $userType
  * @property int|null $user_id
  * @property int|null $status
+ * @property string|null $nama
+ * @property string|null $kelurahan
+ * @property string|null $alamat
+ * @property string|null $no_telepon
+ * @property string|null $created_at
+ * @property string|null $updated_at
  */
 class UsersTable extends \yii\db\ActiveRecord
 {
@@ -34,9 +40,11 @@ class UsersTable extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'status'], 'integer'],
-            [['username', 'password', 'email'], 'string', 'max' => 255],
+            [['created_at', 'updated_at'], 'safe'],
+            [['username', 'password', 'email', 'nama', 'alamat'], 'string', 'max' => 255],
             [['authKey', 'accessToken'], 'string', 'max' => 32],
             [['userType'], 'string', 'max' => 50],
+            [['kelurahan', 'no_telepon'], 'string', 'max' => 20],
             [['username'], 'unique'],
             [['email'], 'unique'],
         ];
@@ -57,6 +65,12 @@ class UsersTable extends \yii\db\ActiveRecord
             'userType' => Yii::t('app', 'User Type'),
             'user_id' => Yii::t('app', 'User ID'),
             'status' => Yii::t('app', 'Status'),
+            'nama' => Yii::t('app', 'Nama'),
+            'kelurahan' => Yii::t('app', 'Kelurahan'),
+            'alamat' => Yii::t('app', 'Alamat'),
+            'no_telepon' => Yii::t('app', 'No Telepon'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
 }

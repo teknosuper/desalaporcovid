@@ -64,7 +64,7 @@ NotificationsWidget::widget([
                     <?php else:?>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="<?= \app\models\CommonHelper::letterAvatar(\yii::$app->user->identity->username) ;?>" class="user-image" alt="User Image"/>
-                            <span class="hidden-xs"><?= \yii::$app->user->identity->username;?></span>
+                            <span class="hidden-xs"><?= \yii::$app->user->identity->nama;?> (<?= \yii::$app->user->identity->username;?>)</span>
                         </a>
                     <?php endif;?>
                     <ul class="dropdown-menu">
@@ -75,8 +75,8 @@ NotificationsWidget::widget([
                                  alt="User Image"/>
 
                             <p>
-                                <?= \yii::$app->user->identity->username;?>                                
-                                <small><?= \yii::$app->user->identity->userType;?></small>
+                                <?= \yii::$app->user->identity->nama;?> (<?= \yii::$app->user->identity->username;?>)                                
+                                <small><?= \yii::$app->user->identity->levelDetail;?></small>
                             </p>
                         </li>
 

@@ -37,6 +37,37 @@
                 );
                 # code...
                 break;
+            case \app\models\User::LEVEL_ADMIN_DESA:
+                echo dmstr\widgets\Menu::widget(
+                    [
+                        'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
+                        'items' => [
+                            ['label' => 'Menu Dasbor', 'options' => ['class' => 'header']],
+                            ['label' => 'Beranda', 'icon' => 'home', 'url' => ['/']],
+                            ['label' => 'Lapor Warga', 'icon' => 'file-o', 'url' => ['/laporan']],
+                            // ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                            [
+                                'label' => 'Input Data Posko',
+                                'icon' => 'save',
+                                'url' => '#',
+                                'items' => [
+                                    ['label' => 'Data Posko', 'icon' => 'save', 'url' => ['/dataposko'],],
+                                ],
+                            ],
+                            [
+                                'label' => 'Master Data',
+                                'icon' => 'file',
+                                'url' => '#',
+                                'items' => [
+                                    ['label' => 'Daftar Posko', 'icon' => 'file-code-o', 'url' => ['/posko'],],
+                                    ['label' => 'Pengguna', 'icon' => 'users', 'url' => ['/users'],],
+                                ],
+                            ],
+                        ],
+                    ]
+                );
+                # code...
+                break;
 
             case \app\models\User::LEVEL_POSKO:
                 echo dmstr\widgets\Menu::widget(

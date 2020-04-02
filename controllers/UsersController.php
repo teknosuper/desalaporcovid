@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\User;
+use app\models\form\UserForm;
 use app\models\form\UserSearch;
 use app\controllers\MainController;
 use yii\web\NotFoundHttpException;
@@ -23,7 +23,26 @@ class UsersController extends MainController
     {
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        switch (\yii::$app->user->identity->userType) {
+            case \app\models\User::LEVEL_ADMIN:
+                # code...
+                break;
+            case \app\models\User::LEVEL_ADMIN_DESA:
+                $userType = [
+                    \app\models\User::LEVEL_POSKO,
+                    \app\models\User::LEVEL_ADMIN_DESA,
+                    \app\models\User::LEVEL_PENGGUNA,
+                ];
+                $dataProvider->query->andWhere([
+                    'userType'=>$userType,
+                ]);                        
+                # code...
+                break;            
+            default:
 
+                # code...
+                break;
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -49,7 +68,7 @@ class UsersController extends MainController
      */
     public function actionCreate()
     {
-        $model = new User();
+        $model = new UserForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -101,10 +120,33 @@ class UsersController extends MainController
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+        switch (\yii::$app->user->identity->userType) {
+            case \app\models\User::LEVEL_ADMIN:
+                if (($model = UserForm::findOne($id)) !== null) {
+                    return $model;
+                } else {
+                    throw new NotFoundHttpException('The requested page does not exist.');
+                }
+                # code...
+                break;
+            case \app\models\User::LEVEL_ADMIN_DESA:
+                $userType = [
+                    \app\models\User::LEVEL_POSKO,
+                    \app\models\User::LEVEL_ADMIN_DESA,
+                    \app\models\User::LEVEL_PENGGUNA,
+                ];
+                if (($model = UserForm::find()->where(['id'=>$id,'userType'=>$userType])->one()) !== null) {
+                    return $model;
+                } else {
+                    throw new NotFoundHttpException('The requested page does not exist.');
+                }
+                # code...
+                break;            
+            default:
+
+                # code...
+                break;
         }
+
     }
 }

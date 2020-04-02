@@ -23,7 +23,22 @@ class PoskoController extends \app\controllers\MainController
     {
         $searchModel = new PoskoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        switch (\yii::$app->user->identity->userType) {
+            case \app\models\User::LEVEL_ADMIN:
+                # code...
+                break;
+            case \app\models\User::LEVEL_ADMIN_DESA:
+                $id_kelurahan = \yii::$app->user->identity->idPoskoToPoskoModel->id_kelurahan;
+                $dataProvider->query->andWhere([
+                    'id_kelurahan'=>$id_kelurahan,
+                ]);                        
+                # code...
+                break;            
+            default:
 
+                # code...
+                break;
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -101,10 +116,32 @@ class PoskoController extends \app\controllers\MainController
      */
     protected function findModel($id)
     {
-        if (($model = PoskoModel::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+        switch (\yii::$app->user->identity->userType) {
+            case \app\models\User::LEVEL_ADMIN:
+                if (($model = PoskoModel::findOne($id)) !== null) {
+                    return $model;
+                } else {
+                    throw new NotFoundHttpException('The requested page does not exist.');
+                }
+                # code...
+                break;
+            case \app\models\User::LEVEL_ADMIN_DESA:
+                $id_kelurahan = \yii::$app->user->identity->idPoskoToPoskoModel->id_kelurahan;
+                if (($model = PoskoModel::find()->where(['id_kelurahan'=>$id_kelurahan,'id'=>$id])->one()) !== null) {
+                    return $model;
+                } else {
+                    throw new NotFoundHttpException('The requested page does not exist.');
+                }
+                $dataProvider->query->andWhere([
+                    'id_kelurahan'=>$id_kelurahan,
+                ]);                        
+                # code...
+                break;          
+            default:
+
+                # code...
+                break;
         }
+
     }
 }

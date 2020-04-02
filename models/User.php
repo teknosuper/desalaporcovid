@@ -17,6 +17,7 @@ class User extends UsersTable implements IdentityInterface
 
     const LEVEL_POSKO = 'posko';
     const LEVEL_ADMIN = 'admin';
+    const LEVEL_ADMIN_DESA = 'admin_desa';
     const LEVEL_PENGGUNA = 'pengguna';
 
     public function attributeLabels()
@@ -46,11 +47,30 @@ class User extends UsersTable implements IdentityInterface
 
     public static function getLevelList()
     {
-        return [
-            self::LEVEL_PENGGUNA=>"PENGGUNA",
-            self::LEVEL_POSKO=>"POSKO",
-            self::LEVEL_ADMIN=>"ADMIN",
-        ];
+        switch (\yii::$app->user->identity->userType) {
+            case \app\models\User::LEVEL_ADMIN:
+                return [
+                    self::LEVEL_PENGGUNA=>"PENGGUNA",
+                    self::LEVEL_POSKO=>"POSKO",
+                    self::LEVEL_ADMIN_DESA=>"ADMIN DESA",
+                    self::LEVEL_ADMIN=>"ADMIN",
+                ];
+                # code...
+                break;
+            case \app\models\User::LEVEL_ADMIN_DESA:
+                return [
+                    self::LEVEL_PENGGUNA=>"PENGGUNA",
+                    self::LEVEL_POSKO=>"POSKO",
+                    self::LEVEL_ADMIN_DESA=>"ADMIN DESA",
+                ];
+                # code...
+                break;            
+            default:
+
+                # code...
+                break;
+        }
+
     }
 
     public function getStatusDetail()
