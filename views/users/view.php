@@ -32,10 +32,31 @@ $this->params['breadcrumbs'][] = $this->title;
                 'email:email',
                 // 'accessToken',
                 'userType',
-                'user_id',
-                'status',
+                [
+                    'attribute' => 'user_id',
+                    'value' => function ($model) {
+                        return ($model->idPoskoToPoskoModel) ? $model->idPoskoToPoskoModel->textPosko : null;
+                    },
+                    // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
+                    // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
+                ],
+                [
+                    'attribute' => 'status',
+                    'value' => function ($model) {
+                        return $model->statusDetail;
+                    },
+                    // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
+                    // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
+                ],
                 'nama',
-                'kelurahan',
+                [
+                    'attribute' => 'kelurahan',
+                    'value' => function ($model) {
+                        return ($model->kelurahanBelongsToKelurahanModel) ? $model->kelurahanBelongsToKelurahanModel->textKelurahan : null;
+                    },
+                    // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
+                    // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
+                ],
                 'alamat',
             ],
         ]) ?>

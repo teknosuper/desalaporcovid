@@ -86,24 +86,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
                 ],
                 'waktu_datang',
-                'created_at',
                 [
                     'attribute' => 'created_by',
                     'value' => function ($model) {
-                        return ($model->createdByBelongsToUser) ? $model->createdByBelongsToUser->username : null;
+                        return $model->createdByText;
                     },
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
-                ],                
-                'updated_at',
+                ],
+                'created_at',
                 [
                     'attribute' => 'updated_by',
                     'value' => function ($model) {
-                        return ($model->updatedByBelongsToUser) ? $model->updatedByBelongsToUser->username : null;
+                        return $model->updatedByText;
                     },
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
-                ],                
+                ],
+                'updated_at',              
             ],
         ]) ?>
     </div>

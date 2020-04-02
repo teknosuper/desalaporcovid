@@ -17,6 +17,25 @@ class DataPoskoModel extends DataPoskoTable
     const STATUS_PERGI = 50;
     const STATUS_NEGATIF = 60;
 
+
+    public function getUpdatedByText()
+    {
+    	if($this->updatedByBelongsToUser)
+    	{
+	    	return implode(' - ', [$this->updatedByBelongsToUser->nama,$this->updatedByBelongsToUser->username]);
+    	}
+    	return null;
+    }
+
+    public function getCreatedByText()
+    {
+    	if($this->updatedByBelongsToUser)
+    	{
+	    	return implode(' - ', [$this->updatedByBelongsToUser->nama,$this->updatedByBelongsToUser->username]);
+    	}
+    	return null;
+    }
+
     public static function getDataPoskoCount()
     {
     	if(\yii::$app->user->isGuest)

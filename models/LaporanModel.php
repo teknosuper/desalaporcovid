@@ -14,6 +14,24 @@ class LaporanModel extends LaporanTable
     const STATUS_PROCESSED = 40;
     const STATUS_NOT_VALID = 50;
 
+    public function getUpdatedByText()
+    {
+    	if($this->updatedByBelongsToUser)
+    	{
+	    	return implode(' - ', [$this->updatedByBelongsToUser->nama,$this->updatedByBelongsToUser->username]);
+    	}
+    	return null;
+    }
+
+    public function getCreatedByText()
+    {
+    	if($this->updatedByBelongsToUser)
+    	{
+	    	return implode(' - ', [$this->updatedByBelongsToUser->nama,$this->updatedByBelongsToUser->username]);
+    	}
+    	return null;
+    }
+
 	public function getCreatedByBelongsToUser()
 	{
 		return $this->hasOne(User::className(),['id'=>'created_by']);
@@ -87,6 +105,8 @@ class LaporanModel extends LaporanTable
             'id_negara' => Yii::t('app', 'Negara'),
             'created_by' => Yii::t('app', 'Dibuat Oleh'),
             'updated_by' => Yii::t('app', 'Diubah Oleh'),
+            'created_time' => Yii::t('app', 'Waktu Dibuat'),
+            'updated_time' => Yii::t('app', 'Waktu Diubah'),
         ];
     }
 

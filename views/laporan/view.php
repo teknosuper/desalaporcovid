@@ -101,13 +101,23 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
                 ],
                 [
-                    'attribute' => 'updated_by',
+                    'attribute' => 'created_by',
                     'value' => function ($model) {
-                        return ($model->updatedByBelongsToUser) ? implode(' - ', [$model->updatedByBelongsToUser->username]) : null;
+                        return $model->createdByText;
                     },
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
                 ],
+                'created_time',
+                [
+                    'attribute' => 'updated_by',
+                    'value' => function ($model) {
+                        return $model->updatedByText;
+                    },
+                    // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
+                    // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
+                ],
+                'updated_time',
             ],
         ]) ?>
     </div>
