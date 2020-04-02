@@ -69,7 +69,7 @@ use yii\helpers\Url;
                                         ]
                                     ])
                                     ->widget(Select2::classname(), [
-                                        'initValueText' => \app\models\KelurahanModel::getTextKelurahanById($model->id_kelurahan),                        
+                                        'initValueText' => \app\models\KelurahanModel::getTextKelurahanById($model->kelurahan),                        
                                         'options' => [
                                             'placeholder' => 'Pilih Kelurahan/Desa ...',
                                         ],
