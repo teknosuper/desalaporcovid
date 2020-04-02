@@ -79,8 +79,8 @@ class DataPoskoModel extends DataPoskoTable
     {
         return [
             // self::STATUS_DELETED=>"DI HAPUS",
-            self::STATUS_DALAM_PEMANTAUAN=>"STATUS DALAM PEMANTAUAN",
-            self::STATUS_GEJALA=>"STATUS GEJALA",
+            self::STATUS_DALAM_PEMANTAUAN=>"ODP (Orang Dalam Pemantauan)",
+            self::STATUS_GEJALA=>"PDP (Pasien Dalam Pemantauan)",
             self::STATUS_POSITIF=>"STATUS POSITIF",
             self::STATUS_SEMBUH=>"STATUS SEMBUH",
             self::STATUS_PERGI=>"STATUS PERGI",
