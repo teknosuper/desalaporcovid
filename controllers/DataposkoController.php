@@ -27,6 +27,7 @@ class DataposkoController extends \app\controllers\MainController
             case \app\models\User::LEVEL_ADMIN:
                 # code...
                 break;
+            case \app\models\User::LEVEL_ADMIN_DESA:
             case \app\models\User::LEVEL_POSKO:
                 $id_kelurahan = \yii::$app->user->identity->idPoskoToPoskoModel->id_kelurahan;
                 $dataProvider->query->andWhere([

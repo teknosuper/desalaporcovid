@@ -23,8 +23,7 @@
         "yohang88/letter-avatar": "^2.2",
         "kartik-v/yii2-widget-depdrop": "@dev",
         "kartik-v/yii2-widget-select2": "dev-master",
-        "machour/yii2-notifications": "*",
-        "kartik-v/yii2-export": "@dev"
+        "machour/yii2-notifications": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
