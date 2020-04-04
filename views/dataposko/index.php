@@ -199,6 +199,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => function ($model) {
                         return ($model->statusDetail) ? $model->statusDetail : null;
                     },
+                    'format'=>'raw',
                     'filter' => \app\models\DataPoskoModel::getStatusList(),
                     'filterInputOptions' => ['prompt' => 'Semua Status', 'class' => 'form-control', 'id' => null]
                 ],

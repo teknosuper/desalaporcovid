@@ -87,17 +87,50 @@ class DataPoskoModel extends DataPoskoTable
 		return $this->hasOne(PoskoModel::className(),['id'=>'id_posko']);
 	}
 
+	public function getTanggalBerakhirIsolasiMandiri()
+	{
+		return date('d M Y H:i:s',strtotime($this->waktu_datang."+14 days"));
+	}
+
     public function getStatusDetail()
     {
         $status = $this->status;
         $array = self::getStatusList();
-        return isset($array[$status]) ? $array[$status] : NULL;
+        if(isset($array[$status]))
+        {
+        	$status = $array[$status];
+        	$tanggal_berakhir_isolasi = $this->tanggalBerakhirIsolasiMandiri;
+        	switch ($this->status) {
+        		case self::STATUS_DALAM_PEMANTAUAN:
+        			return "
+        			<span class='btn btn-xs btn-warning'>{$status}</span>
+        			<p><i class='fa fa-warning'></i> Harus isolasi di rumah sampai tanggal : <span class='btn btn-xs btn-danger'>{$tanggal_berakhir_isolasi}</span></p>
+        			";
+        			# code...
+        			break;
+        		case self::STATUS_GEJALA:
+        			return "
+        			<span class='btn btn-xs btn-danger'>{$status}</span>
+        			<p>Harus isolasi di rumah sampai tanggal : {$tanggal_berakhir_isolasi}</p>
+        			";
+        			# code...
+        			break;        		
+        		case self::STATUS_GEJALA:
+        			return "<span class='bg-white'>{$status}</span>";
+        			# code...
+        			break;        		
+        		default:
+        			return "<span class='bg-white'>{$status}</span>";
+        			# code...
+        			break;
+        	}
+        }
+
     }
 
     public static function getStatusList()
     {
         return [
-            // self::STATUS_DELETED=>"DI HAPUS",
             self::STATUS_DALAM_PEMANTAUAN=>"ODP (Orang Dalam Pemantauan)",
             self::STATUS_GEJALA=>"PDP (Pasien Dalam Pemantauan)",
             self::STATUS_POSITIF=>"STATUS POSITIF",
