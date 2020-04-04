@@ -32,6 +32,14 @@
                                     ['label' => 'Pengguna', 'icon' => 'users', 'url' => ['/users'],],
                                 ],
                             ],
+                            [
+                                'label' => 'Statistik',
+                                'icon' => 'bar-chart',
+                                'url' => '#',
+                                'items' => [
+                                    ['label' => 'Overall', 'icon' => 'line-chart', 'url' => ['/statistik/overall'],],
+                                ],
+                            ],
                         ],
                     ]
                 );

@@ -134,4 +134,20 @@ class PoskoModel extends PoskoTable
         }
     }
 
+    public static function getDesaAktifCount()
+    {
+        return self::find()->select('id_kelurahan')->where(['status' => self::STATUS_ACTIVE])->distinct()->count();
+    }
+
+    public static function getTotalKabKota()
+    {
+        $kelurahan = self::find()->select('id_kelurahan')->where(['status' => self::STATUS_ACTIVE])->distinct()->all();
+        $kota = [];
+        foreach($kelurahan as $lurah){
+            $kota[] = $lurah->poskoBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->id_kab;
+        }
+        $kota = array_unique($kota);
+        return count($kota);
+    }
+
 }
