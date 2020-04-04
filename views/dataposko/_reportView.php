@@ -66,7 +66,7 @@ use yii\widgets\DetailView;
                   <th>:</th>
                   <td>
                   	<?php 
-						$waktu_datang = date('d M Y H:i:s',strtotime($model->waktu_datang));
+						$waktu_datang = date('d F Y H:i:s',strtotime($model->waktu_datang));
                         echo "<span class='badge'>{$waktu_datang}</span>";
                   	?>
                   </td>
@@ -74,22 +74,22 @@ use yii\widgets\DetailView;
                 <tr>
                   <th>Dibuat Oleh </th>
                   <th>:</th>
-                  <td><?= $model->createdByText;?></td>
+                  <td><?= ($model->createdByText) ? $model->createdByText : "-";?></td>
                 </tr>
                 <tr>
                   <th>Waktu Dibuat  </th>
                   <th>:</th>
-                  <td><?= $model->created_at;?></td>
+                  <td><?= ($model->created_at) ? date('d F Y H:i:s',strtotime($model->created_at)) : "-";?></td>
                 </tr>
                 <tr>
                   <th>Diubah Oleh  </th>
                   <th>:</th>
-                  <td><?= $model->UpdatedByText;?></td>
+                  <td><?= ($model->UpdatedByText) ? $model->UpdatedByText : "-";?></td>
                 </tr>                
                 <tr>
                   <th>Waktu Diubah</th>
                   <th>:</th>
-                  <td><?= $model->updated_at;?></td>
+                  <td><?= ($model->updated_at) ? date('d F Y H:i:s',strtotime($model->updated_at)) : "-";?></td>
                 </tr>
               </tbody></table>
             </div>

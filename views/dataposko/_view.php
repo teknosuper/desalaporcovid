@@ -64,7 +64,7 @@ use yii\widgets\DetailView;
                     'attribute' => 'waktu_datang',
                     'format'=>'raw',
                     'value' => function ($model) {
-                    	$waktu_datang = date('d M Y H:i:s',strtotime($model->waktu_datang));
+                    	$waktu_datang = date('d F Y H:i:s',strtotime($model->waktu_datang));
                         return "<span class='badge'>{$waktu_datang}</span>";
                     },
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag

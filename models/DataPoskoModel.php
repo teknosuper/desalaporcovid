@@ -89,7 +89,7 @@ class DataPoskoModel extends DataPoskoTable
 
 	public function getTanggalBerakhirIsolasiMandiri()
 	{
-		return date('d M Y H:i:s',strtotime($this->waktu_datang."+14 days"));
+		return date('d F Y H:i:s',strtotime($this->waktu_datang."+14 days"));
 	}
 
     public function getStatusDetail()
