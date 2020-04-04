@@ -262,13 +262,38 @@ class DataposkoController extends \app\controllers\MainController
         if($model)
         {
             $kelurahanDataPosko = $model->dataPoskoHistoryBelongsToDataPoskoModel->kelurahan;
-            if($kelurahan_user==$kelurahanDataPosko)
-            {
-                if($model->delete())
-                {
-                    $model->sendLogs('delete');
-                }
+            
+            switch (\yii::$app->user->identity->userType) {
+                case \app\models\User::LEVEL_ADMIN:
+                    if($model->delete())
+                    {
+                        $model->sendLogs('delete');
+                    }
+                    # code...
+                    break;
+                case \app\models\User::LEVEL_ADMIN_DESA:
+                case \app\models\User::LEVEL_POSKO:
+                    if($kelurahan_user==$kelurahanDataPosko)
+                    {
+                        if($model->delete())
+                        {
+                            $model->sendLogs('delete');
+                        }
+                    }
+                    # code...
+                    break;            
+                default:
+                    if($kelurahan_user==$kelurahanDataPosko)
+                    {
+                        if($model->delete())
+                        {
+                            $model->sendLogs('delete');
+                        }
+                    }
+                    # code...
+                    break;
             }
+
             return $this->redirect(['/dataposko/view', 'id' => $model->data_posko_id]);
         }
         return $this->redirect(['index']);
