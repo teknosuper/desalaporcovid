@@ -69,15 +69,16 @@ class UsersController extends MainController
      */
     public function actionCreate()
     {
-        $model = new UserForm();
+        throw new NotFoundHttpException('The requested page does not exist.');
+        // $model = new UserForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        //     return $this->redirect(['view', 'id' => $model->id]);
+        // } else {
+        //     return $this->render('create', [
+        //         'model' => $model,
+        //     ]);
+        // }
     }
 
     /**
