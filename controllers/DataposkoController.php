@@ -32,7 +32,7 @@ class DataposkoController extends \app\controllers\MainController
                 break;
             case \app\models\User::LEVEL_ADMIN_DESA:
             case \app\models\User::LEVEL_POSKO:
-                $id_kelurahan = \yii::$app->user->identity->idPoskoToPoskoModel->id_kelurahan;
+                $id_kelurahan = \yii::$app->user->identity->kelurahan;
                 $dataProvider->query->andWhere([
                     'kelurahan_datang'=>$id_kelurahan,
                 ]);                        
@@ -285,10 +285,26 @@ class DataposkoController extends \app\controllers\MainController
     protected function findModel($id)
     {
         $kelurahan_user = \yii::$app->user->identity->kelurahan;
-        $model = DataPoskoForm::find()->where([
-            'id'=>$id,
-            'kelurahan_datang'=>$kelurahan_user,
-        ])->one();
+        switch (\yii::$app->user->identity->userType) {
+            case \app\models\User::LEVEL_ADMIN:
+                # code...
+                break;
+            case \app\models\User::LEVEL_ADMIN_DESA:
+            case \app\models\User::LEVEL_POSKO:
+                $model = DataPoskoForm::find()->where([
+                    'id'=>$id,
+                    'kelurahan_datang'=>$kelurahan_user,
+                ])->one();
+                # code...
+                break;            
+            default:
+                $model = DataPoskoForm::find()->where([
+                    'id'=>$id,
+                    'kelurahan_datang'=>$kelurahan_user,
+                ])->one();
+                # code...
+                break;
+        }
         if($model){
             return $model;
         } else {

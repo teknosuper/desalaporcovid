@@ -53,7 +53,7 @@ use yii\widgets\DetailView;
                 ],
                 [
                     'attribute' => 'status',
-                    'format'=>'raw',
+                    'format'=>'html',
                     'value' => function ($model) {
                         return ($model->statusDetail) ? $model->statusDetail : null;
                     },
