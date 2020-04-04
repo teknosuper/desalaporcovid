@@ -22,6 +22,8 @@ use Yii;
  * @property string|null $no_telepon
  * @property string|null $created_at
  * @property string|null $updated_at
+ * @property int|null $created_by
+ * @property int|null $updated_by
  */
 class UsersTable extends \yii\db\ActiveRecord
 {
@@ -39,7 +41,7 @@ class UsersTable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'status'], 'integer'],
+            [['user_id', 'status', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['username', 'password', 'email', 'nama', 'alamat'], 'string', 'max' => 255],
             [['authKey', 'accessToken'], 'string', 'max' => 32],
@@ -71,6 +73,8 @@ class UsersTable extends \yii\db\ActiveRecord
             'no_telepon' => Yii::t('app', 'No Telepon'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+            'created_by' => Yii::t('app', 'Created By'),
+            'updated_by' => Yii::t('app', 'Updated By'),
         ];
     }
 }

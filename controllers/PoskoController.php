@@ -66,7 +66,10 @@ class PoskoController extends \app\controllers\MainController
     {
         $model = new PoskoModel();
 
+        $model->created_by = \yii::$app->user->identity->id;
+        $model->created_at = date('Y-m-d H:i:s');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->sendLogs("create");
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -85,7 +88,10 @@ class PoskoController extends \app\controllers\MainController
     {
         $model = $this->findModel($id);
 
+        $model->updated_by = \yii::$app->user->identity->id;
+        $model->updated_at = date('Y-m-d H:i:s');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->sendLogs("update");
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

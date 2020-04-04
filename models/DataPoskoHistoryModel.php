@@ -8,5 +8,48 @@ use app\models\table\DataPoskoHistoryTable;
 class DataPoskoHistoryModel extends DataPoskoHistoryTable
 {
 
+	public function getDataPoskoHistoryBelongsToDataPoskoModel()
+	{
+		return $this->hasOne(DataPoskoModel::className(),['id'=>'data_posko_id']);
+	}
+
+    public function sendLogs($action="create")
+    {
+    	switch ($action) {
+    		case 'create':
+	            /* start  */
+	            	$user_id = $this->created_by;
+	            	$action = "create_data_posko_history";
+	            	$action_id = $this->id;
+	            	$data = $this->toArray();
+	            	$createLogs = \app\models\LogsModel::CreateLogs($user_id,$action,$action_id,$data);
+	            /* end */
+    			# code...
+    			break;
+    		case 'update':
+	            /* start  */
+	            	$user_id = $this->updated_by;
+	            	$action = "update_data_posko_history";
+	            	$action_id = $this->id;
+	            	$data = $this->toArray();
+	            	$createLogs = \app\models\LogsModel::CreateLogs($user_id,$action,$action_id,$data);
+	            /* end */
+    			# code...
+    			break;    		
+    		case 'delete':
+	            /* start  */
+	            	$user_id = \yii::$app->user->identity->id;
+	            	$action = "delete_data_posko_history";
+	            	$action_id = $this->id;
+	            	$data = $this->toArray();
+	            	$createLogs = \app\models\LogsModel::CreateLogs($user_id,$action,$action_id,$data);
+	            /* end */
+    			# code...
+    			break;    		
+    		default:
+    			# code...
+    			break;
+    	}
+    }
 
 }

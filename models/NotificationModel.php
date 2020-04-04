@@ -33,7 +33,8 @@ class NotificationModel extends NotificationTable
 		$model->type = $type;
 		$model->user_id = $user_id;
 		$model->seen = 0;
-		$model->created_at = new \yii\db\Expression('NOW()');
+		// $model->created_at = new \yii\db\Expression('NOW()');
+        $model->created_at = date('Y-m-d H:i:s');
 		$model->flashed = 0;
 		if($model->save())
 		{

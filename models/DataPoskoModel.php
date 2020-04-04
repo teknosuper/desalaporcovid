@@ -29,9 +29,9 @@ class DataPoskoModel extends DataPoskoTable
 
     public function getCreatedByText()
     {
-    	if($this->updatedByBelongsToUser)
+    	if($this->createdByBelongsToUser)
     	{
-	    	return implode(' - ', [$this->updatedByBelongsToUser->nama,$this->updatedByBelongsToUser->username]);
+	    	return implode(' - ', [$this->createdByBelongsToUser->nama,$this->createdByBelongsToUser->username]);
     	}
     	return null;
     }
@@ -141,7 +141,11 @@ class DataPoskoModel extends DataPoskoTable
 	            {
 	                $posko_id[] = $allPoskoByKelurahanData->id;
 	            }
-	            $userModel = \app\models\User::find()->where(['user_id'=>$posko_id,'userType'=>\app\models\User::LEVEL_POSKO])->all();
+	            $userTypeArray = [
+	            	\app\models\User::LEVEL_POSKO,
+	            	\app\models\User::LEVEL_ADMIN_DESA,
+	            ];
+	            $userModel = \app\models\User::find()->where(['user_id'=>$posko_id,'userType'=>$userTypeArray])->all();
 	            if($userModel)
 	            {
 	                foreach($userModel as $userModelData)
@@ -256,6 +260,16 @@ class DataPoskoModel extends DataPoskoTable
 	            /* start  */
 	            	$user_id = $this->updated_by;
 	            	$action = "update_data_posko";
+	            	$action_id = $this->id;
+	            	$data = $this->toArray();
+	            	$createLogs = \app\models\LogsModel::CreateLogs($user_id,$action,$action_id,$data);
+	            /* end */
+    			# code...
+    			break;    		
+    		case 'delete':
+	            /* start  */
+	            	$user_id = \yii::$app->user->identity->id;
+	            	$action = "delete_data_posko";
 	            	$action_id = $this->id;
 	            	$data = $this->toArray();
 	            	$createLogs = \app\models\LogsModel::CreateLogs($user_id,$action,$action_id,$data);

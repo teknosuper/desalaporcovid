@@ -15,6 +15,10 @@ use Yii;
  * @property string|null $keterangan
  * @property int|null $status
  * @property string|null $no_telepon
+ * @property int|null $created_by
+ * @property string|null $created_at
+ * @property int|null $updated_by
+ * @property string|null $updated_at
  */
 class PoskoTable extends \yii\db\ActiveRecord
 {
@@ -32,8 +36,11 @@ class PoskoTable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['status'], 'integer'],
-            [['id_kelurahan','nama_posko', 'alamat_posko', 'email_posko', 'no_telepon','keterangan'], 'safe'],
+            [['keterangan'], 'string'],
+            [['status', 'created_by', 'updated_by'], 'integer'],
+            [['created_at', 'updated_at'], 'safe'],
+            [['id_kelurahan'], 'string', 'max' => 20],
+            [['nama_posko', 'alamat_posko', 'email_posko', 'no_telepon'], 'string', 'max' => 255],
         ];
     }
 
@@ -51,6 +58,10 @@ class PoskoTable extends \yii\db\ActiveRecord
             'keterangan' => Yii::t('app', 'Keterangan'),
             'status' => Yii::t('app', 'Status'),
             'no_telepon' => Yii::t('app', 'No Telepon'),
+            'created_by' => Yii::t('app', 'Created By'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_by' => Yii::t('app', 'Updated By'),
+            'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
 }

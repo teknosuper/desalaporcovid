@@ -134,4 +134,33 @@ class PoskoModel extends PoskoTable
         }
     }
 
+    public function sendLogs($action="create")
+    {
+    	switch ($action) {
+    		case 'create':
+	            /* start  */
+	            	$user_id = $this->created_by;
+	            	$action = "create_posko";
+	            	$action_id = $this->id;
+	            	$data = $this->toArray();
+	            	$createLogs = \app\models\LogsModel::CreateLogs($user_id,$action,$action_id,$data);
+	            /* end */
+    			# code...
+    			break;
+    		case 'update':
+	            /* start  */
+	            	$user_id = $this->updated_by;
+	            	$action = "update_posko";
+	            	$action_id = $this->id;
+	            	$data = $this->toArray();
+	            	$createLogs = \app\models\LogsModel::CreateLogs($user_id,$action,$action_id,$data);
+	            /* end */
+    			# code...
+    			break;    		
+    		default:
+    			# code...
+    			break;
+    	}
+    }
+
 }

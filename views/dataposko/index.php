@@ -213,6 +213,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'title' => Yii::t('app', 'view'),
                                             'class'=>'btn btn-success btn-xs modal-form',
                                             'data-size' => 'modal-lg',
+                                            'data-pjax'=>0,
                                 ]);
                             },
 

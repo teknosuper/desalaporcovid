@@ -136,7 +136,11 @@ class LaporanModel extends LaporanTable
 	            {
 	                $posko_id[] = $allPoskoByKelurahanData->id;
 	            }
-	            $userModel = \app\models\User::find()->where(['user_id'=>$posko_id,'userType'=>\app\models\User::LEVEL_POSKO])->all();
+	            $userTypeArray = [
+	            	\app\models\User::LEVEL_POSKO,
+	            	\app\models\User::LEVEL_ADMIN_DESA,
+	            ];
+	            $userModel = \app\models\User::find()->where(['user_id'=>$posko_id,'userType'=>$userTypeArray])->all();
 	            if($userModel)
 	            {
 	                foreach($userModel as $userModelData)

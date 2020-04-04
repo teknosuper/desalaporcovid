@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\form\DataPoskoForm;
 use app\models\form\DataPoskoSearch;
+use app\models\form\DataPoskoHistoryForm;
+use app\models\form\DataPoskoHistorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -53,10 +55,58 @@ class DataposkoController extends \app\controllers\MainController
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $searchModel = new DataPoskoHistorySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
+
+    public function actionDataharian($id)
+    {
+        $dataPoskoModel = $this->findModel($id);                
+        $searchModel = new DataPoskoHistorySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = new DataPoskoHistoryForm();
+        $model->data_posko_id = $id;
+        $model->created_by = \yii::$app->user->identity->id;
+        $model->created_at = date('Y-m-d H:i:s');
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['/dataposko/view', 'id' => $model->data_posko_id]);
+        } else {
+            return $this->render('history/create', [
+                'dataPoskoModel' => $dataPoskoModel,
+                'model' => $model,
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
+    }
+
+    public function actionUpdateharian($id)
+    {
+        $model = DataPoskoHistoryForm::find()->where([
+            'id'=>$id,
+        ])->one();
+        $searchModel = new DataPoskoHistorySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model->updated_by = \yii::$app->user->identity->id;
+        $model->updated_at = date('Y-m-d H:i:s');
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['/dataposko/view', 'id' => $model->data_posko_id]);
+        } else {
+            return $this->render('history/update', [
+                'dataPoskoModel' => $model->dataPoskoHistoryBelongsToDataPoskoModel,
+                'model' => $model,
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
+    }
+
 
     /**
      * Creates a new DataPoskoForm model.
@@ -89,17 +139,20 @@ class DataposkoController extends \app\controllers\MainController
         }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             /* start update laporan */
-            $checkLaporanId->status = \app\models\LaporanModel::STATUS_PROCESSED;
-            $checkLaporanId->updated_time = date('Y-m-d H:i:s');
-            $checkLaporanId->updated_by = \yii::$app->user->identity->id;
-            if($checkLaporanId->save())
+            if($checkLaporanId)
             {
-                /* start send notification */
-                $checkLaporanId->sendNotification("update");
-                $checkLaporanId->sendLogs("update");                
-                /* end send notification */
+                $checkLaporanId->status = \app\models\LaporanModel::STATUS_PROCESSED;
+                $checkLaporanId->updated_time = date('Y-m-d H:i:s');
+                $checkLaporanId->updated_by = \yii::$app->user->identity->id;
+                if($checkLaporanId->save())
+                {
+                    /* start send notification */
+                    $checkLaporanId->sendNotification("update");
+                    $checkLaporanId->sendLogs("update");                
+                    /* end send notification */
+                }
+                /* end update laporan */
             }
-            /* end update laporan */
             $model->created_at = date('Y-m-d H:i:s');
             $model->created_by = \yii::$app->user->identity->id;
             $model->save();
@@ -149,10 +202,35 @@ class DataposkoController extends \app\controllers\MainController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        if($model->delete())
+        {   
+            $model->sendLogs('delete');
+        }
         return $this->redirect(['index']);
     }
+
+    public function actionDeleteharian($id)
+    {
+        $kelurahan_user = \yii::$app->user->identity->kelurahan;
+        $model = \app\models\DataPoskoHistoryModel::find()->where([
+            'id'=>$id,
+        ])->one();
+        if($model)
+        {
+            $kelurahanDataPosko = $model->dataPoskoHistoryBelongsToDataPoskoModel->kelurahan;
+            if($kelurahan_user==$kelurahanDataPosko)
+            {
+                if($model->delete())
+                {
+                    $model->sendLogs('delete');
+                }
+            }
+            return $this->redirect(['/dataposko/view', 'id' => $model->data_posko_id]);
+        }
+        return $this->redirect(['index']);
+    }
+
 
     /**
      * Finds the DataPoskoForm model based on its primary key value.
@@ -163,10 +241,16 @@ class DataposkoController extends \app\controllers\MainController
      */
     protected function findModel($id)
     {
-        if (($model = DataPoskoForm::findOne($id)) !== null) {
+        $kelurahan_user = \yii::$app->user->identity->kelurahan;
+        $model = DataPoskoForm::find()->where([
+            'id'=>$id,
+            'kelurahan_datang'=>$kelurahan_user,
+        ])->one();
+        if($model){
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }
