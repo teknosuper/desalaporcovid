@@ -13,6 +13,34 @@ class DataPoskoHistoryModel extends DataPoskoHistoryTable
 		return $this->hasOne(DataPoskoModel::className(),['id'=>'data_posko_id']);
 	}
 
+    public function getUpdatedByText()
+    {
+    	if($this->updatedByBelongsToUser)
+    	{
+	    	return implode(' - ', [$this->updatedByBelongsToUser->nama,$this->updatedByBelongsToUser->username]);
+    	}
+    	return null;
+    }
+
+    public function getCreatedByText()
+    {
+    	if($this->createdByBelongsToUser)
+    	{
+	    	return implode(' - ', [$this->createdByBelongsToUser->nama,$this->createdByBelongsToUser->username]);
+    	}
+    	return null;
+    }
+
+	public function getCreatedByBelongsToUser()
+	{
+		return $this->hasOne(User::className(),['id'=>'created_by']);
+	}
+
+	public function getUpdatedByBelongsToUser()
+	{
+		return $this->hasOne(User::className(),['id'=>'updated_by']);
+	}
+
     public function sendLogs($action="create")
     {
     	switch ($action) {

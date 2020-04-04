@@ -40,12 +40,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     'template' => '{view} {update} {delete}',
                     'buttons' => [
                             'view' => function ($url, $model) {
-                            	$url = \yii\helpers\Url::to(['dataposko/hariandetail','id'=>$model->id]);
-                                return Html::a('<span class="fa fa-eye"></span> Detail', $url, [
-                                            'title' => Yii::t('app', 'view'),
-                                            'class'=>'btn btn-success btn-xs modal-form',
-                                            'data-size' => 'modal-lg',
-                                ]);
+                            	// $url = \yii\helpers\Url::to(['dataposko/hariandetail','id'=>$model->id]);
+                             //    return Html::a('<span class="fa fa-eye"></span> Detail', $url, [
+                             //                'title' => Yii::t('app', 'view'),
+                             //                'class'=>'btn btn-success btn-xs modal-form',
+                             //                'data-size' => 'modal-lg',
+                             //    ]);
                             },
 
                             'update' => function ($url, $model) {
@@ -54,6 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'title' => Yii::t('app', 'update'),
                                             'class'=>'btn btn-warning btn-xs modal-form',
                                             'data-size' => 'modal-lg',
+                                            'data-pjax'=>0,
 
                                 ]);
                             },

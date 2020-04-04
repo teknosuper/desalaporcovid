@@ -22,6 +22,11 @@ use yii\widgets\DetailView;
                   <td><?= $model->nama_warga;?></td>
                 </tr>
                 <tr>
+                  <th>NIK</th>
+                  <th>:</th>
+                  <td><?= $model->nik;?></td>
+                </tr>
+                <tr>
                   <th>Kelurahan</th>
                   <th>:</th>
                   <td><?= ($model->kelurahanBelongsToKelurahanModel) ? $model->kelurahanBelongsToKelurahanModel->textKelurahan : null;?></td>
@@ -98,4 +103,37 @@ use yii\widgets\DetailView;
           <!-- /.box -->
         </div>
       </div>
-		<pagebreak />
+
+      <?php if($model->dataPoskoHasManyDataPoskoHistoryModel):?>
+  		<pagebreak />
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="box">
+                <div class="box-header text-center">
+                  <h3 class="box-title">Dokumen Pantauan Harian Warga</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                  <table class="table table-striped table-bordered">
+                    <tbody>
+                      <tr>
+                        <th class="text-center">Waktu</th>
+                        <th class="text-center">Keterangan</th>
+                        <th class="text-center">Waktu Pemantauan</th>
+                        <th class="text-center">Petugas</th>
+                      </tr>
+                      <?php foreach($model->dataPoskoHasManyDataPoskoHistoryModel as $historyPoskoData):?>
+                        <tr>
+                          <td><?= date('d F Y H:i:s',strtotime($historyPoskoData->tanggal));?></td>
+                          <td><?= $historyPoskoData->keterangan;?></td>
+                          <td><?= date('d F Y H:i:s',strtotime($historyPoskoData->created_at));?></td>
+                          <td><?= $historyPoskoData->createdByText;?></td>
+                        </tr>
+                      <?php endforeach;?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+      <?php endif;?>

@@ -87,6 +87,11 @@ class DataPoskoModel extends DataPoskoTable
 		return $this->hasOne(PoskoModel::className(),['id'=>'id_posko']);
 	}
 
+	public function getDataPoskoHasManyDataPoskoHistoryModel()
+	{
+		return $this->hasMany(DataPoskoHistoryModel::className(),['data_posko_id'=>'id']);
+	}
+
 	public function getTanggalBerakhirIsolasiMandiri()
 	{
 		return date('d F Y H:i:s',strtotime($this->waktu_datang."+14 days"));
