@@ -287,6 +287,9 @@ class DataposkoController extends \app\controllers\MainController
         $kelurahan_user = \yii::$app->user->identity->kelurahan;
         switch (\yii::$app->user->identity->userType) {
             case \app\models\User::LEVEL_ADMIN:
+                $model = DataPoskoForm::find()->where([
+                    'id'=>$id,
+                ])->one();
                 # code...
                 break;
             case \app\models\User::LEVEL_ADMIN_DESA:
