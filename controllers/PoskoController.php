@@ -28,7 +28,7 @@ class PoskoController extends \app\controllers\MainController
                 # code...
                 break;
             case \app\models\User::LEVEL_ADMIN_DESA:
-                $id_kelurahan = \yii::$app->user->identity->idPoskoToPoskoModel->id_kelurahan;
+                $id_kelurahan = \yii::$app->user->identity->kelurahan;
                 $dataProvider->query->andWhere([
                     'id_kelurahan'=>$id_kelurahan,
                 ]);                        

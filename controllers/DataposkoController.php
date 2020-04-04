@@ -10,6 +10,7 @@ use app\models\form\DataPoskoHistorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\mpdf\Pdf;
 
 /**
  * DataposkoController implements the CRUD actions for DataPoskoForm model.
@@ -56,13 +57,55 @@ class DataposkoController extends \app\controllers\MainController
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        $searchModel = new DataPoskoHistorySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        return $this->render('view', [
-            'model' => $model,
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        if(\yii::$app->request->get('cetak')==TRUE)
+        {
+            // get your HTML raw content without any layouts or scripts
+            $content = $this->renderPartial('_reportView',[
+                'model'=>$model
+            ]);
+            
+            // setup kartik\mpdf\Pdf component
+            $pdf = new Pdf([
+                // set to use core fonts only
+                'mode' => Pdf::MODE_CORE, 
+                // A4 paper format
+                'format' => Pdf::FORMAT_A4, 
+                // portrait orientation
+                'orientation' => Pdf::ORIENT_PORTRAIT, 
+                // stream to browser inline
+                'destination' => Pdf::DEST_BROWSER, 
+                // your html content input
+                'content' => $content,  
+                // format content from your own css file if needed or use the
+                // enhanced bootstrap css built by Krajee for mPDF formatting 
+                'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
+                // any css to be embedded if required
+                'cssInline' => '.kv-heading-1{font-size:18px}', 
+                 // set mPDF properties on the fly
+                'options' => ['title' => 'Detil Data Warga Pantauan'],
+                 // call mPDF methods on the fly
+                'methods' => [ 
+                    'SetHeader'=>['Dokumen dicetak pada: '.date('d-m-Y H:i:s')], 
+                    'SetFooter'=>['{PAGENO}'],
+                ]
+            ]);
+            
+            // return the pdf output as per the destination setting
+            return $pdf->render(); 
+        }
+        else
+        {
+            $searchModel = new DataPoskoHistorySearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $dataProvider->query->andWhere([
+                'data_posko_id'=>$model->id,
+            ]);                        
+            return $this->render('view', [
+                'model' => $model,
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     public function actionDataharian($id)

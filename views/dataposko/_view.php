@@ -53,13 +53,23 @@ use yii\widgets\DetailView;
                 ],
                 [
                     'attribute' => 'status',
+                    'format'=>'raw',
                     'value' => function ($model) {
                         return ($model->statusDetail) ? $model->statusDetail : null;
                     },
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
                 ],
-                'waktu_datang',
+                [
+                    'attribute' => 'waktu_datang',
+                    'format'=>'raw',
+                    'value' => function ($model) {
+                    	$waktu_datang = date('d M Y H:i:s',strtotime($model->waktu_datang));
+                        return "<span class='badge'>{$waktu_datang}</span>";
+                    },
+                    // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
+                    // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
+                ],
                 [
                     'attribute' => 'created_by',
                     'value' => function ($model) {

@@ -11,16 +11,17 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="data-posko-model-view box box-primary">
     <div class="box-header">
+        <?= Html::a(Yii::t('app', '<i class="fa fa-print"></i> Cetak PDF'), ['/dataposko/view', 'id' => $model->id,'cetak'=>true], ['class' => 'btn btn-primary btn-flat','data-pjax'=>0,'target'=>'__blank']) ?>
         <?php if(\yii::$app->user->identity->userType==\app\models\User::LEVEL_POSKO):?>
-            <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
+            <?= Html::a(Yii::t('app', '<i class="fa fa-pencil"></i> Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
         <?php endif;?>
 
         <?php if(\yii::$app->user->identity->userType==\app\models\User::LEVEL_ADMIN):?>
-            <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
-            <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+            <?= Html::a(Yii::t('app', '<i class="fa fa-pencil"></i> Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
+            <?= Html::a(Yii::t('app', '<i class="fa fa-trash"></i> Delete'), ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger btn-flat',
                 'data' => [
-                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                    'confirm' => Yii::t('app', 'Apakah anda yakin akan menghapus data ini?'),
                     'method' => 'post',
                 ],
             ]) ?>
