@@ -146,6 +146,14 @@ $this->title = 'Pendaftaran Aplikasi Desa Lapor Covid-19';
             <a href="<?= \yii\helpers\Url::toRoute(['/site/login']);?>" class="btn btn-xs btn-block btn-social btn-facebook btn-flat"><i class="fa fa-user"></i> ke Halaman Masuk Aplikasi</a>
         </div>
 
+        <div class="row text-center">
+            <div class="login-logo">
+                <img class="col-md-6 col-md-offset-3 col-xs-6 col-xs-offset-3 col-lg-6 col-lg-offset-3" src="https://cekdiri.id/img/cekdirilogo-text.a204049c.png">
+            </div>        
+            </br>
+            <span>desalaporcovid merupakan bagian dari <a href="https://cekdiri.id" target="__blank">cekdiri.id</a></span>
+        </div>
+
         <?php ActiveForm::end(); ?>
         <!-- <a href="register.html" class="text-center">Register a new membership</a> -->
 
