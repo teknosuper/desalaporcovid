@@ -29,7 +29,7 @@ class LaporanController extends \app\controllers\MainController
                 break;
             case \app\models\User::LEVEL_ADMIN_DESA:
             case \app\models\User::LEVEL_POSKO:
-                $id_kelurahan = \yii::$app->user->identity->idPoskoToPoskoModel->id_kelurahan;
+                $id_kelurahan = \yii::$app->user->identity->kelurahan;
                 $dataProvider->query->andWhere([
                     'kelurahan_datang'=>$id_kelurahan,
                 ]);                        
