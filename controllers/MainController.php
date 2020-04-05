@@ -130,6 +130,7 @@ class MainController extends Controller
                     # code...
                     break;
                 case 'users':
+                case 'users/password':
                 case 'users/create':
                 case 'users/view':
                 case 'users/update':

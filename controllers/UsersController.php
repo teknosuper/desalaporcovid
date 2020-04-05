@@ -50,6 +50,51 @@ class UsersController extends MainController
         ]);
     }
 
+    public function actionPassword($id)
+    {
+        $model = new \app\models\form\ChangePasswordForm;
+        switch (\yii::$app->user->identity->userType) {
+            case \app\models\User::LEVEL_ADMIN:
+                $user_model = \app\models\User::find()->where(['id'=>$id])->one();
+                # code...
+                break;
+            
+            default:
+                $userType = [
+                    \app\models\User::LEVEL_POSKO,
+                    \app\models\User::LEVEL_PENGGUNA,
+                    \app\models\User::LEVEL_ADMIN_DESA,
+                ];
+                $user_model = \app\models\User::find()->where([
+                    'id'=>$id,
+                    'kelurahan'=>\yii::$app->user->identity->kelurahan,
+                    'userType'=>$userType,
+                ])->one();
+                # code...
+                break;
+        }
+        if($user_model)
+        {
+            if ($model->load(Yii::$app->request->post())) {
+                $user_model->password = md5($model->new_password);
+                $user_model->save();
+                \Yii::$app->session->setFlash('success','Selamat Password Telah Berhasil Dirubah');
+                return $this->redirect(['/profile/password']);
+                // return $this->redirect(['view', 'id' => $model->id]);                
+            }
+
+            return $this->render('reset_password',[
+                'model'=>$model,
+                'user_model'=>$user_model,
+            ]);
+        }
+        else
+        {
+            throw new NotFoundHttpException('Data Tidak Ditemukan');            
+        }
+
+    }
+
     /**
      * Displays a single User model.
      * @param integer $id

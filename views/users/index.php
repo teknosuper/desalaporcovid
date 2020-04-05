@@ -95,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'yii\grid\ActionColumn',
                     'header' => '#',
                     'headerOptions' => ['style' => 'color:#337ab7;text-align:center;'],
-                    'template' => '{view} {update} {delete}',
+                    'template' => '{view} {update} {delete} {password}',
                     'buttons' => [
                             'view' => function ($url, $model) {
                                 return Html::a('<span class="fa fa-eye"></span> Detail', $url, [
@@ -109,6 +109,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return Html::a('<span class="fa fa-pencil"></span> Ubah', $url, [
                                             'title' => Yii::t('app', 'update'),
                                             'class'=>'btn btn-warning btn-xs modal-form',
+                                            'data-size' => 'modal-lg',
+
+                                ]);
+                            },
+                            'password' => function ($url, $model) {
+                                return Html::a('<span class="fa fa-key"></span> Reset Password', $url, [
+                                            'title' => Yii::t('app', 'Reset Password/ Kata Sandi'),
+                                            'class'=>'btn btn-danger btn-xs modal-form',
                                             'data-size' => 'modal-lg',
 
                                 ]);
