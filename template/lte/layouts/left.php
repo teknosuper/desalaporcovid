@@ -4,6 +4,16 @@
 
         <?php if(!\yii::$app->user->isGuest):?>
 
+        <div class="user-panel">
+            <div class="pull-left image">
+              <img src="/desalaporcovid-logo.png" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p>@<?= \yii::$app->user->identity->username;?></p>
+              <a href="#"><i class="fa fa-user text-success"></i> <?= \yii::$app->user->identity->levelDetail;?></a>
+            </div>
+        </div>
+
         <?php switch (\yii::$app->user->identity->userType) {
             case \app\models\User::LEVEL_ADMIN:
                 echo dmstr\widgets\Menu::widget(

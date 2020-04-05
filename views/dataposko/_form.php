@@ -8,6 +8,7 @@ use yii\web\JsExpression;
 use kartik\depdrop\DepDrop;
 use yii\helpers\Url;
 use kartik\widgets\DateTimePicker;
+use kartik\widgets\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\LaporanModel */
@@ -112,39 +113,6 @@ use kartik\widgets\DateTimePicker;
 
         </div>
         <div class="box-body table-responsive">
-            <div class="col-md-12">
-                <div class="row">            
-                    <div class="col-md-6">
-                        <div class="form-group">
-                        <?= $form->field($model, 'nik', [
-                                'feedbackIcon' => [
-                                        'default' => '',
-                                        'success' => 'ok',
-                                        'error' => 'exclamation-sign',
-                                        'defaultOptions' => ['class'=>'text-primary']
-                                ],
-                                'hintType' => ActiveField::HINT_SPECIAL,
-                                'addon' => ['append' => ['content'=>'<i class="fa fa-id-card"></i>']],
-                                'hintSettings' => [
-                                    'iconBesideInput' => false,
-                                    'onLabelClick' => false,
-                                    'onLabelHover' => true,
-                                    'onIconClick' => true,
-                                    'onIconHover' => false,
-                                    'title' => '<i class="glyphicon glyphicon-info-sign"></i> Wajib diisi'
-                                ]
-                            ])
-                            ->textInput([
-                                'placeholder' => 'Nomor Induk KTP Warga',
-                            ])
-                            ->hint('<div style="width:200px"><b>NIK Warga </b> - Masukkan Nomor Induk KTP Warga.</div>');?>
-                        </div>
-                    </div>            
-                    <div class="col-md-6">
-
-                    </div>            
-                </div>
-            </div> 
 
             <div class="col-md-12">
                 <div class="row">            
@@ -221,6 +189,65 @@ use kartik\widgets\DateTimePicker;
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
+                            <?= $form->field($model, 'gender', [
+                                    'feedbackIcon' => [
+                                            'default' => '',
+                                            'success' => 'ok',
+                                            'error' => 'exclamation-sign',
+                                            'defaultOptions' => ['class'=>'text-primary']
+                                    ],
+                                    'hintType' => ActiveField::HINT_SPECIAL,
+                                    'hintSettings' => [
+                                        'iconBesideInput' => false,
+                                        'onLabelClick' => false,
+                                        'onLabelHover' => true,
+                                        'onIconClick' => true,
+                                        'onIconHover' => false,
+                                        'title' => '<i class="glyphicon glyphicon-info-sign"></i> Required'
+                                    ]
+                                ])
+                                ->hint('<div style="width:200px"><b>Jenis Kelamin </b> : Pilih Jenis Kelamin</div>')
+                                ->dropDownList(\app\models\User::getGenderList(),['prompt'=>'Pilih Jenis Kelamin']);
+                            ?>
+                        </div>
+                    </div>   
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <?= $form->field($model, 'tanggal_lahir', [
+                                    'feedbackIcon' => [
+                                            'default' => '',
+                                            'success' => 'ok',
+                                            'error' => 'exclamation-sign',
+                                            'defaultOptions' => ['class'=>'text-primary']
+                                    ],
+                                    'hintType' => ActiveField::HINT_SPECIAL,
+                                    'hintSettings' => [
+                                        'iconBesideInput' => false,
+                                        'onLabelClick' => false,
+                                        'onLabelHover' => true,
+                                        'onIconClick' => true,
+                                        'onIconHover' => false,
+                                        'title' => '<i class="glyphicon glyphicon-info-sign"></i> Wajib diisi'
+                                    ]
+                                ])
+                                ->widget(DatePicker::classname(), [
+                                    'options' => ['placeholder' => 'Tanggal Lahir ...'],
+                                    'pluginOptions' => [
+                                        'autoclose' => true,
+                                        'format' => 'yyyy-mm-dd',
+                                    ],
+                                    'readonly' => true,
+                                ])
+                                ->hint('<div style="width:200px"><b>Tanggal Lahir </b> - Tanggal Lahir Sesuai Identitas.</div>');?>
+                        </div>
+                    </div>                            
+                </div>
+            </div> 
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
                         <?= $form->field($model, 'alamat', [
                                 'feedbackIcon' => [
                                         'default' => '',
@@ -271,7 +298,7 @@ use kartik\widgets\DateTimePicker;
                             ->textInput([
                                 'placeholder' => 'Nomer Telepon Warga Terlapor / yang dapat dihubungi',
                             ])
-                            ->hint('<div style="width:200px"><b>Kelurahan </b> - Nomer Telepon Warga Terlapor / nomor yang dapat dihubungi.</div>');?>
+                            ->hint('<div style="width:200px"><b>Nomer Telepon </b> - Nomer Telepon Warga Terlapor / nomor yang dapat dihubungi.</div>');?>
                         </div>
                     </div>                            
                 </div>
@@ -422,26 +449,10 @@ use kartik\widgets\DateTimePicker;
                                         'title' => '<i class="glyphicon glyphicon-info-sign"></i> Required'
                                     ]
                                 ])
-                                ->widget(Select2::classname(), [
-                                    'initValueText' => \app\models\KelurahanModel::getTextKelurahanById($model->kelurahan_datang),                        
-                                    'options' => [
-                                        'placeholder' => 'Pilih Kelurahan/Desa Tujuan ...',
+                                ->hint('<div style="width:200px"><b>Kelurahan/Desa Tujuan </b> : Pilih Status Pantauan</div>')
+                                ->dropDownList(\app\models\KelurahanModel::getKelurahanListByIdKel($model->kelurahan_datang),[
                                         'id'=>'kelurahan_datang_id',
-                                    ],
-                                    'pluginOptions' => [
-                                        'allowClear' => true,
-                                        'minimumInputLength' => 4,
-                                        'language' => [
-                                            'errorLoading' => new JsExpression("function () { return 'Sedang mencari data...'; }"),
-                                        ],
-                                        'ajax' => [
-                                            'url' => \yii\helpers\Url::to(['/site/getdatakelurahan']),
-                                            'dataType' => 'json',
-                                            'data' => new JsExpression('function(params) { return {q:params.term}; }')
-                                        ],
-                                    ],
-                                ])
-                                ->hint('<div style="width:200px"><b>Kelurahan </b> - Masukkan data kelurahan</div>');?>
+                                ]);?>
                         </div>
                     </div> 
                 </div>            
@@ -551,7 +562,7 @@ use kartik\widgets\DateTimePicker;
         </div>
 
         <div class="box-footer">
-            <?= Html::submitButton(Yii::t('app', 'Simpan Data Posko'), ['class' => 'btn btn-success btn-flat btn-block','data-method'=>'post','data-confirm'=>'Tekan OK untuk mengkonfirmasi data']) ?>
+            <?= Html::submitButton(Yii::t('app', '<i class="fa fa-save"></i> Simpan Data Posko'), ['class' => 'btn btn-success btn-flat btn-block','data-method'=>'post','data-confirm'=>'Tekan OK untuk mengkonfirmasi data']) ?>
         </div>
     </div>
     <?php ActiveForm::end(); ?>

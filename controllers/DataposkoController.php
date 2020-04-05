@@ -56,6 +56,9 @@ class DataposkoController extends \app\controllers\MainController
      */
     public function actionView($id)
     {
+        $username = \yii::$app->user->identity->username;
+        $site = \yii\helpers\Url::home(true);
+        $date = implode(', ', [\app\models\CommonHelper::getIndonesianDayName(date('D')),date('d F Y H:i:s')]);
         $model = $this->findModel($id);
         if(\yii::$app->request->get('cetak')==TRUE)
         {
@@ -68,6 +71,7 @@ class DataposkoController extends \app\controllers\MainController
             $pdf = new Pdf([
                 // set to use core fonts only
                 'mode' => Pdf::MODE_CORE, 
+                'filename'=>implode('-', [$model->nama_warga,$model->kelurahanBelongsToKelurahanModel->nama]).'.pdf',
                 // A4 paper format
                 'format' => Pdf::FORMAT_A4, 
                 // portrait orientation
@@ -85,7 +89,7 @@ class DataposkoController extends \app\controllers\MainController
                 'options' => ['title' => 'Detil Data Warga Pantauan'],
                  // call mPDF methods on the fly
                 'methods' => [ 
-                    'SetHeader'=>['Dokumen dicetak pada: '.date('d-m-Y H:i:s')], 
+                    'SetHeader'=>["Dokumen dicetak oleh : @{$username}, pada: {$date} - {$site}"], 
                     'SetFooter'=>['{PAGENO}'],
                 ]
             ]);
@@ -180,6 +184,7 @@ class DataposkoController extends \app\controllers\MainController
             $model->luar_negeri = $checkLaporanId->luar_negeri;
             $model->id_negara = $checkLaporanId->id_negara;
         }
+        $model->kelurahan_datang = \yii::$app->user->identity->kelurahan;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             /* start update laporan */
             if($checkLaporanId)

@@ -21,7 +21,7 @@ class KelurahanModel extends KelurahanTable
         {
         	foreach($model as $data)
         	{
-				$lists[$data->id_kel] = $data->nama;
+				$lists[$data->id_kel] = $data->textKelurahan;
         	}
         }
         return $lists;

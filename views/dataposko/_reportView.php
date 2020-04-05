@@ -22,11 +22,6 @@ use yii\widgets\DetailView;
                   <td><?= $model->nama_warga;?></td>
                 </tr>
                 <tr>
-                  <th>NIK</th>
-                  <th>:</th>
-                  <td><?= $model->nik;?></td>
-                </tr>
-                <tr>
                   <th>Kelurahan</th>
                   <th>:</th>
                   <td><?= ($model->kelurahanBelongsToKelurahanModel) ? $model->kelurahanBelongsToKelurahanModel->textKelurahan : null;?></td>
@@ -35,6 +30,16 @@ use yii\widgets\DetailView;
                   <th>Alamat</th>
                   <th>:</th>
                   <td><?= $model->alamat;?></td>
+                </tr>                
+                <tr>
+                  <th>Jenis Kelamin</th>
+                  <th>:</th>
+                  <td><?= ($model->genderDetail) ? $model->genderDetail : null;?></td>
+                </tr>                
+                <tr>
+                  <th>Tanggal Lahir</th>
+                  <th>:</th>
+                  <td><?= date('d-m-Y',strtotime($model->tanggal_lahir));?></td>
                 </tr>
                 <tr>
                   <th>No Telepon</th>

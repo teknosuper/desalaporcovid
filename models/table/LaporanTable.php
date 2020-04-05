@@ -26,6 +26,7 @@ use Yii;
  * @property string|null $updated_time
  * @property int|null $created_by
  * @property int|null $updated_by
+ * @property int|null $data_posko_id
  */
 class LaporanTable extends \yii\db\ActiveRecord
 {
@@ -43,7 +44,7 @@ class LaporanTable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['jenis_laporan', 'status', 'id_pelapor', 'id_posko', 'luar_negeri', 'created_by', 'updated_by'], 'integer'],
+            [['jenis_laporan', 'status', 'id_pelapor', 'id_posko', 'luar_negeri', 'created_by', 'updated_by', 'data_posko_id'], 'integer'],
             [['keterangan'], 'string'],
             [['created_time', 'updated_time'], 'safe'],
             [['nama_warga', 'no_telepon_pelapor', 'no_telepon_terlapor'], 'string', 'max' => 255],
@@ -77,6 +78,7 @@ class LaporanTable extends \yii\db\ActiveRecord
             'updated_time' => Yii::t('app', 'Updated Time'),
             'created_by' => Yii::t('app', 'Created By'),
             'updated_by' => Yii::t('app', 'Updated By'),
+            'data_posko_id' => Yii::t('app', 'Data Posko ID'),
         ];
     }
 }

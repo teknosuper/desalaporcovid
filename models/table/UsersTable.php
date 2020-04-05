@@ -24,6 +24,9 @@ use Yii;
  * @property string|null $updated_at
  * @property int|null $created_by
  * @property int|null $updated_by
+ * @property string|null $gender
+ * @property string|null $tanggal_lahir
+ * @property string|null $tempat_lahir
  */
 class UsersTable extends \yii\db\ActiveRecord
 {
@@ -42,11 +45,12 @@ class UsersTable extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'status', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
-            [['username', 'password', 'email', 'nama', 'alamat'], 'string', 'max' => 255],
+            [['created_at', 'updated_at', 'tanggal_lahir'], 'safe'],
+            [['username', 'password', 'email', 'nama', 'alamat', 'tempat_lahir'], 'string', 'max' => 255],
             [['authKey', 'accessToken'], 'string', 'max' => 32],
             [['userType'], 'string', 'max' => 50],
             [['kelurahan', 'no_telepon'], 'string', 'max' => 20],
+            [['gender'], 'string', 'max' => 2],
             [['username'], 'unique'],
             [['email'], 'unique'],
         ];
@@ -75,6 +79,9 @@ class UsersTable extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('app', 'Updated At'),
             'created_by' => Yii::t('app', 'Created By'),
             'updated_by' => Yii::t('app', 'Updated By'),
+            'gender' => Yii::t('app', 'Gender'),
+            'tanggal_lahir' => Yii::t('app', 'Tanggal Lahir'),
+            'tempat_lahir' => Yii::t('app', 'Tempat Lahir'),
         ];
     }
 }

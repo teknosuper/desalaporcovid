@@ -24,6 +24,43 @@ class CommonHelper
 	    );
 	}
 
+	public static function getIndonesianDayName($dayName)
+	{
+		switch($dayName){
+		    case 'Sun':
+		        $dayName = "Minggu";
+		    break;
+
+		    case 'Mon':         
+		        $dayName = "Senin";
+		    break;
+
+		    case 'Tue':
+		        $dayName = "Selasa";
+		    break;
+
+		    case 'Wed':
+		        $dayName = "Rabu";
+		    break;
+
+		    case 'Thu':
+		        $dayName = "Kamis";
+		    break;
+
+		    case 'Fri':
+		        $dayName = "Jumat";
+		    break;
+
+		    case 'Sat':
+		        $dayName = "Sabtu";
+		    break;
+		    
+		    default:
+		        $dayName = $dayName;     
+		    break;
+		}
+		return $dayName;		
+	}
 
 	public static function randomCode($capitalOnly=FALSE,$long=6) {
 		// return rand(123456,999999);
@@ -99,6 +136,11 @@ class CommonHelper
 		}        
         return $getSession;
 	}
+
+    public static function getHost()
+    {
+        return isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];        
+    }
 
 	public static function setFlashMessage($key,$type,$title,$message)
 	{

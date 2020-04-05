@@ -14,6 +14,8 @@ class User extends UsersTable implements IdentityInterface
     const STATUS_ACTIVE = 10;
     const STATUS_SUSPENDED = 0;
 
+    const GENDER_L = 'L';
+    const GENDER_P = 'P';
 
     const LEVEL_POSKO = 'posko';
     const LEVEL_ADMIN = 'admin';
@@ -35,6 +37,9 @@ class User extends UsersTable implements IdentityInterface
             'nama' => Yii::t('app', 'Nama'),
             'kelurahan' => Yii::t('app', 'Kelurahan'),
             'alamat' => Yii::t('app', 'Alamat'),
+            'gender' => Yii::t('app', 'Jenis Kelamin'),
+            'tanggal_lahir' => Yii::t('app', 'Tanggal Lahir'),
+            'tempat_lahir' => Yii::t('app', 'Tempat Lahir'),
         ];
     }
 
@@ -66,12 +71,31 @@ class User extends UsersTable implements IdentityInterface
                 # code...
                 break;            
             default:
-
+                return [
+                    self::LEVEL_PENGGUNA=>"PENGGUNA",
+                    self::LEVEL_POSKO=>"POSKO",
+                ];
                 # code...
                 break;
         }
 
     }
+
+    public function getGenderDetail()
+    {
+        $status = $this->gender;
+        $array = self::getGenderList();
+        return isset($array[$status]) ? $array[$status] : NULL;
+    }
+
+    public static function getGenderList()
+    {
+        return [
+            self::GENDER_L=>"LAKI-LAKI",
+            self::GENDER_P=>"PEREMPUAN",
+        ];
+    }
+
 
     public function getStatusDetail()
     {

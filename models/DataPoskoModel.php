@@ -17,6 +17,8 @@ class DataPoskoModel extends DataPoskoTable
     const STATUS_PERGI = 50;
     const STATUS_NEGATIF = 60;
 
+    const GENDER_L = 'L';
+    const GENDER_P = 'P';
 
     public function getUpdatedByText()
     {
@@ -92,6 +94,21 @@ class DataPoskoModel extends DataPoskoTable
 		return $this->hasMany(DataPoskoHistoryModel::className(),['data_posko_id'=>'id']);
 	}
 
+    public function getGenderDetail()
+    {
+        $status = $this->gender;
+        $array = self::getGenderList();
+        return isset($array[$status]) ? $array[$status] : NULL;
+    }
+
+    public static function getGenderList()
+    {
+        return [
+            self::GENDER_L=>"LAKI-LAKI",
+            self::GENDER_P=>"PEREMPUAN",
+        ];
+    }
+
 	public function getTanggalBerakhirIsolasiMandiri()
 	{
 		return date('d F Y H:i:s',strtotime($this->waktu_datang."+14 days"));
@@ -116,12 +133,15 @@ class DataPoskoModel extends DataPoskoTable
         		case self::STATUS_GEJALA:
         			return "
         			<span class='btn btn-xs btn-danger'>{$status}</span>
-        			<p>Harus isolasi di rumah sampai tanggal : {$tanggal_berakhir_isolasi}</p>
+        			<p><i class='fa fa-warning'></i> Harus isolasi di rumah sampai tanggal : <span class='btn btn-xs btn-danger'>{$tanggal_berakhir_isolasi}</span></p>
         			";
         			# code...
         			break;        		
         		case self::STATUS_GEJALA:
-        			return "<span class='bg-white'>{$status}</span>";
+        			return "
+        			<span class='btn btn-xs btn-danger'>{$status}</span>
+        			<p><i class='fa fa-warning'></i> Harus isolasi di rumah sampai tanggal : <span class='btn btn-xs btn-danger'>{$tanggal_berakhir_isolasi}</span></p>
+        			";
         			# code...
         			break;        		
         		default:
@@ -150,12 +170,12 @@ class DataPoskoModel extends DataPoskoTable
         return [
             'id' => Yii::t('app', 'ID'),
             'nik' => Yii::t('app', 'NIK'),
-            'nama_warga' => Yii::t('app', 'Nama Warga'),
-            'kelurahan' => Yii::t('app', 'Kelurahan'),
-            'alamat' => Yii::t('app', 'Alamat'),
+            'nama_warga' => Yii::t('app', 'Nama Warga (Sesuai Identitas)'),
+            'kelurahan' => Yii::t('app', 'Kelurahan (Sesuai Identitas)'),
+            'alamat' => Yii::t('app', 'Alamat (Sesuai Identitas)'),
             'no_telepon' => Yii::t('app', 'No Telepon'),
             'jenis_laporan' => Yii::t('app', 'Jenis Laporan'),
-            'kota_asal' => Yii::t('app', 'Kota Asal'),
+            'kota_asal' => Yii::t('app', 'Kota Asal (Kota Terakhir Sebelumnya)'),
             'kelurahan_datang' => Yii::t('app', 'Desa/Kelurahan Tujuan'),
             'status' => Yii::t('app', 'Status'),
             'keterangan' => Yii::t('app', 'Keterangan'),
@@ -166,6 +186,9 @@ class DataPoskoModel extends DataPoskoTable
             'created_by' => Yii::t('app', 'Dibuat Oleh'),
             'updated_at' => Yii::t('app', 'Waktu Diubah'),
             'updated_by' => Yii::t('app', 'Diubah Oleh'),
+            'gender' => Yii::t('app', 'Jenis Kelamin'),
+            'tanggal_lahir' => Yii::t('app', 'Tanggal Lahir'),
+            'tempat_lahir' => Yii::t('app', 'Tempat Lahir'),
         ];
     }
 

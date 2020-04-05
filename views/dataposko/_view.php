@@ -24,6 +24,16 @@ use yii\widgets\DetailView;
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
                 ],
                 'alamat',
+                [
+                    'attribute' => 'gender',
+                    'format'=>'html',
+                    'value' => function ($model) {
+                        return ($model->genderDetail) ? $model->genderDetail : null;
+                    },
+                    // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
+                    // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
+                ],
+                'tanggal_lahir',
                 'no_telepon',
                 [
                     'attribute' => 'kota_asal',

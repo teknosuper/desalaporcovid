@@ -38,43 +38,52 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'jenis_laporan',
                 'nama_warga',
                 [
-                    'attribute' => 'kelurahan',
+                    'attribute' => 'status',
                     'value' => function ($model) {
-                        return ($model->kelurahanBelongsToKelurahanModel) ? implode(' - ', [$model->kelurahanBelongsToKelurahanModel->nama,$model->kelurahanBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama,$model->kelurahanBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama]) : null;
+                        return ($model->statusDetail) ? $model->statusDetail : null;
                     },
-                    'filter' => Select2::widget([
-
-                        'model' => $searchModel,
-
-                        'attribute' => 'kelurahan',
-
-                        // 'data' => Object::typeNames(),
-
-                        'theme' => Select2::THEME_BOOTSTRAP,
-
-                        'hideSearch' => true,
-                        'initValueText' => \app\models\KelurahanModel::getTextKelurahanById($searchModel->kelurahan),                        
-                        'options' => [
-
-                            'placeholder' => 'Pilih Kelurahan/Desa ...',
-
-                        ],
-                        'pluginOptions' => [
-                            'allowClear' => true,
-                            'minimumInputLength' => 4,
-                            'language' => [
-                                'errorLoading' => new JsExpression("function () { return 'Sedang mencari data...'; }"),
-                            ],
-                            'ajax' => [
-                                'url' => \yii\helpers\Url::to(['/site/getdatakelurahan']),
-                                'dataType' => 'json',
-                                'data' => new JsExpression('function(params) { return {q:params.term}; }')
-                            ],
-                        ],
-
-                    ]),
-                    // 'filterInputOptions' => ['prompt' => 'All Categories', 'class' => 'form-control', 'id' => null]
+                    'format'=>'raw',
+                    'filter' => \app\models\DataPoskoModel::getStatusList(),
+                    'filterInputOptions' => ['prompt' => 'Semua Status', 'class' => 'form-control', 'id' => null]
                 ],
+                // [
+                //     'attribute' => 'kelurahan',
+                //     'value' => function ($model) {
+                //         return ($model->kelurahanBelongsToKelurahanModel) ? implode(' - ', [$model->kelurahanBelongsToKelurahanModel->nama,$model->kelurahanBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama,$model->kelurahanBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama]) : null;
+                //     },
+                //     'filter' => Select2::widget([
+
+                //         'model' => $searchModel,
+
+                //         'attribute' => 'kelurahan',
+
+                //         // 'data' => Object::typeNames(),
+
+                //         'theme' => Select2::THEME_BOOTSTRAP,
+
+                //         'hideSearch' => true,
+                //         'initValueText' => \app\models\KelurahanModel::getTextKelurahanById($searchModel->kelurahan),                        
+                //         'options' => [
+
+                //             'placeholder' => 'Pilih Kelurahan/Desa ...',
+
+                //         ],
+                //         'pluginOptions' => [
+                //             'allowClear' => true,
+                //             'minimumInputLength' => 4,
+                //             'language' => [
+                //                 'errorLoading' => new JsExpression("function () { return 'Sedang mencari data...'; }"),
+                //             ],
+                //             'ajax' => [
+                //                 'url' => \yii\helpers\Url::to(['/site/getdatakelurahan']),
+                //                 'dataType' => 'json',
+                //                 'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                //             ],
+                //         ],
+
+                //     ]),
+                //     // 'filterInputOptions' => ['prompt' => 'All Categories', 'class' => 'form-control', 'id' => null]
+                // ],
                 // 'alamat',
                 // 'no_telepon_pelapor',
                 // 'no_telepon_terlapor',
@@ -193,15 +202,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     ]),
                     // 'filterInputOptions' => ['prompt' => 'All Categories', 'class' => 'form-control', 'id' => null]
-                ],
-                [
-                    'attribute' => 'status',
-                    'value' => function ($model) {
-                        return ($model->statusDetail) ? $model->statusDetail : null;
-                    },
-                    'format'=>'raw',
-                    'filter' => \app\models\DataPoskoModel::getStatusList(),
-                    'filterInputOptions' => ['prompt' => 'Semua Status', 'class' => 'form-control', 'id' => null]
                 ],
                 [
                     'class' => 'yii\grid\ActionColumn',
