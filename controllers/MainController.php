@@ -14,6 +14,25 @@ use yii\web\NotFoundHttpException;
 class MainController extends Controller
 {
 
+    public function init()
+    {   
+        if(!\yii::$app->user->isGuest)
+        {
+            $userStatus = \yii::$app->user->identity->status; 
+            switch ($userStatus) {
+                case \app\models\User::STATUS_DELETED:
+                case \app\models\User::STATUS_SUSPENDED:
+                    throw new NotFoundHttpException('Akun Anda Telah Ditangguhkan, mohon hubungi admin desa terkait');
+                    # code...
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+        }
+    }
+
     public function behaviors() {
         return [
             'access' => [

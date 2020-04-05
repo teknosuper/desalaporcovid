@@ -21,7 +21,41 @@ class UserForm extends \app\models\User
             [['username'], 'unique'],
             [['email'], 'unique'],
             [['email','userType','nama'], 'required'],
+            [['userType'],'validateUserType'],
         ];
+    }
+
+    public function validateUserType($attribute,$params,$validator)
+    {
+        $userType = $this->userType;
+        switch ($userType) {
+            case \app\models\User::LEVEL_ADMIN:
+                switch (\yii::$app->user->identity->userType) {
+                    case \app\models\User::LEVEL_ADMIN:
+
+                        # code...
+                        break;
+                    
+                    default:
+                        $this->addError($attribute, "User Tipe Tidak Bisa Disimpan, silahkan Ulangi Lagi");
+                        # code...
+                        break;
+                }
+                # code...
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+
+        // $msisdn = $this->msisdn;
+        // $tac = $this->$attribute;
+        // $getTac = \common\helpers\CommonHelper::getTAC($msisdn.'-registration-bp-tac');
+        // if($getTac != $tac)
+        // {
+        //     $this->addError($attribute, "{$tac} IS WRONG OTP, PLEASE CHECK YOUR OTP IN {$msisdn} SMS");
+        // }
     }
 
 }

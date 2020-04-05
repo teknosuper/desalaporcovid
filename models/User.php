@@ -31,7 +31,7 @@ class User extends UsersTable implements IdentityInterface
             'password' => Yii::t('app', 'Password'),
             'email' => Yii::t('app', 'Email'),
             'accessToken' => Yii::t('app', 'Access Token'),
-            'userType' => Yii::t('app', 'User Type'),
+            'userType' => Yii::t('app', 'Tipe Pengguna'),
             'user_id' => Yii::t('app', 'Posko'),
             'status' => Yii::t('app', 'Status'),
             'nama' => Yii::t('app', 'Nama'),

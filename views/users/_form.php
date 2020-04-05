@@ -16,8 +16,8 @@ use yii\helpers\Url;
     <?php $form = ActiveForm::begin(); ?>
     <div class="box-body table-responsive">
 
-        <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
-
+        <div class="col-md-12">                
+            <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
                 <div class="row">            
                     <div class="col-md-12">
                         <div class="form-group">
@@ -182,10 +182,11 @@ use yii\helpers\Url;
 
         <?= $form->field($model, 'status')->textInput()->dropDownList(\app\models\User::getStatusList(),['prompt'=>'Pilih Status']) ?>
 
+        </div>
 
-    </div>
-    <div class="box-footer">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success btn-flat btn-block']) ?>
+        <div class="box-footer">
+            <?= Html::submitButton(Yii::t('app', '<i class="fa fa-save"></i> SIMPAN PERUBAHAN DATA'), ['class' => 'btn btn-success btn-flat btn-block','data-method'=>'post','data-confirm'=>'Tekan OK untuk mengkonfirmasi data']) ?>
+        </div>
     </div>
     <?php ActiveForm::end(); ?>
 </div>
