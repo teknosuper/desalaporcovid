@@ -32,11 +32,78 @@
 
         ?>
 
-    <?php endif;?>
+    <?php endif;?>    
     
     <div class="row">
-        <div class="col-md-12">
-          <div class="box box-solid">
+
+        <div class="col-md-6">
+          <div class="box box-solid box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Sekilas Tentang Desa Lapor Covid-19</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="box-group" id="accordion">
+                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                <div class="panel box box-default">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
+                        Apa Itu Desa Lapor Covid-19 ?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="box-body">
+                      <p><b>Aplikasi Desa Lapor Covid-19</b> merupakan sebuah sistem berbasis web yang berfungsi untuk melakukan pencatatan dan pemantauan data warga yang memiliki gejala covid19 ataupun warga yang datang atau pergi dari wilayah terjangkit covid19.</p>
+                      <p><b>Aplikasi Desa Lapor Covid-19</b> dirancang untuk dapat digunakan dari level Desa dan nantinya datanya dapat diakses dan dipantau di level kecamatan, kabupaten / kota, dan bahkan bisa sampai level Provinsi.                        
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-default">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false">
+                        Cara Kerja Desa Lapor Covid-19
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false">
+                    <div class="box-body">
+                      <p><b>Penjelasan singkat aplikasi ini sebagai berikut : </b></p>
+                      <ul>
+                        <li>Warga dapat melaporkan diri sendiri atau warga lain (tetangga) yang mengalami gejala covid19 atau melapor jika anda atau warga lain baru saja datang / akan pergi dari daerah terdampak covid19 (pemudik / perantau).</li>
+                        <li>Data laporan warga kemudian akan di verifikasi dan divalidasi oleh posko yang didirikan di setiap wilayah (misal: RT / RW / Puskesmas).</li>
+                        <li>Admin di level Desa, Kecamatan, Kab / Kota, dan Provinsi dapat memantau data laporan warga dan memantau kondisi warga terlapor secara cepat.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-default">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
+                        Harapan Desa Lapor Covid-19
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false">
+                    <div class="box-body">
+                        <b>Aplikasi ini bersifat sumber terbuka (Open Source).</b>
+                        <p>Besar harapan kami semoga Aplikasi Desa Lapor Covid19 dapat bermanfaat bagi Desa-desa yang ada di Indonesia dalam menanggulangi penyebaran Covid19.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div> 
+
+        <div class="col-md-6">
+          <div class="box box-solid box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">PERBEDAAN ODP, PDP, DAN SUSPECT VIRUS CORONA</h3>
             </div>
@@ -97,3 +164,27 @@
           <!-- /.box -->
         </div>        
     </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box box-default">
+          <div class="box-header with-border">
+            <i class="fa fa-video-camera"></i>
+
+            <h3 class="box-title">Video Panduan Penggunaan Untuk Warga</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/9AgUF88qW18" frameborder="0" allowfullscreen=""></iframe>
+            </div>        
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="embed-responsive embed-responsive-16by9">
+
+        </div>        
+      </div>      
+    </div>    

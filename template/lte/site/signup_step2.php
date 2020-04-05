@@ -143,7 +143,7 @@ $this->title = 'Pendaftaran Aplikasi Desa Lapor Covid-19';
         <div class="social-auth-links text-center">
             <a href="<?= \yii\helpers\Url::toRoute(['/site/signup']);?>" class="btn btn-xs btn-block btn-social btn-github btn-flat"><i class="fa fa-backward"></i> kembali ke Langkah Pertama</a>
             <p>- Sudah Mempunyai Akun ? -</p>
-            <a href="<?= \yii\helpers\Url::toRoute(['/site/login']);?>" class="btn btn-xs btn-block btn-social btn-facebook btn-flat"><i class="fa fa-user"></i> ke Halaman Masuk Aplikasi</a>
+            <a href="<?= \yii\helpers\Url::toRoute(['/site/login']);?>" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-user"></i> ke Halaman Masuk Aplikasi</a>
         </div>
 
         <div class="row text-center">

@@ -106,7 +106,7 @@ $fieldOptions2 = [
 
         <div class="social-auth-links text-center">
             <p>- Belum mempunyai akun ? -</p>
-            <a href="<?= \yii\helpers\Url::toRoute(['/site/signup']);?>" class="btn btn-xs btn-block btn-social btn-facebook btn-flat"><i class="fa fa-user"></i> Daftar Aplikasi </a>
+            <a href="<?= \yii\helpers\Url::toRoute(['/site/signup']);?>" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-user"></i> Daftar Aplikasi </a>
         </div>
 
         <div class="row text-center">
