@@ -48,12 +48,12 @@
                 <div class="panel box box-default">
                   <div class="box-header with-border">
                     <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#apa" aria-expanded="false" class="collapsed">
                         Apa Itu Desa Lapor Covid-19 ?
                       </a>
                     </h4>
                   </div>
-                  <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                  <div id="apa" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                     <div class="box-body">
                       <p><b>Aplikasi Desa Lapor Covid-19</b> merupakan sebuah sistem berbasis web yang berfungsi untuk melakukan pencatatan dan pemantauan data warga yang memiliki gejala covid19 ataupun warga yang datang atau pergi dari wilayah terjangkit covid19.</p>
                       <p><b>Aplikasi Desa Lapor Covid-19</b> dirancang untuk dapat digunakan dari level Desa dan nantinya datanya dapat diakses dan dipantau di level kecamatan, kabupaten / kota, dan bahkan bisa sampai level Provinsi.                        
@@ -64,12 +64,12 @@
                 <div class="panel box box-default">
                   <div class="box-header with-border">
                     <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#carakerja" class="collapsed" aria-expanded="false">
                         Cara Kerja Desa Lapor Covid-19
                       </a>
                     </h4>
                   </div>
-                  <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false">
+                  <div id="carakerja" class="panel-collapse collapse" aria-expanded="false">
                     <div class="box-body">
                       <p><b>Penjelasan singkat aplikasi ini sebagai berikut : </b></p>
                       <ul>
@@ -83,12 +83,12 @@
                 <div class="panel box box-default">
                   <div class="box-header with-border">
                     <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#harapan" class="collapsed" aria-expanded="false">
                         Harapan Desa Lapor Covid-19
                       </a>
                     </h4>
                   </div>
-                  <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false">
+                  <div id="harapan" class="panel-collapse collapse" aria-expanded="false">
                     <div class="box-body">
                         <b>Aplikasi ini bersifat sumber terbuka (Open Source).</b>
                         <p>Besar harapan kami semoga Aplikasi Desa Lapor Covid19 dapat bermanfaat bagi Desa-desa yang ada di Indonesia dalam menanggulangi penyebaran Covid19.</p>
@@ -114,12 +114,12 @@
                 <div class="panel box box-primary">
                   <div class="box-header with-border">
                     <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#odp" aria-expanded="false" class="collapsed">
                         Orang Dalam Pemantauan (ODP)
                       </a>
                     </h4>
                   </div>
-                  <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                  <div id="odp" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                     <div class="box-body">
                       <b>Orang dengan status ODP belum menunjukan gejala sakit.</b>
                       <p>
@@ -130,12 +130,12 @@
                 <div class="panel box box-danger">
                   <div class="box-header with-border">
                     <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#pdp" class="collapsed" aria-expanded="false">
                         Pasien Dalam Pengawasan (PDP)
                       </a>
                     </h4>
                   </div>
-                  <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false">
+                  <div id="pdp" class="panel-collapse collapse" aria-expanded="false">
                     <div class="box-body">
                       <b>Orang yang sudah menunjukan gejala terjangkit Covid-19, seperti demam, batuk, pilek, dan sesak napas.</b>
                       <p>PDP harus betul-betul diperlakukan dengan baik karena sudah menjadi pasien.</p>
@@ -145,12 +145,12 @@
                 <div class="panel box box-success">
                   <div class="box-header with-border">
                     <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#suspect" class="collapsed" aria-expanded="false">
                         SUSPECT
                       </a>
                     </h4>
                   </div>
-                  <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false">
+                  <div id="suspect" class="panel-collapse collapse" aria-expanded="false">
                     <div class="box-body">
                         <b>Orang yang sudah menunjukkan gejala terjangkit korona dan juga diduga kuat melakukan kontak dengan pasien positif Covid-19.</b>
                         <p>Selanjutnya, pasien suspect Covid-19 akan diperiksa spesimennya menggunakan dua metode, Polymerase Chain Reaction (PCR) dan Genome Sequencing.</p>

@@ -36,7 +36,7 @@ use dmstr\widgets\Alert;
 </div>
 
 <footer class="main-footer">
-    <div class="pull-right">
+    <div class="pull-left">
         <strong>desalaporcovid</strong> merupakan bagian dari komunitas <a href="https://cekdiri.id/" target="_blank">cekdiri.id</a>
     </div>
 </footer>
