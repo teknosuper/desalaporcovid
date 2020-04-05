@@ -25,7 +25,7 @@ $fieldOptions2 = [
 <div class="login-box panel panel-default">
     <div class="row text-center">
         <div class="login-logo">
-            <img class="col-md-6 col-md-offset-3 col-xs-6 col-xs-offset-3 col-lg-6 col-lg-offset-3" src="/logodlc-transparent.png">
+            <img class="col-md-6 col-md-offset-3 col-xs-6 col-xs-offset-3 col-lg-6 col-lg-offset-3" src="/desalaporcovid-logo.png">
         </div>        
     </div>    
 
