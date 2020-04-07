@@ -487,6 +487,7 @@ use yii\helpers\Url;
         <?php 
             switch (\yii::$app->user->identity->userType) {
                 case \app\models\User::LEVEL_ADMIN:
+                case \app\models\User::LEVEL_ADMIN_DESA:
                 case \app\models\User::LEVEL_POSKO:
                     echo $this->render('_form_validasi',[
                         'model'=>$model,
