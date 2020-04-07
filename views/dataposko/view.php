@@ -15,6 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php if(\yii::$app->user->identity->userType==\app\models\User::LEVEL_POSKO):?>
             <?= Html::a(Yii::t('app', '<i class="fa fa-pencil"></i> Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
         <?php endif;?>
+        <?php if(\yii::$app->user->identity->userType==\app\models\User::LEVEL_ADMIN_DESA):?>
+            <?= Html::a(Yii::t('app', '<i class="fa fa-pencil"></i> Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
+        <?php endif;?>
 
         <?php if(\yii::$app->user->identity->userType==\app\models\User::LEVEL_ADMIN):?>
             <?= Html::a(Yii::t('app', '<i class="fa fa-pencil"></i> Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>

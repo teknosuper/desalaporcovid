@@ -37,14 +37,24 @@ use yii\widgets\DetailView;
                   <td><?= ($model->genderDetail) ? $model->genderDetail : null;?></td>
                 </tr>                
                 <tr>
-                  <th>Tanggal Lahir</th>
+                  <th>Usia</th>
                   <th>:</th>
-                  <td><?= date('d-m-Y',strtotime($model->tanggal_lahir));?></td>
+                  <td><?= $model->usia;?></td>
                 </tr>
                 <tr>
                   <th>No Telepon</th>
                   <th>:</th>
                   <td><?= $model->no_telepon;?></td>
+                </tr>                
+                <tr>
+                  <th>Apakah Dari Luar Negeri ?</th>
+                  <th>:</th>
+                  <td><?= $model->luarNegeriText;?></td>
+                </tr>                
+                <tr>
+                  <th>Negara</th>
+                  <th>:</th>
+                  <td><?= ($model->negaraBelongsToNegaraModel) ? $model->negaraBelongsToNegaraModel->nama : '-';?></td>
                 </tr>                
                 <tr>
                   <th>Kota Asal </th>

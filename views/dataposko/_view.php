@@ -33,8 +33,24 @@ use yii\widgets\DetailView;
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
                 ],
-                'tanggal_lahir',
+                'usia',
                 'no_telepon',
+                [
+                    'attribute' => 'luar_negeri',
+                    'value' => function ($model) {
+                        return $model->luarNegeriText;
+                    },
+                    // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
+                    // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
+                ],
+                [
+                    'attribute' => 'id_negara',
+                    'value' => function ($model) {
+                        return ($model->negaraBelongsToNegaraModel) ? $model->negaraBelongsToNegaraModel->nama : null;
+                    },
+                    // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
+                    // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
+                ],
                 [
                     'attribute' => 'kota_asal',
                     'value' => function ($model) {

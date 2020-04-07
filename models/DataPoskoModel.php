@@ -38,6 +38,23 @@ class DataPoskoModel extends DataPoskoTable
     	return null;
     }
 
+    public function getLuarNegeriText()
+    {
+    	switch ($this->luar_negeri) {
+    		case 1:
+    			return "TIDAK";
+    			# code...
+    			break;
+    		case 2:
+    			return "IYA";
+    			# code...
+    			break;    		
+    		default:
+    			# code...
+    			break;
+    	}
+    }
+
     public static function getDataPoskoCount()
     {
     	if(\yii::$app->user->isGuest)
@@ -67,6 +84,11 @@ class DataPoskoModel extends DataPoskoTable
 	public function getKelurahanBelongsToKelurahanModel()
 	{
 		return $this->hasOne(KelurahanModel::className(),['id_kel'=>'kelurahan']);
+	}
+
+	public function getNegaraBelongsToNegaraModel()
+	{
+		return $this->hasOne(NegaraModel::className(),['id'=>'id_negara']);
 	}
 
 	public function getKelurahanDatangBelongsToKelurahanModel()
