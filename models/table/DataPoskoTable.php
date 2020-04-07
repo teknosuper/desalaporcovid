@@ -22,6 +22,7 @@ use Yii;
  * @property int|null $luar_negeri
  * @property string|null $id_negara
  * @property string|null $waktu_datang
+ * @property int|null $usia
  * @property string|null $gender
  * @property string|null $tanggal_lahir
  * @property string|null $tempat_lahir
@@ -52,7 +53,7 @@ class DataPoskoTable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['jenis_laporan', 'status', 'id_posko', 'luar_negeri', 'created_by', 'updated_by'], 'integer'],
+            [['jenis_laporan', 'status', 'id_posko', 'luar_negeri', 'usia', 'created_by', 'updated_by'], 'integer'],
             [['keterangan'], 'string'],
             [['waktu_datang', 'tanggal_lahir', 'created_at', 'updated_at'], 'safe'],
             [['nik', 'nama_warga', 'no_telepon', 'kota_asal', 'kelurahan_datang', 'tempat_lahir'], 'string', 'max' => 255],
@@ -86,6 +87,7 @@ class DataPoskoTable extends \yii\db\ActiveRecord
             'luar_negeri' => Yii::t('app', 'Luar Negeri'),
             'id_negara' => Yii::t('app', 'Id Negara'),
             'waktu_datang' => Yii::t('app', 'Waktu Datang'),
+            'usia' => Yii::t('app', 'Usia'),
             'gender' => Yii::t('app', 'Gender'),
             'tanggal_lahir' => Yii::t('app', 'Tanggal Lahir'),
             'tempat_lahir' => Yii::t('app', 'Tempat Lahir'),

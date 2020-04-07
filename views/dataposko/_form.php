@@ -213,7 +213,7 @@ use kartik\widgets\DatePicker;
                     </div>   
                     <div class="col-md-6">
                         <div class="form-group">
-                            <?= $form->field($model, 'tanggal_lahir', [
+                            <?= $form->field($model, 'usia', [
                                     'feedbackIcon' => [
                                             'default' => '',
                                             'success' => 'ok',
@@ -221,6 +221,7 @@ use kartik\widgets\DatePicker;
                                             'defaultOptions' => ['class'=>'text-primary']
                                     ],
                                     'hintType' => ActiveField::HINT_SPECIAL,
+                                    // 'addon' => ['append' => ['content'=>'<i class="fa fa-user"></i>']],
                                     'hintSettings' => [
                                         'iconBesideInput' => false,
                                         'onLabelClick' => false,
@@ -230,15 +231,12 @@ use kartik\widgets\DatePicker;
                                         'title' => '<i class="glyphicon glyphicon-info-sign"></i> Wajib diisi'
                                     ]
                                 ])
-                                ->widget(DatePicker::classname(), [
-                                    'options' => ['placeholder' => 'Tanggal Lahir ...'],
-                                    'pluginOptions' => [
-                                        'autoclose' => true,
-                                        'format' => 'yyyy-mm-dd',
-                                    ],
-                                    'readonly' => true,
+                                ->textInput([
+                                    'placeholder' => 'Usia',
+                                    'type' => 'number',
+                                    'min'=>1,
                                 ])
-                                ->hint('<div style="width:200px"><b>Tanggal Lahir </b> - Tanggal Lahir Sesuai Identitas.</div>');?>
+                                ->hint('<div style="width:200px"><b>Usia </b> - Tuliskan Usia.</div>');?>
                         </div>
                     </div>                            
                 </div>

@@ -218,6 +218,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 switch (\yii::$app->user->identity->userType) {
                                     case \app\models\User::LEVEL_POSKO:
                                     case \app\models\User::LEVEL_ADMIN:
+                                    case \app\models\User::LEVEL_ADMIN_DESA:
                                         return Html::a('<span class="fa fa-pencil"></span> Ubah', $url, [
                                                     'title' => Yii::t('app', 'update'),
                                                     'class'=>'btn btn-warning btn-xs modal-form',
