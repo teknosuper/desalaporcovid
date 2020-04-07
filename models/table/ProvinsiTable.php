@@ -9,6 +9,8 @@ use Yii;
  *
  * @property string $id_prov
  * @property string $nama
+ *
+ * @property Kabupaten[] $kabupatens
  */
 class ProvinsiTable extends \yii\db\ActiveRecord
 {
@@ -27,8 +29,8 @@ class ProvinsiTable extends \yii\db\ActiveRecord
     {
         return [
             [['id_prov', 'nama'], 'required'],
-            [['nama'], 'string'],
             [['id_prov'], 'string', 'max' => 2],
+            [['nama'], 'string', 'max' => 255],
             [['id_prov'], 'unique'],
         ];
     }
@@ -42,5 +44,15 @@ class ProvinsiTable extends \yii\db\ActiveRecord
             'id_prov' => Yii::t('app', 'Id Prov'),
             'nama' => Yii::t('app', 'Nama'),
         ];
+    }
+
+    /**
+     * Gets query for [[Kabupatens]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getKabupatens()
+    {
+        return $this->hasMany(Kabupaten::className(), ['id_prov' => 'id_prov']);
     }
 }

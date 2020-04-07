@@ -20,13 +20,29 @@ use Yii;
  * @property string|null $kelurahan
  * @property string|null $alamat
  * @property string|null $no_telepon
- * @property string|null $created_at
- * @property string|null $updated_at
- * @property int|null $created_by
- * @property int|null $updated_by
  * @property string|null $gender
  * @property string|null $tanggal_lahir
  * @property string|null $tempat_lahir
+ * @property string|null $created_at
+ * @property int|null $created_by
+ * @property string|null $updated_at
+ * @property int|null $updated_by
+ *
+ * @property DataPosko[] $dataPoskos
+ * @property DataPosko[] $dataPoskos0
+ * @property DataPoskoHistory[] $dataPoskoHistories
+ * @property DataPoskoHistory[] $dataPoskoHistories0
+ * @property Laporan[] $laporans
+ * @property Laporan[] $laporans0
+ * @property Laporan[] $laporans1
+ * @property Logs[] $logs
+ * @property Notification[] $notifications
+ * @property Posko[] $poskos
+ * @property Posko[] $poskos0
+ * @property UsersTable $createdBy
+ * @property UsersTable[] $usersTables
+ * @property UsersTable $updatedBy
+ * @property UsersTable[] $usersTables0
  */
 class UsersTable extends \yii\db\ActiveRecord
 {
@@ -45,14 +61,14 @@ class UsersTable extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'status', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at', 'tanggal_lahir'], 'safe'],
+            [['tanggal_lahir', 'created_at', 'updated_at'], 'safe'],
             [['username', 'password', 'email', 'nama', 'alamat', 'tempat_lahir'], 'string', 'max' => 255],
             [['authKey', 'accessToken'], 'string', 'max' => 32],
             [['userType'], 'string', 'max' => 50],
             [['kelurahan', 'no_telepon'], 'string', 'max' => 20],
             [['gender'], 'string', 'max' => 2],
-            [['username'], 'unique'],
-            [['email'], 'unique'],
+            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => UsersTable::className(), 'targetAttribute' => ['created_by' => 'id']],
+            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => UsersTable::className(), 'targetAttribute' => ['updated_by' => 'id']],
         ];
     }
 
@@ -75,13 +91,163 @@ class UsersTable extends \yii\db\ActiveRecord
             'kelurahan' => Yii::t('app', 'Kelurahan'),
             'alamat' => Yii::t('app', 'Alamat'),
             'no_telepon' => Yii::t('app', 'No Telepon'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'created_by' => Yii::t('app', 'Created By'),
-            'updated_by' => Yii::t('app', 'Updated By'),
             'gender' => Yii::t('app', 'Gender'),
             'tanggal_lahir' => Yii::t('app', 'Tanggal Lahir'),
             'tempat_lahir' => Yii::t('app', 'Tempat Lahir'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'created_by' => Yii::t('app', 'Created By'),
+            'updated_at' => Yii::t('app', 'Updated At'),
+            'updated_by' => Yii::t('app', 'Updated By'),
         ];
+    }
+
+    /**
+     * Gets query for [[DataPoskos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDataPoskos()
+    {
+        return $this->hasMany(DataPosko::className(), ['created_by' => 'id']);
+    }
+
+    /**
+     * Gets query for [[DataPoskos0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDataPoskos0()
+    {
+        return $this->hasMany(DataPosko::className(), ['updated_by' => 'id']);
+    }
+
+    /**
+     * Gets query for [[DataPoskoHistories]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDataPoskoHistories()
+    {
+        return $this->hasMany(DataPoskoHistory::className(), ['created_by' => 'id']);
+    }
+
+    /**
+     * Gets query for [[DataPoskoHistories0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDataPoskoHistories0()
+    {
+        return $this->hasMany(DataPoskoHistory::className(), ['updated_by' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Laporans]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLaporans()
+    {
+        return $this->hasMany(Laporan::className(), ['created_by' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Laporans0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLaporans0()
+    {
+        return $this->hasMany(Laporan::className(), ['id_pelapor' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Laporans1]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLaporans1()
+    {
+        return $this->hasMany(Laporan::className(), ['updated_by' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Logs]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLogs()
+    {
+        return $this->hasMany(Logs::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Notifications]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNotifications()
+    {
+        return $this->hasMany(Notification::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Poskos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPoskos()
+    {
+        return $this->hasMany(Posko::className(), ['created_by' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Poskos0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPoskos0()
+    {
+        return $this->hasMany(Posko::className(), ['updated_by' => 'id']);
+    }
+
+    /**
+     * Gets query for [[CreatedBy]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCreatedBy()
+    {
+        return $this->hasOne(UsersTable::className(), ['id' => 'created_by']);
+    }
+
+    /**
+     * Gets query for [[UsersTables]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersTables()
+    {
+        return $this->hasMany(UsersTable::className(), ['created_by' => 'id']);
+    }
+
+    /**
+     * Gets query for [[UpdatedBy]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUpdatedBy()
+    {
+        return $this->hasOne(UsersTable::className(), ['id' => 'updated_by']);
+    }
+
+    /**
+     * Gets query for [[UsersTables0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersTables0()
+    {
+        return $this->hasMany(UsersTable::className(), ['updated_by' => 'id']);
     }
 }

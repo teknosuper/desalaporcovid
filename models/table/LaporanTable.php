@@ -20,13 +20,20 @@ use Yii;
  * @property string|null $keterangan
  * @property int|null $id_pelapor
  * @property int|null $id_posko
- * @property int|null $luar_negeri
+ * @property string|null $luar_negeri
  * @property string|null $id_negara
- * @property string|null $created_time
- * @property string|null $updated_time
- * @property int|null $created_by
- * @property int|null $updated_by
  * @property int|null $data_posko_id
+ * @property string|null $created_at
+ * @property int|null $created_by
+ * @property string|null $updated_at
+ * @property int|null $updated_by
+ *
+ * @property Users $createdBy
+ * @property DataPosko $dataPosko
+ * @property JenisLaporan $jenisLaporan
+ * @property Users $pelapor
+ * @property Posko $posko
+ * @property Users $updatedBy
  */
 class LaporanTable extends \yii\db\ActiveRecord
 {
@@ -44,12 +51,18 @@ class LaporanTable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['jenis_laporan', 'status', 'id_pelapor', 'id_posko', 'luar_negeri', 'created_by', 'updated_by', 'data_posko_id'], 'integer'],
+            [['jenis_laporan', 'status', 'id_pelapor', 'id_posko', 'data_posko_id', 'created_by', 'updated_by'], 'integer'],
             [['keterangan'], 'string'],
-            [['created_time', 'updated_time'], 'safe'],
-            [['nama_warga', 'no_telepon_pelapor', 'no_telepon_terlapor'], 'string', 'max' => 255],
-            [['kelurahan', 'kota_asal', 'kelurahan_datang', 'id_negara'], 'string', 'max' => 11],
+            [['created_at', 'updated_at'], 'safe'],
+            [['nama_warga', 'no_telepon_pelapor', 'no_telepon_terlapor', 'kota_asal', 'kelurahan_datang'], 'string', 'max' => 255],
+            [['kelurahan', 'luar_negeri', 'id_negara'], 'string', 'max' => 11],
             [['alamat'], 'string', 'max' => 500],
+            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'id']],
+            [['data_posko_id'], 'exist', 'skipOnError' => true, 'targetClass' => DataPosko::className(), 'targetAttribute' => ['data_posko_id' => 'id']],
+            [['jenis_laporan'], 'exist', 'skipOnError' => true, 'targetClass' => JenisLaporan::className(), 'targetAttribute' => ['jenis_laporan' => 'id']],
+            [['id_pelapor'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['id_pelapor' => 'id']],
+            [['id_posko'], 'exist', 'skipOnError' => true, 'targetClass' => Posko::className(), 'targetAttribute' => ['id_posko' => 'id']],
+            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'id']],
         ];
     }
 
@@ -74,11 +87,71 @@ class LaporanTable extends \yii\db\ActiveRecord
             'id_posko' => Yii::t('app', 'Id Posko'),
             'luar_negeri' => Yii::t('app', 'Luar Negeri'),
             'id_negara' => Yii::t('app', 'Id Negara'),
-            'created_time' => Yii::t('app', 'Created Time'),
-            'updated_time' => Yii::t('app', 'Updated Time'),
-            'created_by' => Yii::t('app', 'Created By'),
-            'updated_by' => Yii::t('app', 'Updated By'),
             'data_posko_id' => Yii::t('app', 'Data Posko ID'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'created_by' => Yii::t('app', 'Created By'),
+            'updated_at' => Yii::t('app', 'Updated At'),
+            'updated_by' => Yii::t('app', 'Updated By'),
         ];
+    }
+
+    /**
+     * Gets query for [[CreatedBy]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCreatedBy()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'created_by']);
+    }
+
+    /**
+     * Gets query for [[DataPosko]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDataPosko()
+    {
+        return $this->hasOne(DataPosko::className(), ['id' => 'data_posko_id']);
+    }
+
+    /**
+     * Gets query for [[JenisLaporan]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getJenisLaporan()
+    {
+        return $this->hasOne(JenisLaporan::className(), ['id' => 'jenis_laporan']);
+    }
+
+    /**
+     * Gets query for [[Pelapor]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPelapor()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'id_pelapor']);
+    }
+
+    /**
+     * Gets query for [[Posko]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPosko()
+    {
+        return $this->hasOne(Posko::className(), ['id' => 'id_posko']);
+    }
+
+    /**
+     * Gets query for [[UpdatedBy]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUpdatedBy()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'updated_by']);
     }
 }

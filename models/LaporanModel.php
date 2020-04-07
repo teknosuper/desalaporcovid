@@ -105,8 +105,8 @@ class LaporanModel extends LaporanTable
             'id_negara' => Yii::t('app', 'Negara'),
             'created_by' => Yii::t('app', 'Dibuat Oleh'),
             'updated_by' => Yii::t('app', 'Diubah Oleh'),
-            'created_time' => Yii::t('app', 'Waktu Dibuat'),
-            'updated_time' => Yii::t('app', 'Waktu Diubah'),
+            'created_at' => Yii::t('app', 'Waktu Dibuat'),
+            'updated_at' => Yii::t('app', 'Waktu Diubah'),
         ];
     }
 

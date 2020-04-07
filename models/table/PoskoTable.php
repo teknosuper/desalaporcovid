@@ -19,6 +19,12 @@ use Yii;
  * @property string|null $created_at
  * @property int|null $updated_by
  * @property string|null $updated_at
+ *
+ * @property DataPosko[] $dataPoskos
+ * @property Laporan[] $laporans
+ * @property Kelurahan $kelurahan
+ * @property Users $createdBy
+ * @property Users $updatedBy
  */
 class PoskoTable extends \yii\db\ActiveRecord
 {
@@ -41,6 +47,9 @@ class PoskoTable extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['id_kelurahan'], 'string', 'max' => 20],
             [['nama_posko', 'alamat_posko', 'email_posko', 'no_telepon'], 'string', 'max' => 255],
+            [['id_kelurahan'], 'exist', 'skipOnError' => true, 'targetClass' => Kelurahan::className(), 'targetAttribute' => ['id_kelurahan' => 'id_kel']],
+            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'id']],
+            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'id']],
         ];
     }
 
@@ -63,5 +72,55 @@ class PoskoTable extends \yii\db\ActiveRecord
             'updated_by' => Yii::t('app', 'Updated By'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+
+    /**
+     * Gets query for [[DataPoskos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDataPoskos()
+    {
+        return $this->hasMany(DataPosko::className(), ['id_posko' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Laporans]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLaporans()
+    {
+        return $this->hasMany(Laporan::className(), ['id_posko' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Kelurahan]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getKelurahan()
+    {
+        return $this->hasOne(Kelurahan::className(), ['id_kel' => 'id_kelurahan']);
+    }
+
+    /**
+     * Gets query for [[CreatedBy]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCreatedBy()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'created_by']);
+    }
+
+    /**
+     * Gets query for [[UpdatedBy]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUpdatedBy()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'updated_by']);
     }
 }

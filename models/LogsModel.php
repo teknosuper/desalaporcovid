@@ -14,7 +14,7 @@ class LogsModel extends LogsTable
 		$model->action = $action;
 		$model->action_id = $action_id;
 		$model->data_serialize = serialize($data);
-		$model->created_time = date('Y-m-d H:i:s');
+		$model->created_at = date('Y-m-d H:i:s');
 		$model->save();
 	}
 

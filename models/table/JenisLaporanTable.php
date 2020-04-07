@@ -12,6 +12,8 @@ use Yii;
  * @property string|null $keterangan
  * @property int|null $status
  * @property string|null $kode
+ *
+ * @property Laporan[] $laporans
  */
 class JenisLaporanTable extends \yii\db\ActiveRecord
 {
@@ -31,6 +33,7 @@ class JenisLaporanTable extends \yii\db\ActiveRecord
         return [
             [['status'], 'integer'],
             [['nama_laporan', 'keterangan', 'kode'], 'string', 'max' => 255],
+            [['kode'], 'unique'],
         ];
     }
 
@@ -46,5 +49,15 @@ class JenisLaporanTable extends \yii\db\ActiveRecord
             'status' => Yii::t('app', 'Status'),
             'kode' => Yii::t('app', 'Kode'),
         ];
+    }
+
+    /**
+     * Gets query for [[Laporans]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLaporans()
+    {
+        return $this->hasMany(Laporan::className(), ['jenis_laporan' => 'id']);
     }
 }

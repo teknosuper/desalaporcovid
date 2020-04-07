@@ -190,7 +190,7 @@ class DataposkoController extends \app\controllers\MainController
             if($checkLaporanId)
             {
                 $checkLaporanId->status = \app\models\LaporanModel::STATUS_PROCESSED;
-                $checkLaporanId->updated_time = date('Y-m-d H:i:s');
+                $checkLaporanId->updated_at = date('Y-m-d H:i:s');
                 $checkLaporanId->updated_by = \yii::$app->user->identity->id;
                 if($checkLaporanId->save())
                 {

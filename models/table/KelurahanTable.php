@@ -8,9 +8,11 @@ use Yii;
  * This is the model class for table "kelurahan".
  *
  * @property string $id_kel
- * @property string|null $id_kec
- * @property string|null $nama
- * @property int $id_jenis
+ * @property string $id_kec
+ * @property string $nama
+ *
+ * @property Kecamatan $kec
+ * @property Posko[] $poskos
  */
 class KelurahanTable extends \yii\db\ActiveRecord
 {
@@ -28,12 +30,12 @@ class KelurahanTable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_kel', 'id_jenis'], 'required'],
-            [['nama'], 'string'],
-            [['id_jenis'], 'integer'],
+            [['id_kel', 'id_kec', 'nama'], 'required'],
             [['id_kel'], 'string', 'max' => 10],
             [['id_kec'], 'string', 'max' => 6],
+            [['nama'], 'string', 'max' => 255],
             [['id_kel'], 'unique'],
+            [['id_kec'], 'exist', 'skipOnError' => true, 'targetClass' => Kecamatan::className(), 'targetAttribute' => ['id_kec' => 'id_kec']],
         ];
     }
 
@@ -46,7 +48,26 @@ class KelurahanTable extends \yii\db\ActiveRecord
             'id_kel' => Yii::t('app', 'Id Kel'),
             'id_kec' => Yii::t('app', 'Id Kec'),
             'nama' => Yii::t('app', 'Nama'),
-            'id_jenis' => Yii::t('app', 'Id Jenis'),
         ];
+    }
+
+    /**
+     * Gets query for [[Kec]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getKec()
+    {
+        return $this->hasOne(Kecamatan::className(), ['id_kec' => 'id_kec']);
+    }
+
+    /**
+     * Gets query for [[Poskos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPoskos()
+    {
+        return $this->hasMany(Posko::className(), ['id_kelurahan' => 'id_kel']);
     }
 }

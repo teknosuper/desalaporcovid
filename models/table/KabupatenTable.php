@@ -10,7 +10,9 @@ use Yii;
  * @property string $id_kab
  * @property string $id_prov
  * @property string $nama
- * @property int $id_jenis
+ *
+ * @property Provinsi $prov
+ * @property Kecamatan[] $kecamatans
  */
 class KabupatenTable extends \yii\db\ActiveRecord
 {
@@ -28,12 +30,12 @@ class KabupatenTable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_kab', 'id_prov', 'nama', 'id_jenis'], 'required'],
-            [['nama'], 'string'],
-            [['id_jenis'], 'integer'],
+            [['id_kab', 'id_prov', 'nama'], 'required'],
             [['id_kab'], 'string', 'max' => 4],
             [['id_prov'], 'string', 'max' => 2],
+            [['nama'], 'string', 'max' => 255],
             [['id_kab'], 'unique'],
+            [['id_prov'], 'exist', 'skipOnError' => true, 'targetClass' => Provinsi::className(), 'targetAttribute' => ['id_prov' => 'id_prov']],
         ];
     }
 
@@ -46,7 +48,26 @@ class KabupatenTable extends \yii\db\ActiveRecord
             'id_kab' => Yii::t('app', 'Id Kab'),
             'id_prov' => Yii::t('app', 'Id Prov'),
             'nama' => Yii::t('app', 'Nama'),
-            'id_jenis' => Yii::t('app', 'Id Jenis'),
         ];
+    }
+
+    /**
+     * Gets query for [[Prov]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProv()
+    {
+        return $this->hasOne(Provinsi::className(), ['id_prov' => 'id_prov']);
+    }
+
+    /**
+     * Gets query for [[Kecamatans]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getKecamatans()
+    {
+        return $this->hasMany(Kecamatan::className(), ['id_kab' => 'id_kab']);
     }
 }

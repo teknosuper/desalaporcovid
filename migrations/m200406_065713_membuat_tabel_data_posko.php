@@ -30,6 +30,7 @@ class m200406_065713_membuat_tabel_data_posko extends Migration
             'waktu_datang' => $this->datetime()->defaultValue(null),
             'gender' => $this->string(2)->defaultValue(null),
             'tanggal_lahir' => $this->date()->defaultValue(null),
+            'usia' => $this->integer(11)->defaultValue(null),
             'tempat_lahir' => $this->string(255)->defaultValue(null),
             'created_at' => $this->datetime()->defaultValue(null),
             'created_by' => $this->integer(11)->defaultValue(null),

@@ -22,13 +22,19 @@ use Yii;
  * @property int|null $luar_negeri
  * @property string|null $id_negara
  * @property string|null $waktu_datang
+ * @property string|null $gender
+ * @property string|null $tanggal_lahir
+ * @property string|null $tempat_lahir
  * @property string|null $created_at
  * @property int|null $created_by
  * @property string|null $updated_at
  * @property int|null $updated_by
- * @property string|null $gender
- * @property string|null $tanggal_lahir
- * @property string|null $tempat_lahir
+ *
+ * @property Users $createdBy
+ * @property Posko $posko
+ * @property Users $updatedBy
+ * @property DataPoskoHistory[] $dataPoskoHistories
+ * @property Laporan[] $laporans
  */
 class DataPoskoTable extends \yii\db\ActiveRecord
 {
@@ -48,11 +54,14 @@ class DataPoskoTable extends \yii\db\ActiveRecord
         return [
             [['jenis_laporan', 'status', 'id_posko', 'luar_negeri', 'created_by', 'updated_by'], 'integer'],
             [['keterangan'], 'string'],
-            [['waktu_datang', 'created_at', 'updated_at', 'tanggal_lahir'], 'safe'],
-            [['nik', 'nama_warga', 'no_telepon', 'tempat_lahir'], 'string', 'max' => 255],
-            [['kelurahan', 'kota_asal', 'kelurahan_datang', 'id_negara'], 'string', 'max' => 11],
+            [['waktu_datang', 'tanggal_lahir', 'created_at', 'updated_at'], 'safe'],
+            [['nik', 'nama_warga', 'no_telepon', 'kota_asal', 'kelurahan_datang', 'tempat_lahir'], 'string', 'max' => 255],
+            [['kelurahan', 'id_negara'], 'string', 'max' => 11],
             [['alamat'], 'string', 'max' => 500],
             [['gender'], 'string', 'max' => 2],
+            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'id']],
+            [['id_posko'], 'exist', 'skipOnError' => true, 'targetClass' => Posko::className(), 'targetAttribute' => ['id_posko' => 'id']],
+            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'id']],
         ];
     }
 
@@ -77,13 +86,63 @@ class DataPoskoTable extends \yii\db\ActiveRecord
             'luar_negeri' => Yii::t('app', 'Luar Negeri'),
             'id_negara' => Yii::t('app', 'Id Negara'),
             'waktu_datang' => Yii::t('app', 'Waktu Datang'),
+            'gender' => Yii::t('app', 'Gender'),
+            'tanggal_lahir' => Yii::t('app', 'Tanggal Lahir'),
+            'tempat_lahir' => Yii::t('app', 'Tempat Lahir'),
             'created_at' => Yii::t('app', 'Created At'),
             'created_by' => Yii::t('app', 'Created By'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'updated_by' => Yii::t('app', 'Updated By'),
-            'gender' => Yii::t('app', 'Gender'),
-            'tanggal_lahir' => Yii::t('app', 'Tanggal Lahir'),
-            'tempat_lahir' => Yii::t('app', 'Tempat Lahir'),
         ];
+    }
+
+    /**
+     * Gets query for [[CreatedBy]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCreatedBy()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'created_by']);
+    }
+
+    /**
+     * Gets query for [[Posko]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPosko()
+    {
+        return $this->hasOne(Posko::className(), ['id' => 'id_posko']);
+    }
+
+    /**
+     * Gets query for [[UpdatedBy]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUpdatedBy()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'updated_by']);
+    }
+
+    /**
+     * Gets query for [[DataPoskoHistories]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDataPoskoHistories()
+    {
+        return $this->hasMany(DataPoskoHistory::className(), ['data_posko_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Laporans]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLaporans()
+    {
+        return $this->hasMany(Laporan::className(), ['data_posko_id' => 'id']);
     }
 }

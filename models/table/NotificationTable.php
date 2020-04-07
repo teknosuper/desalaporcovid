@@ -15,6 +15,8 @@ use Yii;
  * @property int $seen
  * @property string $created_at
  * @property int $flashed
+ *
+ * @property Users $user
  */
 class NotificationTable extends \yii\db\ActiveRecord
 {
@@ -34,7 +36,9 @@ class NotificationTable extends \yii\db\ActiveRecord
         return [
             [['key', 'type', 'user_id', 'seen', 'created_at', 'flashed'], 'required'],
             [['user_id', 'seen', 'flashed'], 'integer'],
-            [['created_at','key', 'key_id', 'type'], 'safe'],
+            [['created_at'], 'safe'],
+            [['key', 'key_id', 'type'], 'string', 'max' => 255],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -53,5 +57,15 @@ class NotificationTable extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'flashed' => Yii::t('app', 'Flashed'),
         ];
+    }
+
+    /**
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'user_id']);
     }
 }

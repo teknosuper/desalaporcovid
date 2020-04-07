@@ -12,7 +12,9 @@ use Yii;
  * @property string|null $action
  * @property int|null $action_id
  * @property string|null $data_serialize
- * @property string|null $created_time
+ * @property string|null $created_at
+ *
+ * @property Users $user
  */
 class LogsTable extends \yii\db\ActiveRecord
 {
@@ -32,8 +34,9 @@ class LogsTable extends \yii\db\ActiveRecord
         return [
             [['user_id', 'action_id'], 'integer'],
             [['data_serialize'], 'string'],
-            [['created_time'], 'safe'],
+            [['created_at'], 'safe'],
             [['action'], 'string', 'max' => 255],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -48,7 +51,17 @@ class LogsTable extends \yii\db\ActiveRecord
             'action' => Yii::t('app', 'Action'),
             'action_id' => Yii::t('app', 'Action ID'),
             'data_serialize' => Yii::t('app', 'Data Serialize'),
-            'created_time' => Yii::t('app', 'Created Time'),
+            'created_at' => Yii::t('app', 'Created At'),
         ];
+    }
+
+    /**
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'user_id']);
     }
 }

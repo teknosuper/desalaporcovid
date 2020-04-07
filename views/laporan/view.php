@@ -108,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
                 ],
-                'created_time',
+                'created_at',
                 [
                     'attribute' => 'updated_by',
                     'value' => function ($model) {
@@ -117,7 +117,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
                 ],
-                'updated_time',
+                'updated_at',
             ],
         ]) ?>
     </div>
