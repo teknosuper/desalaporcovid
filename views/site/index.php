@@ -35,6 +35,30 @@
     <?php endif;?>    
     
     <div class="row">
+      <div class="col-md-6">
+        <div class="box box-default">
+          <div class="box-header with-border">
+            <i class="fa fa-video-camera"></i>
+
+            <h3 class="box-title">Video Panduan Penggunaan Untuk Warga</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/9AgUF88qW18" frameborder="0" allowfullscreen=""></iframe>
+            </div>        
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="embed-responsive embed-responsive-16by9">
+
+        </div>        
+      </div>      
+    </div>   
+
+    <div class="row">
 
         <div class="col-md-6">
           <div class="box box-solid box-primary">
@@ -164,27 +188,3 @@
           <!-- /.box -->
         </div>        
     </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <div class="box box-default">
-          <div class="box-header with-border">
-            <i class="fa fa-video-camera"></i>
-
-            <h3 class="box-title">Video Panduan Penggunaan Untuk Warga</h3>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body">
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/9AgUF88qW18" frameborder="0" allowfullscreen=""></iframe>
-            </div>        
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="embed-responsive embed-responsive-16by9">
-
-        </div>        
-      </div>      
-    </div>    
