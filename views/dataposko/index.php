@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box-header with-border">
         <?= Html::a(Yii::t('app', '<i class="fa fa-plus"></i> Buat Data Pantauan Posko Baru'), ['create'], ['class' => 'btn btn-success btn-flat']) ?>
         <?php if(\yii::$app->request->url=="/index.php/dataposko"):?>
-            <?= Html::a(Yii::t('app', '<i class="fa fa-print"></i> Cetak PDF'), [str_replace('index.php', '', \yii::$app->request->url),'cetak'=>true], ['class' => 'btn btn-primary btn-flat','data-pjax'=>0,'target'=>'__blank']) ?>
+            <?= Html::a(Yii::t('app', '<i class="fa fa-print"></i> Cetak PDF'), [str_replace('index.php', '', \yii::$app->request->url).'?','cetak'=>true], ['class' => 'btn btn-primary btn-flat','data-pjax'=>0,'target'=>'__blank']) ?>
         <?php else:?>
             <?= Html::a(Yii::t('app', '<i class="fa fa-print"></i> Cetak PDF'), [str_replace('index.php', '', \yii::$app->request->url).'&cetak=TRUE'], ['class' => 'btn btn-primary btn-flat','data-pjax'=>0,'target'=>'__blank']) ?>
         <?php endif;?>
