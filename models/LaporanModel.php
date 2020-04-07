@@ -13,12 +13,12 @@ class LaporanModel extends Laporan
     const STATUS_ON_PROCESS = 30;
     const STATUS_PROCESSED = 40;
     const STATUS_NOT_VALID = 50;
-    
+
     public function getUpdatedByText()
     {
         $updated_by = $this->updated_by;
         $cache = Yii::$app->cache;
-        $cacheUniqueId = implode('-', ['LaporanModel',$updated_by]);
+        $cacheUniqueId = implode('-', ['getUpdatedByText',$updated_by]);
         $getCache = $cache->get($cacheUniqueId);
         if($getCache===FALSE)
         {    
@@ -42,7 +42,7 @@ class LaporanModel extends Laporan
     {
         $created_by = $this->created_by;
         $cache = Yii::$app->cache;
-        $cacheUniqueId = implode('-', ['LaporanModel',$created_by]);
+        $cacheUniqueId = implode('-', ['getCreatedByText',$created_by]);
         $getCache = $cache->get($cacheUniqueId);
         if($getCache===FALSE)
         {       
@@ -62,6 +62,128 @@ class LaporanModel extends Laporan
         return $returnData;
     }
 
+    public function getKelurahanText()
+    {
+        $kelurahan = $this->kelurahan;
+        $cache = Yii::$app->cache;
+        $cacheUniqueId = implode('-', ['getKelurahanText',$kelurahan]);
+        $getCache = $cache->get($cacheUniqueId);
+        if($getCache===FALSE)
+        {       
+            $returnData = ($this->kelurahanBelongsToKelurahanModel) ? implode(' - ', [$this->kelurahanBelongsToKelurahanModel->nama,$this->kelurahanBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama,$this->kelurahanBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama]) : null;     
+           
+                $getCache = $returnData;
+                $cache->set($cacheUniqueId,$getCache,60*360);
+        }
+
+        $returnData = $getCache;
+        return $returnData;
+    }
+
+    public function getKelurahanDatangText()
+    {
+        $kelurahan_datang = $this->kelurahan_datang;
+        $cache = Yii::$app->cache;
+        $cacheUniqueId = implode('-', ['getKelurahanText',$kelurahan_datang]);
+        $getCache = $cache->get($cacheUniqueId);
+        if($getCache===FALSE)
+        {       
+            $returnData = ($this->kelurahanDatangBelongsToKelurahanModel) ? implode(' - ', [$this->kelurahanDatangBelongsToKelurahanModel->nama,$this->kelurahanDatangBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama,$this->kelurahanDatangBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama]) : null;     
+           
+                $getCache = $returnData;
+                $cache->set($cacheUniqueId,$getCache,60*360);
+        }
+
+        $returnData = $getCache;
+        return $returnData;
+    }
+
+    public function getPoskoText()
+    {
+        $id_posko = $this->id_posko;
+        $cache = Yii::$app->cache;
+        $cacheUniqueId = implode('-', ['getPoskoText',$id_posko]);
+        $getCache = $cache->get($cacheUniqueId);
+        if($getCache===FALSE)
+        {       
+            $returnData = ($this->poskoBelongsToPoskoModel) ? implode(' - ', [$this->poskoBelongsToPoskoModel->nama_posko,$this->poskoBelongsToPoskoModel->poskoBelongsToKelurahanModel->nama,$this->poskoBelongsToPoskoModel->poskoBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama]) : null;  
+
+                $getCache = $returnData;
+                $cache->set($cacheUniqueId,$getCache,60*360);
+        }
+
+        $returnData = $getCache;
+        return $returnData;
+    }
+
+    public function getKotaAsalText()
+    {
+        $kota_asal = $this->kota_asal;
+        $cache = Yii::$app->cache;
+        $cacheUniqueId = implode('-', ['getKotaAsalText',$kota_asal]);
+        $getCache = $cache->get($cacheUniqueId);
+        if($getCache===FALSE)
+        {    
+            $returnData = ($this->kotaAsalBelongsToKabupatenModel) ? implode(' - ', [$this->kotaAsalBelongsToKabupatenModel->nama]) : null;
+
+            $getCache = $returnData;
+            $cache->set($cacheUniqueId,$getCache,60*360);
+        }
+        $returnData = $getCache;
+        return $returnData;
+    }
+
+    public function getJenisLaporanText()
+    {
+        $jenis_laporan = $this->jenis_laporan;
+        $cache = Yii::$app->cache;
+        $cacheUniqueId = implode('-', ['getJenisLaporanText',$jenis_laporan]);
+        $getCache = $cache->get($cacheUniqueId);
+        if($getCache===FALSE)
+        {    
+            $returnData = ($this->jenisLaporanBelongsToJenisLaporanModel) ? $this->jenisLaporanBelongsToJenisLaporanModel->nama_laporan : null;
+
+            $getCache = $returnData;
+            $cache->set($cacheUniqueId,$getCache,60*360);
+        }
+        $returnData = $getCache;
+        return $returnData;
+    }
+
+    public function getIdNegaraText()
+    {
+        $id_negara = $this->id_negara;
+        $cache = Yii::$app->cache;
+        $cacheUniqueId = implode('-', ['getIdNegaraText',$id_negara]);
+        $getCache = $cache->get($cacheUniqueId);
+        if($getCache===FALSE)
+        {    
+            $returnData = ($this->negaraBelongsToNegaraModel) ? $this->negaraBelongsToNegaraModel->nama : null;
+
+            $getCache = $returnData;
+            $cache->set($cacheUniqueId,$getCache,60*360);
+        }
+        $returnData = $getCache;
+        return $returnData;
+    }
+
+    public function getLuarNegeriText()
+    {
+        switch ($this->luar_negeri) {
+            case 1:
+                return "TIDAK";
+                # code...
+                break;
+            case 2:
+                return "IYA";
+                # code...
+                break;          
+            default:
+                # code...
+                break;
+        }
+    }
+
 	public function getCreatedByBelongsToUser()
 	{
 		return $this->hasOne(User::className(),['id'=>'created_by']);
@@ -71,6 +193,11 @@ class LaporanModel extends Laporan
 	{
 		return $this->hasOne(User::className(),['id'=>'updated_by']);
 	}
+
+    public function getNegaraBelongsToNegaraModel()
+    {
+        return $this->hasOne(NegaraModel::className(),['id'=>'id_negara']);
+    }
 
 	public function getKelurahanBelongsToKelurahanModel()
 	{

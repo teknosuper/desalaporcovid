@@ -24,7 +24,7 @@ class DataPoskoModel extends DataPosko
     {
         $updated_by = $this->updated_by;
         $cache = Yii::$app->cache;
-        $cacheUniqueId = implode('-', ['DataPoskoModel',$updated_by]);
+        $cacheUniqueId = implode('-', ['getUpdatedByText',$updated_by]);
         $getCache = $cache->get($cacheUniqueId);
         if($getCache===FALSE)
         {    
@@ -48,7 +48,7 @@ class DataPoskoModel extends DataPosko
     {
         $created_by = $this->created_by;
         $cache = Yii::$app->cache;
-        $cacheUniqueId = implode('-', ['DataPoskoModel',$created_by]);
+        $cacheUniqueId = implode('-', ['getCreatedByText',$created_by]);
         $getCache = $cache->get($cacheUniqueId);
         if($getCache===FALSE)
         {       
