@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'user_id',
                     'value' => function ($model) {
-                        return ($model->idPoskoToPoskoModel) ? $model->idPoskoToPoskoModel->textPosko : null;
+                        return $model->poskoText;
                     },
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'kelurahan',
                     'value' => function ($model) {
-                        return ($model->kelurahanBelongsToKelurahanModel) ? $model->kelurahanBelongsToKelurahanModel->textKelurahan : null;
+                        return $model->kelurahanText;
                     },
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag

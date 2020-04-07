@@ -43,6 +43,42 @@ class User extends Users implements IdentityInterface
         ];
     }
 
+    public function getKelurahanText()
+    {
+        $kelurahan = $this->kelurahan;
+        $cache = Yii::$app->cache;
+        $cacheUniqueId = implode('-', ['getKelurahanText',$kelurahan]);
+        $getCache = $cache->get($cacheUniqueId);
+        if($getCache===FALSE)
+        {       
+            $returnData = ($this->kelurahanBelongsToKelurahanModel) ? implode(' - ', [$this->kelurahanBelongsToKelurahanModel->nama,$this->kelurahanBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama,$this->kelurahanBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama]) : null;     
+           
+                $getCache = $returnData;
+                $cache->set($cacheUniqueId,$getCache,60*360);
+        }
+
+        $returnData = $getCache;
+        return $returnData;
+    }
+
+    public function getPoskoText()
+    {
+        $id_posko = $this->user_id;
+        $cache = Yii::$app->cache;
+        $cacheUniqueId = implode('-', ['getPoskoText',$id_posko]);
+        $getCache = $cache->get($cacheUniqueId);
+        if($getCache===FALSE)
+        {       
+            $returnData = ($this->idPoskoToPoskoModel) ? $this->idPoskoToPoskoModel->textPosko : null;  
+
+                $getCache = $returnData;
+                $cache->set($cacheUniqueId,$getCache,60*360);
+        }
+
+        $returnData = $getCache;
+        return $returnData;
+    }
+
     public function getLevelDetail()
     {
         $status = $this->userType;

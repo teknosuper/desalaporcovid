@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'id_kelurahan',
                     'value' => function ($model) {
-                        return ($model->poskoBelongsToKelurahanModel) ? $model->poskoBelongsToKelurahanModel->textKelurahan : null;
+                        return $model->kelurahanText;
                     },
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
@@ -42,6 +42,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
                 ],
+                [
+                    'attribute' => 'created_by',
+                    'value' => function ($model) {
+                        return $model->createdByText;
+                    },
+                    // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
+                    // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
+                ],
+                'created_at',
+                [
+                    'attribute' => 'updated_by',
+                    'value' => function ($model) {
+                        return $model->updatedByText;
+                    },
+                    // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
+                    // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
+                ],
+                'updated_at',
             ],
         ]) ?>
     </div>

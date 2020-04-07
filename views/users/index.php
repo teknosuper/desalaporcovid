@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'kelurahan',
                     'value' => function ($model) {
-                        return ($model->kelurahanBelongsToKelurahanModel) ? implode(' - ', [$model->kelurahanBelongsToKelurahanModel->nama,$model->kelurahanBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama,$model->kelurahanBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama]) : null;
+                        return $model->kelurahanText;
                     },
                     'filter' => Select2::widget([
 
