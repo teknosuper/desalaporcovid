@@ -22,6 +22,7 @@ class LaporanController extends \app\controllers\MainController
     public function actionIndex()
     {
         $searchModel = new LaporanSearch();
+        $searchModel->status = \app\models\LaporanModel::STATUS_WAITING;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         switch (\yii::$app->user->identity->userType) {
             case \app\models\User::LEVEL_ADMIN:
