@@ -5,9 +5,9 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-use app\models\table\UsersTable;
+use app\models\table\Users;
 
-class User extends UsersTable implements IdentityInterface 
+class User extends Users implements IdentityInterface 
 {
 
     const STATUS_DELETED = 30;

@@ -3,9 +3,9 @@
 namespace app\models;
 
 use Yii;
-use app\models\table\KelurahanTable;
+use app\models\table\Kelurahan;
 
-class KelurahanModel extends KelurahanTable
+class KelurahanModel extends Kelurahan
 {
 
 	public function getKelurahanBelongsToKecamatanModel()

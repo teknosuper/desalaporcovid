@@ -3,9 +3,9 @@
 namespace app\models;
 
 use Yii;
-use app\models\table\LogsTable;
+use app\models\table\Logs;
 
-class LogsModel extends LogsTable
+class LogsModel extends Logs
 {
 	public static function CreateLogs($user_id,$action,$action_id,$data)
 	{

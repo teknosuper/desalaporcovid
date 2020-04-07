@@ -3,9 +3,9 @@
 namespace app\models;
 
 use Yii;
-use app\models\table\DataPoskoHistoryTable;
+use app\models\table\DataPoskoHistory;
 
-class DataPoskoHistoryModel extends DataPoskoHistoryTable
+class DataPoskoHistoryModel extends DataPoskoHistory
 {
 
 	public function getDataPoskoHistoryBelongsToDataPoskoModel()

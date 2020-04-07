@@ -3,10 +3,10 @@
 namespace app\models;
 
 use Yii;
-use app\models\table\PoskoTable;
+use app\models\table\Posko;
 use yii\helpers\ArrayHelper;
 
-class PoskoModel extends PoskoTable
+class PoskoModel extends Posko
 {
 
     const STATUS_DELETED = 20;

@@ -3,9 +3,9 @@
 namespace app\models;
 
 use Yii;
-use app\models\table\DataPoskoTable;
+use app\models\table\DataPosko;
 
-class DataPoskoModel extends DataPoskoTable
+class DataPoskoModel extends DataPosko
 {
 
 

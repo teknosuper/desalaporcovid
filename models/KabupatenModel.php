@@ -3,9 +3,9 @@
 namespace app\models;
 
 use Yii;
-use app\models\table\KabupatenTable;
+use app\models\table\Kabupaten;
 
-class KabupatenModel extends KabupatenTable
+class KabupatenModel extends Kabupaten
 {
 
 	public static function getTextKabById($id_kab)

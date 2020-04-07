@@ -3,9 +3,9 @@
 namespace app\models;
 
 use Yii;
-use app\models\table\NotificationTable;
+use app\models\table\Notification;
 
-class NotificationModel extends NotificationTable
+class NotificationModel extends Notification
 {
 
     /**

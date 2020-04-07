@@ -3,9 +3,9 @@
 namespace app\models;
 
 use Yii;
-use app\models\table\LaporanTable;
+use app\models\table\Laporan;
 
-class LaporanModel extends LaporanTable
+class LaporanModel extends Laporan
 {
 
     // const STATUS_DELETED = 20;

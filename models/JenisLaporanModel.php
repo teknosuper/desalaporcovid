@@ -3,10 +3,10 @@
 namespace app\models;
 
 use Yii;
-use app\models\table\JenisLaporanTable;
+use app\models\table\JenisLaporan;
 use yii\helpers\ArrayHelper;
 
-class JenisLaporanModel extends JenisLaporanTable
+class JenisLaporanModel extends JenisLaporan
 {
 
     const STATUS_ACTIVE = 10;

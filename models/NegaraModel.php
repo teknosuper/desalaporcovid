@@ -3,9 +3,9 @@
 namespace app\models;
 
 use Yii;
-use app\models\table\NegaraTable;
+use app\models\table\Negara;
 
-class NegaraModel extends NegaraTable
+class NegaraModel extends Negara
 {
 
 	public static function getTextNegaraById($id)

@@ -3,9 +3,9 @@
 namespace app\models;
 
 use Yii;
-use app\models\table\KecamatanTable;
+use app\models\table\Kecamatan;
 
-class KecamatanModel extends KecamatanTable
+class KecamatanModel extends Kecamatan
 {
 	public function getKecamatanBelongsToKabupatenModel()
 	{
