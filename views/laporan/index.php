@@ -12,6 +12,34 @@ use kartik\widgets\Select2;
 $this->title = Yii::t('app', 'Laporan Saya');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+    <?php /*
+        <div class="box box-primary box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Statistik Laporan Warga <?= \yii::$app->user->identity->namaKelurahan;?></h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer no-padding">
+              <ul class="nav nav-pills nav-stacked">
+                <li>
+                    <a href="#">Total Laporan Warga<span class="pull-right text-red"> </span></a>
+                    <a href="#">Total Laporan <b>MENUNGGU DIPROSES</b><span class="pull-right text-red"> </span></a>
+                    <a href="#">Total <b>SEDANG DIPROSES</b><span class="pull-right text-red"> </span></a>
+                    <a href="#">Total <b>SUDAH DIPROSES</b><span class="pull-right text-red"> </span></a>
+                    <a href="#">Total <b>TIDAK VALID</b><span class="pull-right text-red"> </span></a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.footer -->
+          </div>
+    */ ?>
+
 <div class="laporan-model-index box box-primary">
     <?php Pjax::begin(); ?>
     <div class="box-header with-border">
