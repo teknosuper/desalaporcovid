@@ -51,11 +51,7 @@
         </div>
       </div>
 
-      <div class="col-md-6">
-        <div class="embed-responsive embed-responsive-16by9">
 
-        </div>        
-      </div>      
     </div>   
 
     <div class="row">
