@@ -13,23 +13,53 @@ class LaporanModel extends Laporan
     const STATUS_ON_PROCESS = 30;
     const STATUS_PROCESSED = 40;
     const STATUS_NOT_VALID = 50;
-
+    
     public function getUpdatedByText()
     {
-    	if($this->updatedByBelongsToUser)
-    	{
-	    	return implode(' - ', [$this->updatedByBelongsToUser->nama,$this->updatedByBelongsToUser->username]);
-    	}
-    	return null;
+        $updated_by = $this->updated_by;
+        $cache = Yii::$app->cache;
+        $cacheUniqueId = implode('-', ['LaporanModel',$updated_by]);
+        $getCache = $cache->get($cacheUniqueId);
+        if($getCache===FALSE)
+        {    
+            if($this->updatedByBelongsToUser)
+            {
+                $returnData = implode(' - ', [$this->updatedByBelongsToUser->nama,$this->updatedByBelongsToUser->username]);
+            }
+            else
+            {
+                $returnData = null;
+            }
+
+            $getCache = $returnData;
+            $cache->set($cacheUniqueId,$getCache,60*360);
+        }
+        $returnData = $getCache;
+        return $returnData;
     }
 
     public function getCreatedByText()
     {
-    	if($this->updatedByBelongsToUser)
-    	{
-	    	return implode(' - ', [$this->updatedByBelongsToUser->nama,$this->updatedByBelongsToUser->username]);
-    	}
-    	return null;
+        $created_by = $this->created_by;
+        $cache = Yii::$app->cache;
+        $cacheUniqueId = implode('-', ['LaporanModel',$created_by]);
+        $getCache = $cache->get($cacheUniqueId);
+        if($getCache===FALSE)
+        {       
+            if($this->createdByBelongsToUser)
+            {
+                $returnData = implode(' - ', [$this->createdByBelongsToUser->nama,$this->createdByBelongsToUser->username]);
+            }
+            else
+            {
+                $returnData = null;
+            }
+
+            $getCache = $returnData;
+            $cache->set($cacheUniqueId,$getCache,60*360);
+        }
+        $returnData = $getCache;
+        return $returnData;
     }
 
 	public function getCreatedByBelongsToUser()

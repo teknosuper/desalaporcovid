@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'jenis_laporan',
                     'value' => function ($model) {
-                        return ($model->jenisLaporanBelongsToJenisLaporanModel) ? $model->jenisLaporanBelongsToJenisLaporanModel->nama_laporan : null;
+                        return $model->jenisLaporanText;
                     },
                     'filter' => \app\models\JenisLaporanModel::getJenisLaporanList(),
                     'filterInputOptions' => ['prompt' => 'Semua Jenis Laporan', 'class' => 'form-control', 'id' => null]
@@ -127,7 +127,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'kota_asal',
                     'value' => function ($model) {
-                        return ($model->kotaAsalBelongsToKabupatenModel) ? implode(' - ', [$model->kotaAsalBelongsToKabupatenModel->nama]) : null;
+                        return $model->kotaAsalText;
                     },
                     'filter' => Select2::widget([
 
@@ -165,7 +165,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'kelurahan_datang',
                     'value' => function ($model) {
-                        return ($model->kelurahanDatangBelongsToKelurahanModel) ? implode(' - ', [$model->kelurahanDatangBelongsToKelurahanModel->nama,$model->kelurahanDatangBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama,$model->kelurahanDatangBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama]) : null;
+                        return $model->kelurahanDatangText;
                     },
                     'filter' => Select2::widget([
 
@@ -205,7 +205,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'id_posko',
                     'value' => function ($model) {
-                        return ($model->poskoBelongsToPoskoModel) ? implode(' - ', [$model->poskoBelongsToPoskoModel->nama_posko,$model->poskoBelongsToPoskoModel->poskoBelongsToKelurahanModel->nama,$model->poskoBelongsToPoskoModel->poskoBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama]) : null;
+                        return $model->poskoText;
                     },
                     'filter' => Select2::widget([
 
@@ -218,11 +218,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         'theme' => Select2::THEME_BOOTSTRAP,
 
                         'hideSearch' => true,
-                        'initValueText' => \app\models\KelurahanModel::getTextKelurahanById($searchModel->kelurahan),                        
+                        'initValueText' => \app\models\PoskoModel::getTextPoskoById($searchModel->kelurahan),                        
                         'options' => [
-
-                            'placeholder' => 'Pilih Kelurahan/Desa ...',
-
+                            'placeholder' => 'Pilih Posko ...',
                         ],
                         'pluginOptions' => [
                             'allowClear' => true,
@@ -231,7 +229,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'errorLoading' => new JsExpression("function () { return 'Sedang mencari data...'; }"),
                             ],
                             'ajax' => [
-                                'url' => \yii\helpers\Url::to(['/site/getdatakelurahan']),
+                                'url' => \yii\helpers\Url::to(['/site/getdataposko']),
                                 'dataType' => 'json',
                                 'data' => new JsExpression('function(params) { return {q:params.term}; }')
                             ],

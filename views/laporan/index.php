@@ -200,7 +200,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'theme' => Select2::THEME_BOOTSTRAP,
 
                         'hideSearch' => true,
-                        'initValueText' => \app\models\KelurahanModel::getTextKelurahanById($searchModel->kelurahan),                        
+                        'initValueText' => \app\models\PoskoModel::getTextPoskoById($searchModel->kelurahan),                        
                         'options' => [
                             'placeholder' => 'Pilih Posko ...',
                         ],

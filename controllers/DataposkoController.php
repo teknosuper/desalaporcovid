@@ -26,7 +26,6 @@ class DataposkoController extends \app\controllers\MainController
     {
         $searchModel = new DataPoskoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         switch (\yii::$app->user->identity->userType) {
             case \app\models\User::LEVEL_ADMIN:
                 # code...
@@ -34,6 +33,7 @@ class DataposkoController extends \app\controllers\MainController
             case \app\models\User::LEVEL_ADMIN_DESA:
             case \app\models\User::LEVEL_POSKO:
                 $id_kelurahan = \yii::$app->user->identity->kelurahan;
+
                 $dataProvider->query->andWhere([
                     'kelurahan_datang'=>$id_kelurahan,
                 ]);                        
