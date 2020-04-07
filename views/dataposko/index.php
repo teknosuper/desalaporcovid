@@ -12,6 +12,37 @@ use kartik\widgets\Select2;
 $this->title = Yii::t('app', 'Data Pantauan Posko');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+    <?php /*
+
+        <div class="box box-primary box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Statistik Data Posko <?= \yii::$app->user->identity->namaKelurahan;?></h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer no-padding">
+              <ul class="nav nav-pills nav-stacked">
+                <li>
+                    <a href="#">Jumlah Warga ODP (Orang Dalam Pemantauan)<span class="pull-right text-red"> </span></a>
+                    <a href="#">Jumlah Warga PDP (Pasien Dalam Pemantauan)<span class="pull-right text-red"> </span></a>
+                    <a href="#">Jumlah Warga POSITIF<span class="pull-right text-red"> </span></a>
+                    <a href="#">Jumlah Warga NEGATIF<span class="pull-right text-red"> </span></a>
+                    <a href="#">Jumlah Warga SEMBUH<span class="pull-right text-red"> </span></a>
+                    <a href="#">Jumlah Warga PERGI<span class="pull-right text-red"> </span></a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.footer -->
+          </div>
+    */?>
+
 <div class="laporan-model-index box box-primary">
     <?php Pjax::begin(); ?>
     <div class="box-header with-border">

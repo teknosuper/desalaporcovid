@@ -65,6 +65,7 @@ class DataPoskoModel extends DataPoskoTable
     	}
     }
 
+
     public static function getDataPoskoCount()
     {
     	if(\yii::$app->user->isGuest)
