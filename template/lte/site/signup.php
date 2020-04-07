@@ -21,6 +21,7 @@ $this->title = 'Pendaftaran Aplikasi Desa Lapor Covid-19';
 
     <!-- /.login-logo -->
     <div class="login-box-body">
+        <p class="text-center alert alert-success"><small> <i class="fa fa-warning"></i> Pengguna Yang Sudah Terdaftar, Silahkan <a title="Tautan Mendaftar desalaporcovid.online" class="text-bold" href="<?= \yii\helpers\Url::toRoute(['/site/login']);?>">Login</a> dengan username dan password anda, Jika Lupa, silahkan hubungi admin desa masing-masing</small></p>
         <p class="login-box-msg"><b>Daftar Aplikasi</b></p>
 
         <?php $form = ActiveForm::begin(['id' => 'Signup-form', 'enableClientValidation' => false,'options' => ['autocomplete' => 'off']]); ?>

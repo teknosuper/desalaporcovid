@@ -31,8 +31,8 @@ $fieldOptions2 = [
 
     <!-- /.login-logo -->
     <div class="login-box-body">
+        <p class="text-center alert alert-warning"><small> <i class="fa fa-warning"></i> Pengguna Baru Harap <a title="Tautan Mendaftar desalaporcovid.online" class="text-bold" href="<?= \yii\helpers\Url::toRoute(['/site/signup']);?>">Mendaftar</a> Terlebih Dahulu, Agar Anda Dapat Menggunakan Sistem ini</small></p>
         <p class="login-box-msg"><b>Halaman Login Aplikasi</b></p>
-
         <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false,'options' => ['autocomplete' => 'off']]); ?>
 
         <div class="row">
