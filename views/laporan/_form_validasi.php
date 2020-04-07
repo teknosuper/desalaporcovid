@@ -32,7 +32,7 @@ use kartik\form\ActiveField;
                                     ]
                                 ])
                                 ->hint('<div style="width:200px"><b>Status </b></div>')
-                                ->dropDownList(\app\models\LaporanModel::getStatusList(),['prompt'=>'Pilih Status Laporan'])
+                                ->dropDownList(\app\models\LaporanModel::getStatusUpdateList(),['prompt'=>'Pilih Status Laporan'])
                             ;?>
                         </div>
                     </div>   

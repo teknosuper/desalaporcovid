@@ -82,7 +82,17 @@ class LaporanModel extends Laporan
             self::STATUS_ON_PROCESS=>"SEDANG DIPROSES",
             self::STATUS_PROCESSED=>"SUDAH DIPROSES",
             self::STATUS_NOT_VALID=>"DATA TIDAK VALID",
-        ];
+        ];            
+    }
+
+    public static function getStatusUpdateList()
+    {
+        return [
+            // self::STATUS_DELETED=>"DI HAPUS",
+            // self::STATUS_WAITING=>"MENUNGGU DIPROSES",
+            self::STATUS_ON_PROCESS=>"SEDANG DIPROSES",
+            self::STATUS_NOT_VALID=>"DATA TIDAK VALID",
+        ];            
     }
 
     public function attributeLabels()
