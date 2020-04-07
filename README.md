@@ -12,59 +12,108 @@ Penjelasan singkat aplikasi ini sebagai berikut :
   - Admin di level Desa, Kecamatan, Kab / Kota, dan Provinsi dapat memantau data laporan warga dan memantau kondisi warga terlapor secara cepat.
 
 # Fitur Desa Lapor Covid!
+
     Tipe Pengguna : Warga 
-  [x] Pendaftaran Pengguna Baru
-  [x] Login Pengguna
-  [x] Laporan Warga
-  [x] Notifikasi Status Perkembangan Laporan Warga
-  [x] Halaman Daftar Laporan Saya
-  [x] Mengganti Password/ Kata Sandi Sendiri
-  [x] Logs Semua Aktifitas Pengguna  
+    
+  [+] Pendaftaran Pengguna Baru
+  
+  [+] Login Pengguna
+  
+  [+] Laporan Warga
+  
+  [+] Notifikasi Status Perkembangan Laporan Warga
+  
+  [+] Halaman Daftar Laporan Saya
+  
+  [+] Mengganti Password/ Kata Sandi Sendiri
+  
+  [+] Logs Semua Aktifitas Pengguna  
+  
   
     Tipe Pengguna : POSKO 
-  [x] Login Petugas Posko
-  [x] Mengganti Password/ Kata Sandi Sendiri
-  [x] Notifikasi Laporan Warga
-  [x] Validasi Laporan Warga
-  [x] Merubah Status Laporan Warga
-  [x] Notifikasi Laporan Warga  
-  [x] Import/Pindah/Copy Data Dari Laporan Warga Ke Data Posko
-  [x] Membuat Data Posko (Data Pantauan Warga Pendatang/Pemudik)
-  [x] Merubah Status Data Posko (Data Posko)
-  [x] Menambah/ Merubah Data Pantauan Harian
-  [x] Mencetak PDF Data Posko Per Desa Petugas Posko
-  [x] Mencetak PDF Detail Data Posko Per Warga Desa Petugas Posko
-  [x] Logs Semua Aktifitas Pengguna  
+  [+] Login Petugas Posko
+  
+  [+] Mengganti Password/ Kata Sandi Sendiri
+  
+  [+] Notifikasi Laporan Warga
+  
+  [+] Validasi Laporan Warga
+  
+  [+] Merubah Status Laporan Warga
+  
+  [+] Notifikasi Laporan Warga  
+  
+  [+] Import/Pindah/Copy Data Dari Laporan Warga Ke Data Posko
+  
+  [+] Membuat Data Posko (Data Pantauan Warga Pendatang/Pemudik)
+  
+  [+] Merubah Status Data Posko (Data Posko)
+  
+  [+] Menambah/ Merubah Data Pantauan Harian
+  
+  [+] Mencetak PDF Data Posko Per Desa Petugas Posko
+  
+  [+] Mencetak PDF Detail Data Posko Per Warga Desa Petugas Posko
+  
+  [+] Logs Semua Aktifitas Pengguna  
+  
   [ ] Statistik Data Posko 1 Desa
+  
   [ ] Statistik Laporan Warga 1 Desa
   
+  
       Tipe Pengguna : ADMIN DESA 
-  [x] Login ADMIN DESA
-  [x] Mengganti Password/ Kata Sandi Sendiri
-  [x] Notifikasi Laporan Warga
-  [x] Validasi Laporan Warga
-  [x] Merubah Status Laporan Warga
-  [x] Notifikasi Laporan Warga  
-  [x] Import/Pindah/Copy Data Dari Laporan Warga Ke Data Posko
-  [x] Membuat Data Posko (Data Pantauan Warga Pendatang/Pemudik)
-  [x] Merubah Status Data Posko (Data Posko)
-  [x] Menambah/ Merubah Data Pantauan Harian
-  [x] Mencetak PDF Data Posko Per Desa Petugas Posko
-  [x] Mencetak PDF Detail Data Posko Per Warga Desa Petugas Posko
-  [x] Merubah Status Pengguna dari Desa Yang Sama Menjadi Tipe Posko Atau Admin Desa
-  [x] Merubah Kata Sandi Pengguna dari Desa Yang Sama
-  [x] Merubah Status Pengguna Dari Desa Yang Sama (AKTIF/DITANGGUHKAN)
-  [x] Menghapus Data Posko
+  [+] Login ADMIN DESA
+  
+  [+] Mengganti Password/ Kata Sandi Sendiri
+  
+  [+] Notifikasi Laporan Warga
+  
+  [+] Validasi Laporan Warga
+  
+  [+] Merubah Status Laporan Warga
+  
+  [+] Notifikasi Laporan Warga  
+  
+  [+] Import/Pindah/Copy Data Dari Laporan Warga Ke Data Posko
+  
+  [+] Membuat Data Posko (Data Pantauan Warga Pendatang/Pemudik)
+  
+  [+] Merubah Status Data Posko (Data Posko)
+  
+  [+] Menambah/ Merubah Data Pantauan Harian
+  
+  [+] Mencetak PDF Data Posko Per Desa Petugas Posko
+  
+  [+] Mencetak PDF Detail Data Posko Per Warga Desa Petugas Posko
+  
+  [+] Merubah Status Pengguna dari Desa Yang Sama Menjadi Tipe Posko Atau Admin
+  Desa
+  
+  [+] Merubah Kata Sandi Pengguna dari Desa Yang Sama
+  
+  [+] Merubah Status Pengguna Dari Desa Yang Sama (AKTIF/DITANGGUHKAN)
+  
+  [+] Menghapus Data Posko
+  
   [x] Menghapus Laporan Warga
+  
   [x] Logs Semua Aktifitas Pengguna  
+  
   [ ] Statistik Data Posko 1 Desa
+  
   [ ] Statistik Laporan Warga 1 Desa
+  
   
       Tipe Pengguna : PETUGAS PUSKESMAS 
   [ ] Login PETUGAS PUSKESMAS
+  
   [ ] Mengganti Password/ Kata Sandi Sendiri
+  
   [ ] Melihat Data Posko 1 Kecamatan
+  
   [ ] Menambahkan/ Merubah Data Pantauan Harian Warga 
+  
 
 ### Tech
 
