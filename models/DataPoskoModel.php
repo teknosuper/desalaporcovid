@@ -38,6 +38,16 @@ class DataPoskoModel extends DataPoskoTable
     	return null;
     }
 
+    public function getKelurahanText()
+    {
+		return ($this->kelurahanBelongsToKelurahanModel) ? implode(' - ', [$this->kelurahanBelongsToKelurahanModel->nama,$this->kelurahanBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama,$this->kelurahanBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama]) : null;    	
+    }
+
+    public function getPoskoText()
+    {
+		return ($this->poskoBelongsToPoskoModel) ? implode(' - ', [$this->poskoBelongsToPoskoModel->nama_posko,$this->poskoBelongsToPoskoModel->poskoBelongsToKelurahanModel->nama,$this->poskoBelongsToPoskoModel->poskoBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama]) : null;  	
+    }
+
     public function getLuarNegeriText()
     {
     	switch ($this->luar_negeri) {

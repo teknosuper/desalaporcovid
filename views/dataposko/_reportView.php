@@ -40,12 +40,7 @@ use yii\widgets\DetailView;
                   <th>Usia</th>
                   <th>:</th>
                   <td><?= $model->usia;?></td>
-                </tr>
-                <tr>
-                  <th>No Telepon</th>
-                  <th>:</th>
-                  <td><?= $model->no_telepon;?></td>
-                </tr>                
+                </tr>              
                 <tr>
                   <th>Apakah Dari Luar Negeri ?</th>
                   <th>:</th>

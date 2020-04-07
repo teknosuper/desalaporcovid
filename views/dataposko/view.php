@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]) ?>
         <?php endif;?>
+        <?= Html::a(Yii::t('app', '<i class="fa fa-plus"></i> Tambah Data Posko Baru'), ['/dataposko/create','cetak'=>true], ['class' => 'btn btn-success btn-flat','data-pjax'=>0]) ?>
     </div>
     <div class="box-body table-responsive no-padding">
         <?= $this->render('_view',[
