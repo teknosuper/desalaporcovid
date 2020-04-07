@@ -14,7 +14,7 @@ use yii\widgets\DetailView;
                 <tbody><tr>
                   <th>Jenis Laporan</th>
                   <th>:</th>
-                  <td><?= ($model->jenisLaporanBelongsToJenisLaporanModel) ? $model->jenisLaporanBelongsToJenisLaporanModel->nama_laporan : null;?></td>
+                  <td><?= $model->jenisLaporanText;?></td>
                 </tr>
                 <tr>
                   <th>Nama Warga</th>
@@ -24,7 +24,7 @@ use yii\widgets\DetailView;
                 <tr>
                   <th>Kelurahan</th>
                   <th>:</th>
-                  <td><?= ($model->kelurahanBelongsToKelurahanModel) ? $model->kelurahanBelongsToKelurahanModel->textKelurahan : null;?></td>
+                  <td><?= $model->kelurahanText;?></td>
                 </tr>
                 <tr>
                   <th>Alamat</th>
@@ -49,17 +49,17 @@ use yii\widgets\DetailView;
                 <tr>
                   <th>Negara</th>
                   <th>:</th>
-                  <td><?= ($model->negaraBelongsToNegaraModel) ? $model->negaraBelongsToNegaraModel->nama : '-';?></td>
+                  <td><?= $model->idNegaraText;?></td>
                 </tr>                
                 <tr>
                   <th>Kota Asal </th>
                   <th>:</th>
-                  <td><?= ($model->kotaAsalBelongsToKabupatenModel) ? implode(' - ', [$model->kotaAsalBelongsToKabupatenModel->nama]) : null;?></td>
+                  <td><?= $model->kotaAsalText;?></td>
                 </tr>                
                 <tr>
                   <th>Desa / Kelurahan Tujuan</th>
                   <th>:</th>
-                  <td><?= ($model->kelurahanDatangBelongsToKelurahanModel) ? $model->kelurahanDatangBelongsToKelurahanModel->textKelurahan : null;?></td>
+                  <td><?= $model->kelurahanDatangText;?></td>
                 </tr>
                 <tr>
                   <th>Keterangan</th>

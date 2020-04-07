@@ -156,6 +156,23 @@ class DataPoskoModel extends DataPosko
         return $returnData;
     }
 
+    public function getIdNegaraText()
+    {
+        $id_negara = $this->id_negara;
+        $cache = Yii::$app->cache;
+        $cacheUniqueId = implode('-', ['getIdNegaraText',$id_negara]);
+        $getCache = $cache->get($cacheUniqueId);
+        if($getCache===FALSE)
+        {    
+        	$returnData = ($this->negaraBelongsToNegaraModel) ? $this->negaraBelongsToNegaraModel->nama : null;
+
+            $getCache = $returnData;
+            $cache->set($cacheUniqueId,$getCache,60*360);
+        }
+        $returnData = $getCache;
+        return $returnData;
+    }
+
     public function getLuarNegeriText()
     {
     	switch ($this->luar_negeri) {

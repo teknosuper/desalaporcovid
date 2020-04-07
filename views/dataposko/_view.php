@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
                 [
                     'attribute' => 'jenis_laporan',
                     'value' => function ($model) {
-                        return ($model->jenisLaporanBelongsToJenisLaporanModel) ? $model->jenisLaporanBelongsToJenisLaporanModel->nama_laporan : null;
+                        return $model->jenisLaporanText;
                     },
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
@@ -46,7 +46,7 @@ use yii\widgets\DetailView;
                 [
                     'attribute' => 'id_negara',
                     'value' => function ($model) {
-                        return ($model->negaraBelongsToNegaraModel) ? $model->negaraBelongsToNegaraModel->nama : null;
+                        return $model->idNegaraText;
                     },
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
@@ -54,7 +54,7 @@ use yii\widgets\DetailView;
                 [
                     'attribute' => 'kota_asal',
                     'value' => function ($model) {
-                        return ($model->kotaAsalBelongsToKabupatenModel) ? implode(' - ', [$model->kotaAsalBelongsToKabupatenModel->nama]) : null;
+                        return $model->kotaAsalText;
                     },
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
@@ -62,7 +62,7 @@ use yii\widgets\DetailView;
                 [
                     'attribute' => 'kelurahan_datang',
                     'value' => function ($model) {
-                        return ($model->kelurahanDatangBelongsToKelurahanModel) ? implode(' - ', [$model->kelurahanDatangBelongsToKelurahanModel->nama,$model->kelurahanDatangBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->nama,$model->kelurahanDatangBelongsToKelurahanModel->kelurahanBelongsToKecamatanModel->kecamatanBelongsToKabupatenModel->nama]) : null;
+                        return $model->kelurahanDatangText;
                     },
                     // 'contentOptions' => ['class' => 'bg-grey'],     // HTML attributes to customize value tag
                     // 'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag

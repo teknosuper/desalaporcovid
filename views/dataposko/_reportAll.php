@@ -26,15 +26,15 @@
 					<?php foreach($model as $modelData):?>
 	                <tr>
 	                	<td><?= $no++;?></td>
-	                	<td><?= ($modelData->jenisLaporanBelongsToJenisLaporanModel) ? $modelData->jenisLaporanBelongsToJenisLaporanModel->nama_laporan : null;?></td>
+	                	<td><?= $modelData->jenisLaporanText;?></td>
 	                	<td><?= $modelData->nama_warga;?></td>
 	                	<td><?= $modelData->kelurahanText;?></td>
 	                	<td><?= $modelData->alamat;?></td>
 	                	<td><?= $modelData->genderDetail;?></td>
 	                	<td><?= $modelData->usia;?></td>
 	                	<td><?= $modelData->luarNegeriText;?></td>
-	                	<td><?= ($modelData->negaraBelongsToNegaraModel) ? $modelData->negaraBelongsToNegaraModel->nama : null;?></td>
-	                	<td><?= ($modelData->kotaAsalBelongsToKabupatenModel) ? implode(' - ', [$modelData->kotaAsalBelongsToKabupatenModel->nama]) : null;?></td>
+	                	<td><?= $modelData->idNegaraText;?></td>
+	                	<td><?= $modelData->kotaAsalText;?></td>
 	                	<td><?= ($modelData->statusDetail) ? $modelData->statusDetail : null;?></td>
 	                </tr>
 		            <?php endforeach;?>
