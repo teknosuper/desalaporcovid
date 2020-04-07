@@ -1,0 +1,14 @@
+# Autodetect text files
+* text=auto
+
+# Definitively text files
+*.php  text
+*.css  text
+*.js   text
+*.txt  text
+*.md   text
+*.xml  text
+*.json text
+*.bat  text
+*.sql  text
+*.yml  text
